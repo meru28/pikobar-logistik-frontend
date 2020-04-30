@@ -108,15 +108,7 @@ export default {
   data() {
     return {
       step: 1,
-      formApplicant: {
-        instanceType: '',
-        instance: '',
-        instancePhoneNumber: '',
-        cityNameId: '',
-        districtNameId: '',
-        villageNameId: '',
-        fullAddress: ''
-      },
+      formApplicant: {},
       formIdentityApplicant: {},
       logisticNeeds: [],
       applicantLetter: null,

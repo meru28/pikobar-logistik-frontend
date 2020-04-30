@@ -31,7 +31,7 @@
               rules="requiredInstanceName"
             >
               <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
-              <v-select
+              <v-autocomplete
                 v-model="formApplicant.instance"
                 :items="faskesList"
                 item-value="id"
