@@ -65,14 +65,14 @@
         </v-row>
         <v-container fluid>
           <div class="btn-desktop">
-            <v-col cols="6" sm="6" md="6" class="float-right">
+            <v-col cols="6" sm="6" md="6" class="float-right-fourth-step">
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 color="primary"
                 @click="onNext"
               >{{ $t('label.next') }}</v-btn>
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 outlined
                 text
                 @click="onPrev"
@@ -80,16 +80,16 @@
             </v-col>
           </div>
           <div class="btn-mobile">
-            <v-col cols="12" sm="12" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right-fourth-step">
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 color="primary"
                 @click="onNext"
               >{{ $t('label.next') }}</v-btn>
             </v-col>
-            <v-col cols="12" sm="12" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right-fourth-step">
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 outlined
                 text
                 @click="onPrev"
@@ -156,15 +156,8 @@ export default {
 }
 </script>
 <style>
-.text-class {
-  font-weight: bold;
-  font-size: 10px;
-}
-.btn-desktop {
-  display: block;
-}
-.btn-mobile {
-  display: none;
+.float-right-fourth-step {
+  float: right;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }
@@ -172,17 +165,5 @@ export default {
 }
 
 @media (max-width: 588px) and (min-width: 320px) {
-  .main-card {
-    display: none;
-  }
-  .main-card-mobile {
-    display: block;
-  }
-  .btn-desktop {
-    display: none;
-  }
-  .btn-mobile {
-    display: block;
-  }
 }
 </style>

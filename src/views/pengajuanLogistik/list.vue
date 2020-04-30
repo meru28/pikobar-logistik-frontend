@@ -143,8 +143,9 @@ export default {
     this.getLogisticRequestList()
   },
   methods: {
-    changeDate(value) {
+    async changeDate(value) {
       this.listQuery.date = value
+      await this.getLogisticRequestList()
     },
     async getLogisticRequestList() {
       await this.$store.dispatch('logistics/getListLogisticRequest', this.listQuery)

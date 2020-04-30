@@ -14,7 +14,7 @@
               v-slot="{ errors }"
               rules="requiredInstanceType"
             >
-              <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.instanceType"
                 outlined
@@ -30,7 +30,7 @@
               v-slot="{ errors }"
               rules="requiredInstanceName"
             >
-              <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.instance"
                 :items="faskesList"
@@ -47,6 +47,20 @@
                 @change="onSelectFaskes"
               />
             </ValidationProvider>
+            <!-- Sementara ditutup karena belum selesai dan belum di verifikasi -->
+            <div>
+              <v-label class="title"><b>{{ $t('label.instance_not_found_title') }}</b></v-label>
+              <v-btn
+                outlined
+                color="#2E7D32"
+                large
+                style="margin-left: 30px"
+                @click.stop="showForm = true"
+              >
+                {{ $t('label.adding') }}
+              </v-btn>
+              <form-add-instance :show="showForm" />
+            </div>
             <ValidationProvider
               v-slot="{ errors }"
               rules="isPhoneNumber"
@@ -66,7 +80,7 @@
               v-slot="{ errors }"
               rules="requiredCityName"
             >
-              <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.cityNameId"
                 outlined
@@ -80,7 +94,7 @@
               v-slot="{ errors }"
               rules="requiredDistrictName"
             >
-              <v-label class="title"><b>{{ $t('label.district_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.district_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.districtNameId"
                 outlined
@@ -94,7 +108,7 @@
               v-slot="{ errors }"
               rules="requiredVillageName"
             >
-              <v-label class="title"><b>{{ $t('label.village_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.village_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.villageNameId"
                 outlined
@@ -107,7 +121,7 @@
               v-slot="{ errors }"
               rules="requiredFullAddress"
             >
-              <v-label class="title"><b>{{ $t('label.full_address') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.full_address') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-textarea
                 v-model="formApplicant.fullAddress"
                 outlined
@@ -122,14 +136,14 @@
         </v-row>
         <v-container fluid>
           <div class="btn-desktop">
-            <v-col cols="6" sm="6" md="6" class="float-right">
+            <v-col cols="6" sm="6" md="6" class="float-right-first-step">
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 color="primary"
                 @click="onNext()"
               >{{ $t('label.next') }}</v-btn>
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 outlined
                 text
                 href="#/landing-page"
@@ -137,16 +151,16 @@
             </v-col>
           </div>
           <div class="btn-mobile">
-            <v-col cols="12" sm="12" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right-first-step">
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 color="primary"
                 @click="onNext()"
               >{{ $t('label.next') }}</v-btn>
             </v-col>
-            <v-col cols="12" sm="12" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right-first-step">
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 outlined
                 text
                 href="#/landing-page"
@@ -182,7 +196,8 @@ export default {
       listQueryFaskes: {
         nama_faskes: null,
         id_tipe_faskes: null
-      }
+      },
+      showForm: false
     }
   },
   computed: {
@@ -203,6 +218,9 @@ export default {
     await this.getListCity()
     await this.$store.dispatch('faskesType/getListFaskesType')
     await this.getListFaskes()
+    EventBus.$on('dialogHide', (value) => {
+      this.showForm = value
+    })
   },
   methods: {
     async onNext() {
@@ -268,52 +286,19 @@ export default {
       if (id) {
         await this.$store.dispatch('faskes/getDetailFaskes', id)
       }
+    },
+    hideDialog(value) {
+
     }
   }
 }
 </script>
 <style>
-.main-card {
-  margin-left: -50px;
-  display: block;
-}
-.main-card-mobile {
-  display: none;
-}
-.margin-negative {
-  margin-top: -30px !important;
-}
-.text-small {
+.text-small-first-step {
   font-size: 13px;
 }
-.margin-header-mobile {
-  margin-top: -150px;
-}
-.margin-text-mobile-10 {
-  margin-top: -10px;
-  padding: 10px;
-}
-.margin-top-100 {
-  margin-top: -100px !important;
-}
-.margin-top-80 {
-  margin-top: -80px;
-}
-.margin-top-30 {
-  margin-top: -30px;
-}
-.margin-input {
-  margin-left: -130px;
-  margin-right: -130px;
-}
-.float-right {
+.float-right-first-step {
   float: right;
-}
-.btn-desktop {
-  display:block;
-}
-.btn-mobile {
-  display: none;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }
@@ -321,17 +306,5 @@ export default {
 }
 
 @media (max-width: 588px) and (min-width: 320px) {
-  .main-card {
-    display: none;
-  }
-  .main-card-mobile {
-    display: block;
-  }
-  .btn-desktop {
-    display: none;
-  }
-  .btn-mobile {
-    display: block;
-  }
 }
 </style>
