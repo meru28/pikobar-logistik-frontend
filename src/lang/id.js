@@ -229,7 +229,12 @@ export default {
     fail_dialog: 'GAGAL!',
     fail_text_dialog: 'Maaf, terdapat sedikit gangguan',
     fail_text_dialog_2: 'sehingga, data yang anda masukkan gagal disimpan.',
-    repeat: 'Ulangi!'
+    repeat: 'Ulangi!',
+    not_verified_value: 'not_verified',
+    not_verified_label: 'Belum Terverifikasi',
+    rejected_value: 'rejected',
+    rejected_label: 'Ditolak'
+
   },
   success: {
     login_success: 'Login Berhasil',

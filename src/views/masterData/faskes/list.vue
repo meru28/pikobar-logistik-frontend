@@ -85,6 +85,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import i18n from '@/lang'
 export default {
   name: 'ListFasilitasKesehatan',
   data() {
@@ -94,8 +95,8 @@ export default {
         { value: 'desc', label: 'Z-A' }
       ],
       verificationStatusOption: [
-        { value: 'not_verified', label: 'Belum Terverifikasi' },
-        { value: 'rejected', label: 'Ditolak' }
+        { value: i18n.t('label.not_verified_value'), label: i18n.t('label.not_verified_label') },
+        { value: i18n.t('label.rejected_value'), label: i18n.t('label.rejected_label') }
       ],
       listQuery: {
         page: 1,
