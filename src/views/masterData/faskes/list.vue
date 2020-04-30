@@ -80,13 +80,20 @@
       :limit.sync="listQuery.limit"
       :on-next="onNext"
     />
+    <dataVerification
+      :show="showVerification"
+    />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import dataVerification from './verification'
 export default {
   name: 'ListFasilitasKesehatan',
+  components: {
+    dataVerification
+  },
   data() {
     return {
       sortOption: [
@@ -105,7 +112,8 @@ export default {
         nama_faskes: '',
         verification_status: 'not_verified'
       },
-      verificationStatusDefault: ''
+      verificationStatusDefault: '',
+      showVerification: false
     }
   },
   computed: {
@@ -144,8 +152,10 @@ export default {
     handleDetail(row) {
       console.log(row)
     },
-    handleVerification(row) {
-      console.log(row)
+    handleVerification(value) {
+      this.showVerification = true
+      console.log(value)
+      console.log(this.showVerification)
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)

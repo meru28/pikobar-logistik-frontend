@@ -211,8 +211,12 @@ export default {
     upper_name: 'Nama Atasan',
     faskes_location: 'Lokasi Faskes',
     verification: 'Verifikasi',
+    verification_fakes_title: 'Verifikasi Fasilitas Kesehatan',
+    registration_number: 'Nomor Registrasi',
     reject: 'Tolak',
-    link_maps_lat_long: 'https://maps.google.com/?q='
+    link_maps_lat_long: 'https://maps.google.com/?q=',
+    open_in_goolge_maps: 'Buka di Google Maps',
+    copy_url: 'Copy Url'
   },
   success: {
     login_success: 'Login Berhasil',
