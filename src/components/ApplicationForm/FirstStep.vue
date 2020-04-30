@@ -15,7 +15,7 @@
               rules="requiredInstanceType"
             >
               <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
-              <v-autocomplete
+              <v-select
                 v-model="formApplicant.instanceType"
                 outlined
                 :error-messages="errors"
@@ -31,7 +31,7 @@
               rules="requiredInstanceName"
             >
               <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
-              <v-autocomplete
+              <v-select
                 v-model="formApplicant.instance"
                 :items="faskesList"
                 item-value="id"
@@ -81,7 +81,7 @@
               rules="requiredCityName"
             >
               <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
-              <v-autocomplete
+              <v-select
                 v-model="formApplicant.cityNameId"
                 outlined
                 :error-messages="errors"
@@ -95,7 +95,7 @@
               rules="requiredDistrictName"
             >
               <v-label class="title"><b>{{ $t('label.district_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
-              <v-autocomplete
+              <v-select
                 v-model="formApplicant.districtNameId"
                 outlined
                 :error-messages="errors"
@@ -109,7 +109,7 @@
               rules="requiredVillageName"
             >
               <v-label class="title"><b>{{ $t('label.village_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
-              <v-autocomplete
+              <v-select
                 v-model="formApplicant.villageNameId"
                 outlined
                 :error-messages="errors"
