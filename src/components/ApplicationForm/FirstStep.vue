@@ -34,15 +34,14 @@
               <v-autocomplete
                 v-model="formApplicant.instance"
                 :items="faskesList"
+                :clearable="true"
+                :error-messages="errors"
+                :placeholder="$t('label.example_instance_name')"
                 item-value="id"
                 item-text="nama_faskes"
                 single-line
                 solo
                 outlined
-                :clearable="true"
-                autocomplete
-                :error-messages="errors"
-                :placeholder="$t('label.example_instance_name')"
                 @input.native="querySearchFaskes"
                 @change="onSelectFaskes"
               />
