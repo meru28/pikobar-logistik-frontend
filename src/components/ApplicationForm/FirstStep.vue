@@ -31,7 +31,7 @@
               rules="requiredInstanceName"
             >
               <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
-              <v-autocomplete
+              <v-select
                 v-model="formApplicant.instance"
                 :items="faskesList"
                 :clearable="true"
@@ -39,7 +39,7 @@
                 :placeholder="$t('label.example_instance_name')"
                 item-value="id"
                 item-text="nama_faskes"
-                validate-on-blur
+                autocomplete
                 single-line
                 solo
                 outlined
