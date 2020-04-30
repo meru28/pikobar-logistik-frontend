@@ -59,7 +59,7 @@
                   <td>{{ faskes.nomor_registrasi }}</td>
                   <td>{{ faskes.nama_faskes }}</td>
                   <td>{{ faskes.nama_atasan }}</td>
-                  <td>{{ $t('label.link_maps_lat_long') }}{{ faskes.latitude }},{{ faskes.longitude }}</td>
+                  <td>{{ faskes.point_latitude_longitude }}</td>
                   <td v-if="verificationStatusDefault != 'verified'" class="text-link">
                     <v-btn v-if="verificationStatusDefault === 'rejected'" text small color="info" @click="handleDetail(faskes)">{{ $t('label.detail') }}</v-btn>
                     <v-btn v-if="verificationStatusDefault === 'not_verified'" text small color="info" @click="handleVerification(faskes)">{{ $t('label.verification') }}</v-btn>

@@ -217,7 +217,6 @@ export default {
     input_faskes_location: 'Masukkan link koordinat lokasi dari google maps',
     verification: 'Verifikasi',
     reject: 'Tolak',
-    link_maps_lat_long: 'https://maps.google.com/?q=',
     add_medical_facility: 'Tambah Fasilitas Kesehatan',
     instance_not_found_title: 'Tidak menemukan nama instansi anda?',
     adding: 'Tambahkan',
