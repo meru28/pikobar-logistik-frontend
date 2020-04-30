@@ -127,8 +127,13 @@ export default {
     }
   },
   created() {
-    this.listQuery.verification_status = this.$route.params.verification_status
-    this.verificationStatusDefault = this.$route.params.verification_status
+    if (this.$route.name === 'FaskesTerdaftar') {
+      this.listQuery.verification_status = 'verified'
+      this.verificationStatusDefault = 'verified'
+    } else if (this.$route.name === 'FaskesBelumTerdaftar') {
+      this.listQuery.verification_status = 'not_verified'
+      this.verificationStatusDefault = 'not_verified'
+    }
     this.getFaskesList()
   },
   methods: {
