@@ -39,6 +39,26 @@ extend('requiredFullAddress', {
   message: (_, values) => i18n.t('errors.field_must_be_filled_full_address', values)
 })
 
+extend('requiredRegistrationNumber', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_registraion_number', values)
+})
+
+extend('requiredFaskesName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_faskes_name', values)
+})
+
+extend('requiredUpperName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_upper_name', values)
+})
+
+extend('requiredFaskesLocation', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_faskes_location', values)
+})
+
 extend('requiredApplicantName', {
   ...required,
   message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_name', values)

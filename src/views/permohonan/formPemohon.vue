@@ -1,20 +1,22 @@
 <template>
-  <div v-if="!isConfirm" class="background-landing-page background-height">
+  <div v-if="!isConfirm" class="background-landing-page background-height-form-pemohon">
     <div class="full-landing-page">
       <div class="header-landing-page">
         <v-row justify="space-between" align="center">
           <v-col cols="12" md="8" xs="12">
             <v-row>
-              <img height="40" src="../../static/logistik_logo_lingkar.svg">
-              <div class="title-page">{{ $t('label.applicant_form_title') }}</div>
+              <router-link to="/landing-page">
+                <v-img :max-width="40" src="../../static/logistik_logo_lingkar.svg" />
+              </router-link>
+              <router-link to="/landing-page">
+                <div class="title-page-form-pemohon">{{ $t('label.applicant_form_title') }}</div>
+              </router-link>
             </v-row>
           </v-col>
           <v-col cols="12" md="4" xs="12">
             <v-row class="float-right-landing-page">
-              <v-icon color="white" size="17">{{ $t('label.icon_talk') }}</v-icon>
-              <div class="call-center-landing-page">{{ $t('label.call_center') }}</div>
-              <v-icon color="white" size="17">{{ $t('label.icon_help') }}</v-icon>
-              <div class="pusat-bantuan-landing-page">{{ $t('label.help_center') }}</div>
+              <a :href="$t('label.link_tutorial')" target="_blank"><v-icon color="white" size="25">{{ $t('label.icon_help') }}</v-icon></a>
+              <a :href="$t('label.link_tutorial')" target="_blank"><div class="tutorial-class-form-pemohon pusat-bantuan-landing-page">{{ $t('label.tutorial') }}</div></a>
             </v-row>
           </v-col>
         </v-row>
@@ -36,18 +38,17 @@
           </v-col>
           <v-col cols="4">
             <v-row class="float-right-landing-page">
-              <v-icon class="margin-icon-talk-mobile-landing-page" color="white" size="30">{{ $t('label.icon_talk') }}</v-icon>
-              <v-icon class="margin-icon-talk-mobile-landing-page" color="white" size="30">{{ $t('label.icon_help') }}</v-icon>
+              <a :href="$t('label.link_tutorial')" target="_blank" class="margin-icon-talk-mobile-landing-page"><v-icon color="white" size="25">{{ $t('label.icon_help') }}</v-icon></a>
             </v-row>
           </v-col>
         </v-row>
       </div>
     </div>
     <div class="negative-landing-page">
-      <v-card class="main-card" outlined>
-        <v-stepper v-model="step" class="stepper-margin" :alt-labels="true">
+      <v-card class="main-card-form-pemohon" outlined>
+        <v-stepper v-model="step" class="stepper-margin-form-pemohon" :alt-labels="true">
           <v-stepper-header>
-            <v-stepper-step class="left-margin" :complete="step > 1" step="1">
+            <v-stepper-step class="left-margin-form-pemohon" :complete="step > 1" step="1">
               <center>{{ $t('label.step_title_1') }}</center>
             </v-stepper-step>
             <v-divider />
@@ -59,7 +60,7 @@
               <center>{{ $t('label.step_title_3') }}</center>
             </v-stepper-step>
             <v-divider />
-            <v-stepper-step :complete="step > 4" class="right-margin" step="4">
+            <v-stepper-step :complete="step > 4" class="right-margin-form-pemohon" step="4">
               <center>{{ $t('label.step_title_4') }}</center>
             </v-stepper-step>
           </v-stepper-header>
@@ -83,49 +84,6 @@
             </v-stepper-content>
             <v-stepper-content step="4">
               <surat-permohonan />
-            </v-stepper-content>
-          </v-stepper-items>
-        </v-stepper>
-      </v-card>
-      <v-card class="main-card-mobile" outlined>
-        <v-stepper v-model="step" class="stepper-margin" :alt-labels="true">
-          <v-stepper-header>
-            <v-stepper-step :complete="step > 1" step="1">
-              <center>{{ $t('label.step_title_1') }}</center>
-            </v-stepper-step>
-            <v-divider />
-            <v-stepper-step :complete="step > 2" step="2">
-              <center>{{ $t('label.step_title_2') }}</center>
-            </v-stepper-step>
-            <v-divider />
-            <v-stepper-step :complete="step > 3" step="3">
-              <center>{{ $t('label.step_title_3') }}</center>
-            </v-stepper-step>
-            <v-divider />
-            <v-stepper-step :complete="step > 4" step="4">
-              <center>{{ $t('label.step_title_4') }}</center>
-            </v-stepper-step>
-          </v-stepper-header>
-          <v-stepper-items>
-            <v-stepper-content step="1">
-              <identitas-instansi-pemohon
-                :form-applicant="formApplicant"
-              />
-            </v-stepper-content>
-            <v-stepper-content step="2">
-              <identitas-pemohon
-                :form-identity-applicant="formIdentityApplicant"
-              />
-            </v-stepper-content>
-            <v-stepper-content step="3">
-              <kebutuhan-logistik
-                :logistic-needs="logisticNeeds"
-              />
-            </v-stepper-content>
-            <v-stepper-content step="4">
-              <surat-permohonan
-                :applicant-letter="applicantLetter"
-              />
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
@@ -174,38 +132,48 @@ export default {
 }
 </script>
 <style>
-.main-card {
+.main-card-form-pemohon {
   margin: -50px 120px 30px 120px;
   height: 500px;
   padding: 100px 10px;
 }
-.main-card-mobile {
-  display: none;
-}
-.title-page {
+.title-page-form-pemohon {
   padding: 5px 20px;
   font-size: 22px;
   color: white;
   line-height: 29px;
 }
-.margin-positive {
+.left-margin-form-pemohon {
+  margin-left: 200px;
+}
+.right-margin-form-pemohon {
+  margin-right: 200px;
+}
+.background-height-form-pemohon {
+  height: 1000px;
+}
+.stepper-margin-form-pemohon {
+  margin: -100px -10px 0px -10px;
+}
+.tutorial-class-form-pemohon {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+}
+.btn-margin-positive {
   margin: 10px;
   float: right;
 }
-.left-margin {
-  margin-left: 200px;
+.btn-desktop {
+  display:block;
 }
-.right-margin {
-  margin-right: 200px;
+.btn-mobile {
+  display: none;
 }
-.margin-button {
-  margin-top: 100px;
-}
-.background-height {
-  height: 1000px;
-}
-.stepper-margin {
-  margin: -100px -10px 0px -10px;
+.margin-10 {
+  margin: 10px;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }
@@ -213,12 +181,23 @@ export default {
 }
 
 @media (max-width: 588px) and (min-width: 320px) {
-  .main-card {
+  .main-card-form-pemohon {
+    margin: 150px 0px -30px 0px;
+  }
+  .left-margin-form-pemohon {
+    margin-left: 0px;
+  }
+  .right-margin-form-pemohon {
+    margin-right: 0px;
+  }
+  .stepper-margin-form-pemohon {
+    margin: -200px -10px 0px -10px;
+  }
+  .btn-desktop {
     display: none;
   }
-  .main-card-mobile {
+  .btn-mobile {
     display: block;
-    margin: 150px 0px -30px 0px;
   }
 }
 </style>

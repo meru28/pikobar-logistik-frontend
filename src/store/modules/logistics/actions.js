@@ -3,7 +3,7 @@ import { fetchList, doPostUpdate } from '@/api'
 export default {
   async getListAPD({ commit }, params) {
     try {
-      const response = await fetchList('/api/v1/landing-page-registration/products', 'GET', params)
+      const response = await fetchList('/api/v1/landing-page-registration/products', 'GET')
       commit('SET_LIST_APD', response.data)
       return response
     } catch (e) {
@@ -75,6 +75,14 @@ export default {
   async postVerificationStatus({ commit }, params) {
     try {
       const response = await doPostUpdate('/api/v1/logistic-request/verification', 'POST', params)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async postAddFaskes({ commit }, params) {
+    try {
+      const response = await doPostUpdate('/api/v1/master-faskes', 'POST', params)
       return response
     } catch (e) {
       return e

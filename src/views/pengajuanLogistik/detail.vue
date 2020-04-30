@@ -228,7 +228,7 @@
             <thead>
               <tr>
                 <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
-                <th class="text-left">{{ $t('label.apd_name_spesification') }}</th>
+                <th class="text-left">{{ $t('label.apd_name_specification') }}</th>
                 <th class="text-left">{{ $t('label.brand') }}</th>
                 <th class="text-left">{{ $t('label.total') }}</th>
                 <th class="text-left">{{ $t('label.unit') }}</th>
