@@ -147,10 +147,10 @@ export default {
       await this.getFaskesList()
     },
     handleDetail(row) {
-      console.log(row)
+      // sambungkang ke api detail
     },
     handleVerification(row) {
-      console.log(row)
+      // sambungkan ke dialog verifikasi
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
