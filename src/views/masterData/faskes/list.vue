@@ -134,17 +134,17 @@ export default {
       this.listQuery.verification_status = 'not_verified'
       this.verificationStatusDefault = 'not_verified'
     }
-    this.getFaskesList()
+    this.getListFaskes()
   },
   methods: {
-    async getFaskesList() {
+    async getListFaskes() {
       await this.$store.dispatch('faskes/getListFaskes', this.listQuery)
     },
     async handleSearch() {
-      await this.getFaskesList()
+      await this.getListFaskes()
     },
     async onNext() {
-      await this.getFaskesList()
+      await this.getListFaskes()
     },
     handleDetail(row) {
       // TODO: sambungkang ke api detail
