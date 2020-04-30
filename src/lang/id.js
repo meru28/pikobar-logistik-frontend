@@ -10,6 +10,8 @@ export default {
     master_data_title: 'Master Data',
     medical_tools_title: 'Alat Kesehatan',
     medical_facility_title: 'Fasilitas Kesehatan',
+    not_registered_title: 'Belum Terdaftar',
+    registered_title: 'Terdaftar',
     rdt: 'Test Masif',
     create_rdt: 'Input hasil test',
     list_rdt: 'List hasil test',
@@ -215,7 +217,6 @@ export default {
     input_faskes_location: 'Masukkan link koordinat lokasi dari google maps',
     verification: 'Verifikasi',
     reject: 'Tolak',
-    link_maps_lat_long: 'https://maps.google.com/?q=',
     add_medical_facility: 'Tambah Fasilitas Kesehatan',
     instance_not_found_title: 'Tidak menemukan nama instansi anda?',
     adding: 'Tambahkan',
@@ -228,7 +229,12 @@ export default {
     fail_dialog: 'GAGAL!',
     fail_text_dialog: 'Maaf, terdapat sedikit gangguan',
     fail_text_dialog_2: 'sehingga, data yang anda masukkan gagal disimpan.',
-    repeat: 'Ulangi!'
+    repeat: 'Ulangi!',
+    not_verified_value: 'not_verified',
+    not_verified_label: 'Belum Terverifikasi',
+    rejected_value: 'rejected',
+    rejected_label: 'Ditolak'
+
   },
   success: {
     login_success: 'Login Berhasil',
