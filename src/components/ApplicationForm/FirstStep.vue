@@ -215,6 +215,7 @@ export default {
     ])
   },
   async created() {
+    console.log(this.formApplicant)
     await this.getListCity()
     await this.$store.dispatch('faskesType/getListFaskesType')
     await this.getListFaskes()
