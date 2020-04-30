@@ -39,6 +39,7 @@
                 :placeholder="$t('label.example_instance_name')"
                 item-value="id"
                 item-text="nama_faskes"
+                validate-on-blur
                 single-line
                 solo
                 outlined
