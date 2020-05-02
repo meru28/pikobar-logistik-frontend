@@ -24,18 +24,6 @@
           </ValidationProvider>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="requiredFaskesName"
-          >
-            <v-label class="title"><b>{{ $t('label.faskes_name') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
-            <v-text-field
-              v-model="listQuery.nama_faskes"
-              :placeholder="$t('label.input_faskes_name')"
-              outlined
-              :error-messages="errors"
-            />
-          </ValidationProvider>
-          <ValidationProvider
-            v-slot="{ errors }"
             rules="requiredInstanceType"
           >
             <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
@@ -46,6 +34,18 @@
               :items="faskesTypeList"
               item-text="name"
               item-value="id"
+              :error-messages="errors"
+            />
+          </ValidationProvider>
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="requiredFaskesName"
+          >
+            <v-label class="title"><b>{{ $t('label.faskes_name') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
+            <v-text-field
+              v-model="listQuery.nama_faskes"
+              :placeholder="$t('label.input_faskes_name')"
+              outlined
               :error-messages="errors"
             />
           </ValidationProvider>
@@ -67,7 +67,7 @@
           >
             <v-label class="title"><b>{{ $t('label.faskes_location') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
             <v-text-field
-              v-model="listQuery.faskes_location"
+              v-model="listQuery.point_latitude_longitude"
               :placeholder="$t('label.input_faskes_location')"
               outlined
               :error-messages="errors"
@@ -181,7 +181,7 @@ export default {
         return
       }
       const response = await this.$store.dispatch('logistics/postAddFaskes', this.listQuery)
-      if (response) {
+      if (response.status === 200) {
         this.isSuccess = true
       } else {
         this.isFail = true
