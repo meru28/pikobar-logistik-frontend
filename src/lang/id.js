@@ -209,7 +209,7 @@ export default {
     applicant_letter: 'Surat Permohonan',
     list_applicant_logistic_medic: 'Daftar Pengajuan Logistik Medis',
     registration_number: 'No. Registrasi',
-    regis_number: 'Nomor Regsitrasi',
+    regis_number: 'Nomor Registrasi',
     regis_number_placeholder: 'Masukkan Nomor Registrasi Faskes',
     upper_name: 'Nama Atasan',
     input_upper_name: 'Masukkan Nama Atasan',
