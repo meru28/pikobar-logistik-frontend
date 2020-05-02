@@ -1,11 +1,11 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" persistent max-width="500px">
       <v-card>
         <v-card-title>
           <v-row class="survey-bottom-form">
             <v-col>
-              <span class="text-title-green">{{ $t('label.verification_fakes_title') }}</span>
+              <span class="text-title-green-verification-faskes">{{ $t('label.verification_fakes_title') }}</span>
             </v-col>
           </v-row>
         </v-card-title>
@@ -14,37 +14,37 @@
             <v-container>
               <v-row>
                 <v-col>
-                  <span class="text-title-green">{{ $t('label.registration_number') }}</span>
+                  <span class="text-title-green-verification-faskes">{{ $t('label.registration_number') }}</span>
                   <br>
                   <v-label>
-                    <span class="text-data-grey">{{ formVerification.nomor_registrasi }}</span>
+                    <span class="text-data-grey-verification-faskes">{{ formVerification.nomor_registrasi }}</span>
                   </v-label>
                 </v-col>
               </v-row>
               <v-row>
                 <v-col>
-                  <span class="text-title-green">{{ $t('label.faskes_name') }}</span>
+                  <span class="text-title-green-verification-faskes">{{ $t('label.faskes_name') }}</span>
                   <br>
                   <v-label>
-                    <span class="text-data-grey">{{ formVerification.nama_faskes }}</span>
+                    <span class="text-data-grey-verification-faskes">{{ formVerification.nama_faskes }}</span>
                   </v-label>
                 </v-col>
               </v-row>
               <v-row>
                 <v-col>
-                  <span class="text-title-green">{{ $t('label.upper_name') }}</span>
+                  <span class="text-title-green-verification-faskes">{{ $t('label.upper_name') }}</span>
                   <br>
                   <v-label>
-                    <span class="text-data-grey">{{ formVerification.nama_atasan }}</span>
+                    <span class="text-data-grey-verification-faskes">{{ formVerification.nama_atasan }}</span>
                   </v-label>
                 </v-col>
               </v-row>
               <v-row>
                 <v-col>
-                  <span class="text-title-green">{{ $t('label.faskes_location') }}</span>
+                  <span class="text-title-green-verification-faskes">{{ $t('label.faskes_location') }}</span>
                   <br>
                   <v-label>
-                    <span class="text-data-grey">{{ formVerification.point_latitude_longitude }}</span>
+                    <span class="text-data-grey-verification-faskes">{{ formVerification.point_latitude_longitude }}</span>
                   </v-label>
                 </v-col>
               </v-row>
@@ -55,16 +55,15 @@
                     outlined
                     color="#2E7D32"
                     dark
+                    large
                   >
                     <strong>{{ $t('label.copy_url') }}</strong>
                   </v-btn>
-                </v-col>
-                <v-col>
                   <v-btn
-                    class="text-capitalize"
+                    class="text-capitalize margin-btn-verification-faskes"
                     outlined
                     color="#2E7D32"
-                    dark=""
+                    large
                   >
                     <strong>{{ $t('label.open_in_goolge_maps') }}</strong>
                   </v-btn>
@@ -73,19 +72,21 @@
             </v-container>
             <v-container>
               <v-row class="mb-12">
-                <v-col>
-                  <v-btn
-                    v-if="visible"
-                    class="pa-6"
-                    outlined
-                    color="red"
-                  >
-                    <strong>
-                      {{ $t('label.reject') }}
-                    </strong>
-                  </v-btn>
-                  <v-btn v-if="visible" class="pa-6" color="success"><strong>{{ $t('label.verification') }}</strong></v-btn>
-                </v-col>
+                <v-btn
+                  v-if="visible"
+                  outlined
+                  color="red"
+                  class="margin-btn-submit-verification-faskes"
+                >
+                  {{ $t('label.reject') }}
+                </v-btn>
+                <v-btn
+                  v-if="visible"
+                  color="success"
+                  class="margin-btn-submit-verification-faskes"
+                >
+                  {{ $t('label.verification') }}
+                </v-btn>
                 <v-btn block outlined color="grey" @click="closeDialog"><strong>{{ $t('label.cancel') }}</strong></v-btn>
               </v-row>
             </v-container>
@@ -152,23 +153,7 @@ export default {
 </script>
 
 <style>
-.text-title {
-  font-family: "Product Sans";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: black;
-}
-.text-data-green {
-  font-family: "Product Sans";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 17px;
-  color: #219653;
-}
-.text-data-grey {
+.text-data-grey-verification-faskes {
   font-family: "Product Sans";
   font-style: normal;
   font-weight: bold;
@@ -176,15 +161,7 @@ export default {
   line-height: 17px;
   color: #757575;
 }
-.text-data-red {
-  font-family: "Product Sans";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 17px;
-  color: #e62929;
-}
-.text-title-green {
+.text-title-green-verification-faskes {
   font-family: "Product Sans";
   font-style: normal;
   font-weight: bold;
@@ -192,32 +169,10 @@ export default {
   line-height: 19px;
   color: #219653;
 }
-.margin-btn {
-  margin: -30%
+.margin-btn-verification-faskes {
+  margin-left: 5%;
 }
-.margin-left-min-30 {
-  margin-left: -30px;
-}
-.margin-20 {
-  margin: 20px;
-}
-.margin-top-min-15 {
-  margin-top: -15px
-}
-.d-none {
-  display: none;
-}
-.image-style {
-    max-width: 100%;
-    max-height: 500px;
-  }
-.letter-class {
-  color: #2D9CDB !important;
-  font-family: "Product Sans";
-  font-style: italic;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 19px;
-  text-decoration: underline;
+.margin-btn-submit-verification-faskes {
+  margin: 1% 1% 5% 1%;
 }
 </style>

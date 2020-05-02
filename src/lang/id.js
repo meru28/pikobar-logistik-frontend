@@ -217,7 +217,6 @@ export default {
     input_faskes_location: 'Masukkan link koordinat lokasi dari google maps',
     verification: 'Verifikasi',
     verification_fakes_title: 'Verifikasi Fasilitas Kesehatan',
-    registration_number: 'Nomor Registrasi',
     reject: 'Tolak',
     open_in_goolge_maps: 'Buka di Google Maps',
     copy_url: 'Copy Url',
