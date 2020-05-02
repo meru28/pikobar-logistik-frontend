@@ -82,6 +82,10 @@
     />
     <dataVerification
       :show="showVerification"
+      :close.sync="showVerification"
+      :close-detail.sync="isDetail"
+      :verification-data="verificationData"
+      :is-detail="isDetail"
     />
   </div>
 </template>
@@ -113,7 +117,9 @@ export default {
         verification_status: 'not_verified'
       },
       verificationStatusDefault: '',
-      showVerification: false
+      showVerification: false,
+      isDetail: false,
+      verificationData: {}
     }
   },
   computed: {
@@ -149,13 +155,13 @@ export default {
     async onNext() {
       await this.getFaskesList()
     },
-    handleDetail(row) {
-      console.log(row)
+    handleDetail(value) {
+      this.isDetail = true
+      this.verificationData = value
     },
     handleVerification(value) {
       this.showVerification = true
-      console.log(value)
-      console.log(this.showVerification)
+      this.verificationData = value
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
@@ -163,4 +169,3 @@ export default {
   }
 }
 </script>
-

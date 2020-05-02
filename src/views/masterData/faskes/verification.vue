@@ -17,7 +17,7 @@
                   <span class="text-title-green">{{ $t('label.registration_number') }}</span>
                   <br>
                   <v-label>
-                    <span class="text-data-grey">{{ $t('label.registration_number') }}</span>
+                    <span class="text-data-grey">{{ formVerification.nomor_registrasi }}</span>
                   </v-label>
                 </v-col>
               </v-row>
@@ -26,7 +26,7 @@
                   <span class="text-title-green">{{ $t('label.faskes_name') }}</span>
                   <br>
                   <v-label>
-                    <span class="text-data-grey">{{ $t('label.faskes_name') }}</span>
+                    <span class="text-data-grey">{{ formVerification.nama_faskes }}</span>
                   </v-label>
                 </v-col>
               </v-row>
@@ -35,7 +35,7 @@
                   <span class="text-title-green">{{ $t('label.upper_name') }}</span>
                   <br>
                   <v-label>
-                    <span class="text-data-grey">{{ $t('label.upper_name') }}</span>
+                    <span class="text-data-grey">{{ formVerification.nama_atasan }}</span>
                   </v-label>
                 </v-col>
               </v-row>
@@ -44,7 +44,7 @@
                   <span class="text-title-green">{{ $t('label.faskes_location') }}</span>
                   <br>
                   <v-label>
-                    <span class="text-data-grey">{{ $t('label.faskes_location') }}</span>
+                    <span class="text-data-grey">{{ formVerification.point_latitude_longitude }}</span>
                   </v-label>
                 </v-col>
               </v-row>
@@ -75,6 +75,7 @@
               <v-row class="mb-12">
                 <v-col>
                   <v-btn
+                    v-if="visible"
                     class="pa-6"
                     outlined
                     color="red"
@@ -83,9 +84,9 @@
                       {{ $t('label.reject') }}
                     </strong>
                   </v-btn>
-                  <v-btn class="pa-6" color="success"><strong>{{ $t('label.verification') }}</strong></v-btn>
+                  <v-btn v-if="visible" class="pa-6" color="success"><strong>{{ $t('label.verification') }}</strong></v-btn>
                 </v-col>
-                <v-btn block outlined color="grey" @click="dialog= false"><strong>{{ $t('label.cancel') }}</strong></v-btn>
+                <v-btn block outlined color="grey" @click="closeDialog"><strong>{{ $t('label.cancel') }}</strong></v-btn>
               </v-row>
             </v-container>
           </v-form>
@@ -101,17 +102,41 @@ export default {
     show: {
       type: Boolean,
       default: false
+    },
+    isDetail: {
+      type: Boolean,
+      default: false
+    },
+    verificationData: {
+      type: Object,
+      default: function() {
+        return []
+      }
     }
   },
   data() {
     return {
-      dialog: false
+      dialog: false,
+      formVerification: {},
+      visible: false
     }
   },
-  created() {
-    console.log('this.dialog')
-    console.log(this.dialog)
-    console.log(this.show)
+  watch: {
+    show(value) {
+      this.dialog = value
+      this.visible = value
+    },
+    isDetail(value) {
+      this.visible = !value
+      this.dialog = value
+    },
+    verificationData(value) {
+      this.formVerification.id = value.id
+      this.formVerification.nomor_registrasi = value.nomor_registrasi
+      this.formVerification.nama_faskes = value.nama_faskes
+      this.formVerification.nama_atasan = value.nama_atasan
+      this.formVerification.point_latitude_longitude = value.point_latitude_longitude
+    }
   },
   mounted() {
     this.dialog = this.show
@@ -119,21 +144,14 @@ export default {
   methods: {
     closeDialog() {
       this.dialog = false
-      this.$emit('close', this.dialog)
+      this.$emit('update:close', this.dialog)
+      this.$emit('update:closeDetail', this.dialog)
     }
   }
 }
 </script>
 
 <style>
-.table-title {
-  font-family: "Product Sans";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 29px;
-  color: black;
-}
 .text-title {
   font-family: "Product Sans";
   font-style: normal;
