@@ -219,7 +219,7 @@ export default {
     verification_fakes_title: 'Verifikasi Fasilitas Kesehatan',
     reject: 'Tolak',
     open_in_goolge_maps: 'Buka di Google Maps',
-    copy_url: 'Copy Url',
+    copy_url: 'Copy URL',
     add_medical_facility: 'Tambah Fasilitas Kesehatan',
     instance_not_found_title: 'Tidak menemukan nama instansi anda?',
     adding: 'Tambahkan',
