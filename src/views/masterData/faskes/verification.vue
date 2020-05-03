@@ -56,6 +56,7 @@
                     color="#2E7D32"
                     dark
                     large
+                    @click.stop.prevent="copyText"
                   >
                     <strong>{{ $t('label.copy_url') }}</strong>
                   </v-btn>
@@ -69,6 +70,7 @@
                   >
                     <strong>{{ $t('label.open_in_goolge_maps') }}</strong>
                   </v-btn>
+                  <input id="copy-url" type="hidden" :value="formVerification.point_latitude_longitude">
                 </v-col>
               </v-row>
             </v-container>
@@ -149,6 +151,14 @@ export default {
       this.dialog = false
       this.$emit('update:close', this.dialog)
       this.$emit('update:closeDetail', this.dialog)
+    },
+    copyText() {
+      const copyTextData = document.querySelector('#copy-url')
+      copyTextData.setAttribute('type', 'text')
+      copyTextData.select()
+      document.execCommand('copy')
+      copyTextData.setAttribute('type', 'hidden')
+      window.getSelection().removeAllRanges()
     }
   }
 }
