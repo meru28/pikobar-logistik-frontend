@@ -64,6 +64,8 @@
                     outlined
                     color="#2E7D32"
                     large
+                    :href="formVerification.point_latitude_longitude"
+                    target="_blank"
                   >
                     <strong>{{ $t('label.open_in_goolge_maps') }}</strong>
                   </v-btn>
