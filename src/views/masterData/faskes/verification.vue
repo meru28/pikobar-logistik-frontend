@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="500px">
+    <v-dialog v-if="!dialogSuccessShow" v-model="dialog" persistent max-width="500px">
       <v-card>
         <v-card-title>
           <v-row class="survey-bottom-form">
@@ -81,6 +81,7 @@
                   outlined
                   color="red"
                   class="margin-btn-submit-verification-faskes"
+                  @click="rejectVerification"
                 >
                   {{ $t('label.reject') }}
                 </v-btn>
@@ -88,6 +89,7 @@
                   v-if="visible"
                   color="success"
                   class="margin-btn-submit-verification-faskes"
+                  @click="submitVerification"
                 >
                   {{ $t('label.verification') }}
                 </v-btn>
@@ -96,6 +98,72 @@
             </v-container>
           </v-form>
         </v-card-text>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-else
+      v-model="dialog"
+      max-width="500"
+      :persistent="true"
+    >
+      <v-card v-if="dialogSuccessShow && !dialogFail">
+        <div>
+          <v-row>
+            <v-img :max-width="100" src="../../../static/success_icon.svg" class="img-icon-add-instance" />
+          </v-row>
+          <v-row>
+            <v-col>
+              <center><span class="title-dialog-success-add-instance">{{ $t('label.success_dialog') }}</span></center>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col v-if="isVerification">
+              <center><span class="text-dialog-success-add-instance">{{ $t('label.success_text_dialog_verification_faskes') }}</span></center>
+            </v-col>
+            <v-col v-else>
+              <center><span class="text-dialog-success-add-instance">{{ $t('label.success_text_dialog_reject_faskes') }}</span></center>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <center>
+                <v-btn color="primary" class="white--text" @click="refreshPage">
+                  {{ $t('label.ok') }}
+                </v-btn>
+              </center>
+            </v-col>
+          </v-row>
+        </div>
+      </v-card>
+      <v-card v-else-if="dialogFail">
+        <div>
+          <v-row>
+            <v-img :max-width="100" src="../../../static/fail_icon.svg" class="img-icon-add-instance" />
+          </v-row>
+          <v-row>
+            <v-col>
+              <center><span class="title-dialog-success-add-instance">{{ $t('label.fail_dialog') }}</span></center>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <center>
+                <span class="text-dialog-success-add-instance">{{ $t('label.fail_text_dialog') }}</span>
+                <br>
+                <span class="text-dialog-success-add-instance">{{ $t('label.fail_text_dialog_2') }}</span>
+              </center>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <center>
+                <v-btn color="primary" class="white--text" @click="refreshPage">
+                  {{ $t('label.repeat') }}
+                </v-btn>
+              </center>
+            </v-col>
+          </v-row>
+        </div>
       </v-card>
     </v-dialog>
   </v-row>
@@ -123,7 +191,10 @@ export default {
     return {
       dialog: false,
       formVerification: {},
-      visible: false
+      visible: false,
+      dialogSuccessShow: false,
+      dialogFail: false,
+      isVerification: false
     }
   },
   watch: {
@@ -159,6 +230,29 @@ export default {
       document.execCommand('copy')
       copyTextData.setAttribute('type', 'hidden')
       window.getSelection().removeAllRanges()
+    },
+    async submitVerification() {
+      const response = await this.$store.dispatch('faskes/postVerificationFaskes', { id: this.verificationData.id, verification_status: 'verified' })
+      if (response.status === 200) {
+        this.dialogSuccessShow = true
+        this.isVerification = true
+      } else {
+        this.dialogFail = true
+        this.dialogSuccessShow = true
+      }
+    },
+    async rejectVerification() {
+      const response = await this.$store.dispatch('faskes/postVerificationFaskes', { id: this.verificationData.id, verification_status: 'rejected' })
+      if (response.status === 200) {
+        this.dialogSuccessShow = true
+        this.isVerification = true
+      } else {
+        this.dialogFail = true
+        this.dialogSuccessShow = true
+      }
+    },
+    refreshPage() {
+      window.location.reload()
     }
   }
 }

@@ -236,8 +236,9 @@ export default {
     not_verified_value: 'not_verified',
     not_verified_label: 'Belum Terverifikasi',
     rejected_value: 'rejected',
-    rejected_label: 'Ditolak'
-
+    rejected_label: 'Ditolak',
+    success_text_dialog_verification_faskes: 'Data Fasilitas Kesehatan berhasil diverifikasi.',
+    success_text_dialog_reject_faskes: 'Proses tolak verifikasi berhasil dilakukan.'
   },
   success: {
     login_success: 'Login Berhasil',
