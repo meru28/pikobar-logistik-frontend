@@ -80,14 +80,25 @@
       :limit.sync="listQuery.limit"
       :on-next="onNext"
     />
+    <dataVerification
+      :show="showVerification"
+      :close.sync="showVerification"
+      :close-detail.sync="isDetail"
+      :verification-data="verificationData"
+      :is-detail="isDetail"
+    />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import i18n from '@/lang'
+import dataVerification from './verification'
 export default {
   name: 'ListFasilitasKesehatan',
+  components: {
+    dataVerification
+  },
   data() {
     return {
       sortOption: [
@@ -106,7 +117,10 @@ export default {
         nama_faskes: '',
         verification_status: 'not_verified'
       },
-      verificationStatusDefault: ''
+      verificationStatusDefault: '',
+      showVerification: false,
+      isDetail: false,
+      verificationData: {}
     }
   },
   computed: {
@@ -147,11 +161,13 @@ export default {
     async onNext() {
       await this.getListFaskes()
     },
-    handleDetail(row) {
-      // TODO: sambungkang ke api detail
+    handleDetail(value) {
+      this.isDetail = true
+      this.verificationData = value
     },
-    handleVerification(row) {
-      // TODO: sambungkan ke dialog verifikasi
+    handleVerification(value) {
+      this.showVerification = true
+      this.verificationData = value
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
@@ -159,4 +175,3 @@ export default {
   }
 }
 </script>
-

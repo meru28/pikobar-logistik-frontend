@@ -216,7 +216,10 @@ export default {
     faskes_location: 'Lokasi Faskes',
     input_faskes_location: 'Masukkan link koordinat lokasi dari google maps',
     verification: 'Verifikasi',
+    verification_fakes_title: 'Verifikasi Fasilitas Kesehatan',
     reject: 'Tolak',
+    open_in_goolge_maps: 'Buka di Google Maps',
+    copy_url: 'Copy URL',
     add_medical_facility: 'Tambah Fasilitas Kesehatan',
     instance_not_found_title: 'Tidak menemukan nama instansi anda?',
     adding: 'Tambahkan',
@@ -233,8 +236,9 @@ export default {
     not_verified_value: 'not_verified',
     not_verified_label: 'Belum Terverifikasi',
     rejected_value: 'rejected',
-    rejected_label: 'Ditolak'
-
+    rejected_label: 'Ditolak',
+    success_text_dialog_verification_faskes: 'Data Fasilitas Kesehatan berhasil diverifikasi.',
+    success_text_dialog_reject_faskes: 'Proses tolak verifikasi berhasil dilakukan.'
   },
   success: {
     login_success: 'Login Berhasil',
