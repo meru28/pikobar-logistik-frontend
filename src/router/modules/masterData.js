@@ -1,27 +1,17 @@
 import Layout from '@/layout'
 
-const masterData = {
+const masterDataRouter = {
   path: '/master-data',
   component: Layout,
-  redirect: '/master-data/fasilitas-kesehatan',
+  redirect: '/master-data/fasilitas-kesehatan/terdaftar',
+  name: 'MasterData',
   meta: {
     title: 'master_data_title',
-    icon: 'library_books',
+    icon: 'mdi-database',
     roles: ['superadmin', 'dinkesprov']
   },
   active: false,
-  children: [
-    {
-      path: 'fasilitas-kesehatan',
-      component: () => import('@/views/masterData/listFasilitasKesehatan'),
-      meta: {
-        title: 'medical_facility_title',
-        icon: 'library_books',
-        noCache: true,
-        roles: ['superadmin', 'dinkesprov']
-      }
-    }
-  ]
+  children: []
 }
 
-export default masterData
+export default masterDataRouter

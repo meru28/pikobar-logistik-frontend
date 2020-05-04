@@ -1,4 +1,4 @@
-import { fetchList } from '@/api'
+import { fetchList, doPostUpdate } from '@/api'
 
 export default {
   async getListFaskes({ commit }, params) {
@@ -15,6 +15,14 @@ export default {
     try {
       const response = await fetchList(`/api/v1/master-faskes/${faskesId}`, 'GET')
       commit('SET_DETAIL_FASKES', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async postVerificationFaskes({ commit }, params) {
+    try {
+      const response = await doPostUpdate('/api/v1/verify-master-faskes/' + params.id, 'POST', { verification_status: params.verification_status })
       return response
     } catch (e) {
       return e
