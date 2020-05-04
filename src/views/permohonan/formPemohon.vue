@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isConfirm" class="background-landing-page background-height">
+  <div v-if="!isConfirm" class="background-landing-page background-height-form-pemohon">
     <div class="full-landing-page">
       <div class="header-landing-page">
         <v-row justify="space-between" align="center">
@@ -9,14 +9,14 @@
                 <v-img :max-width="40" src="../../static/logistik_logo_lingkar.svg" />
               </router-link>
               <router-link to="/landing-page">
-                <div class="title-page">{{ $t('label.applicant_form_title') }}</div>
+                <div class="title-page-form-pemohon">{{ $t('label.applicant_form_title') }}</div>
               </router-link>
             </v-row>
           </v-col>
           <v-col cols="12" md="4" xs="12">
             <v-row class="float-right-landing-page">
               <a :href="$t('label.link_tutorial')" target="_blank"><v-icon color="white" size="25">{{ $t('label.icon_help') }}</v-icon></a>
-              <a :href="$t('label.link_tutorial')" target="_blank"><div class="tutorial-class pusat-bantuan-landing-page">{{ $t('label.tutorial') }}</div></a>
+              <a :href="$t('label.link_tutorial')" target="_blank"><div class="tutorial-class-form-pemohon pusat-bantuan-landing-page">{{ $t('label.tutorial') }}</div></a>
             </v-row>
           </v-col>
         </v-row>
@@ -45,10 +45,10 @@
       </div>
     </div>
     <div class="negative-landing-page">
-      <v-card class="main-card" outlined>
-        <v-stepper v-model="step" class="stepper-margin" :alt-labels="true">
+      <v-card class="main-card-form-pemohon" outlined>
+        <v-stepper v-model="step" class="stepper-margin-form-pemohon" :alt-labels="true">
           <v-stepper-header>
-            <v-stepper-step class="left-margin" :complete="step > 1" step="1">
+            <v-stepper-step class="left-margin-form-pemohon" :complete="step > 1" step="1">
               <center>{{ $t('label.step_title_1') }}</center>
             </v-stepper-step>
             <v-divider />
@@ -60,7 +60,7 @@
               <center>{{ $t('label.step_title_3') }}</center>
             </v-stepper-step>
             <v-divider />
-            <v-stepper-step :complete="step > 4" class="right-margin" step="4">
+            <v-stepper-step :complete="step > 4" class="right-margin-form-pemohon" step="4">
               <center>{{ $t('label.step_title_4') }}</center>
             </v-stepper-step>
           </v-stepper-header>
@@ -132,45 +132,48 @@ export default {
 }
 </script>
 <style>
-.main-card {
+.main-card-form-pemohon {
   margin: -50px 120px 30px 120px;
   height: 500px;
   padding: 100px 10px;
 }
-.main-card-mobile {
-  display: none;
-}
-.title-page {
+.title-page-form-pemohon {
   padding: 5px 20px;
   font-size: 22px;
   color: white;
   line-height: 29px;
 }
-.margin-positive {
-  margin: 10px;
-  float: right;
-}
-.left-margin {
+.left-margin-form-pemohon {
   margin-left: 200px;
 }
-.right-margin {
+.right-margin-form-pemohon {
   margin-right: 200px;
 }
-.margin-button {
-  margin-top: 100px;
-}
-.background-height {
+.background-height-form-pemohon {
   height: 1000px;
 }
-.stepper-margin {
+.stepper-margin-form-pemohon {
   margin: -100px -10px 0px -10px;
 }
-.tutorial-class {
+.tutorial-class-form-pemohon {
   font-family: 'Product Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
+}
+.btn-margin-positive {
+  margin: 10px;
+  float: right;
+}
+.btn-desktop {
+  display:block;
+}
+.btn-mobile {
+  display: none;
+}
+.margin-10 {
+  margin: 10px;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }
@@ -178,9 +181,23 @@ export default {
 }
 
 @media (max-width: 588px) and (min-width: 320px) {
-  .main-card {
-    display: block;
+  .main-card-form-pemohon {
     margin: 150px 0px -30px 0px;
+  }
+  .left-margin-form-pemohon {
+    margin-left: 0px;
+  }
+  .right-margin-form-pemohon {
+    margin-right: 0px;
+  }
+  .stepper-margin-form-pemohon {
+    margin: -200px -10px 0px -10px;
+  }
+  .btn-desktop {
+    display: none;
+  }
+  .btn-mobile {
+    display: block;
   }
   .left-margin {
     margin-left: 0px;

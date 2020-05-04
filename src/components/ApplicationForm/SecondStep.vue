@@ -6,7 +6,7 @@
         lazy-validation
       >
         <v-row>
-          <center><v-label class="title"><b>{{ $t('label.applicant_form_header') }}</b></v-label></center>
+          <center><v-label class="title"><b>{{ $t('label.applicant_form_header_step_2') }}</b></v-label></center>
         </v-row>
         <v-row>
           <v-col cols="12" sm="12" md="6">
@@ -14,7 +14,7 @@
               v-slot="{ errors }"
               rules="requiredApplicantName"
             >
-              <v-label class="title"><b>{{ $t('label.contact_person') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.contact_person') }}</b> <i class="text-small-second-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field
                 v-model="formIdentityApplicant.applicantName"
                 outlined
@@ -27,7 +27,7 @@
               v-slot="{ errors }"
               rules="requiredApplicantPosition"
             >
-              <v-label class="title"><b>{{ $t('label.applicant_position') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.applicant_position') }}</b> <i class="text-small-second-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field
                 v-model="formIdentityApplicant.applicantPosition"
                 outlined
@@ -41,7 +41,7 @@
             >
               <v-label class="title"><b>{{ $t('label.upload_applicant_ktp') }}</b></v-label>
               <br>
-              <v-label><i class="text-small">({{ $t('label.max_file_title') }})</i></v-label>
+              <v-label><i class="text-small-second-step">({{ $t('label.max_file_title') }})</i></v-label>
               <div>
                 <v-label v-if="!isUpload">{{ $t('label.not_yet_upload_file') }}</v-label>
                 <v-label v-else>{{ selectedFileName }}</v-label>
@@ -72,7 +72,7 @@
                 <v-btn
                   v-if="isUpload"
                   outlined
-                  class="btn-delete-mobile"
+                  class="btn-delete-mobile-second-step"
                   @click="deleteFile"
                 >
                   {{ $t('label.delete') }}
@@ -102,7 +102,7 @@
               v-slot="{ errors }"
               rules="requiredApplicantEmail|email"
             >
-              <v-label class="title"><b>{{ $t('label.applicant_email') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.applicant_email') }}</b> <i class="text-small-second-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field
                 v-model="formIdentityApplicant.applicantEmail"
                 outlined
@@ -115,7 +115,7 @@
               v-slot="{ errors }"
               rules="requiredApplicantPhoneNumber|isPhoneNumber"
             >
-              <v-label class="title"><b>{{ $t('label.applicant_phone_number') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.applicant_phone_number') }}</b> <i class="text-small-second-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field
                 v-model="formIdentityApplicant.applicantPhoneNumber"
                 outlined
@@ -128,7 +128,7 @@
               v-slot="{ errors }"
               rules="requiredApplicantPhoneNumber|isPhoneNumber"
             >
-              <v-label class="title"><b>{{ $t('label.other_applicant_phone_number') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.other_applicant_phone_number') }}</b> <i class="text-small-second-step">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field
                 v-model="formIdentityApplicant.applicantPhoneNumber2"
                 outlined
@@ -141,14 +141,14 @@
         </v-row>
         <v-container fluid>
           <div class="btn-desktop">
-            <v-col cols="6" sm="6" md="6" class="float-right">
+            <v-col cols="6" sm="6" md="6" class="float-right-second-step">
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 color="primary"
                 @click="onNext"
               >{{ $t('label.next') }}</v-btn>
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 outlined
                 text
                 @click="onPrev"
@@ -156,16 +156,16 @@
             </v-col>
           </div>
           <div class="btn-mobile">
-            <v-col cols="12" sm="12" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right-second-step">
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 color="primary"
                 @click="onNext"
               >{{ $t('label.next') }}</v-btn>
             </v-col>
-            <v-col cols="12" sm="12" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right-second-step">
               <v-btn
-                class="margin-positive"
+                class="btn-margin-positive"
                 outlined
                 text
                 @click="onPrev"
@@ -249,50 +249,11 @@ export default {
 }
 </script>
 <style>
-.main-card {
-  margin-left: -50px;
-  display: block;
-}
-.main-card-mobile {
-  display: none;
-}
-.margin-negative {
-  margin-top: -30px !important;
-}
-.text-small {
+.text-small-second-step {
   font-size: 13px;
 }
-.margin-header-mobile {
-  margin-top: -150px;
-}
-.margin-text-mobile-10 {
-  margin-top: -10px;
-  padding: 10px;
-}
-.margin-top-100 {
-  margin-top: -100px !important;
-}
-.margin-top-80 {
-  margin-top: -80px;
-}
-.margin-top-30 {
-  margin-top: -30px;
-}
-.margin-10 {
-  margin: 10px;
-}
-.margin-input {
-  margin-left: -130px;
-  margin-right: -130px;
-}
-.float-right {
+.float-right-second-step {
   float: right;
-}
-.btn-desktop {
-  display:block;
-}
-.btn-mobile {
-  display: none;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }
@@ -300,19 +261,7 @@ export default {
 }
 
 @media (max-width: 588px) and (min-width: 320px) {
-  .main-card {
-    display: none;
-  }
-  .main-card-mobile {
-    display: block;
-  }
-  .btn-desktop {
-    display: none;
-  }
-  .btn-mobile {
-    display: block;
-  }
-  .btn-delete-mobile {
+  .btn-delete-mobile-second-step {
     display: block;
     margin: 10px;
   }
