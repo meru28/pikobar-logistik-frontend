@@ -199,5 +199,14 @@ export default {
   .btn-mobile {
     display: block;
   }
+  .left-margin {
+    margin-left: 0px;
+  }
+  .right-margin {
+    margin-right: 0px;
+  }
+  .stepper-margin {
+    margin: -200px -10px 0px -10px;
+  }
 }
 </style>
