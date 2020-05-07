@@ -54,11 +54,6 @@ extend('requiredUpperName', {
   message: (_, values) => i18n.t('errors.field_must_be_filled_upper_name', values)
 })
 
-extend('requiredFaskesLocation', {
-  ...required,
-  message: (_, values) => i18n.t('errors.field_must_be_filled_faskes_location', values)
-})
-
 extend('requiredApplicantName', {
   ...required,
   message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_name', values)
