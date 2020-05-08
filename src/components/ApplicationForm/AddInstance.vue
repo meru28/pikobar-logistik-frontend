@@ -61,18 +61,12 @@
               :error-messages="errors"
             />
           </ValidationProvider>
-          <ValidationProvider
-            v-slot="{ errors }"
-            rules="requiredFaskesLocation"
-          >
-            <v-label class="title"><b>{{ $t('label.faskes_location') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
-            <v-text-field
-              v-model="listQuery.point_latitude_longitude"
-              :placeholder="$t('label.input_faskes_location')"
-              outlined
-              :error-messages="errors"
-            />
-          </ValidationProvider>
+          <v-label class="title"><b>{{ $t('label.faskes_location') }}</b></v-label>
+          <v-text-field
+            v-model="listQuery.point_latitude_longitude"
+            :placeholder="$t('label.input_faskes_location')"
+            outlined
+          />
           <div>
             <i>{{ $t('label.add_instance_not_found_notif') }}</i>
           </div>
