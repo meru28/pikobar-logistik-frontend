@@ -238,7 +238,13 @@ export default {
     rejected_value: 'rejected',
     rejected_label: 'Ditolak',
     success_text_dialog_verification_faskes: 'Data Fasilitas Kesehatan berhasil diverifikasi.',
-    success_text_dialog_reject_faskes: 'Proses tolak verifikasi berhasil dilakukan.'
+    success_text_dialog_reject_faskes: 'Proses tolak verifikasi berhasil dilakukan.',
+    realization_amount: 'Jumlah Realisasi',
+    update: 'Upadte',
+    update_logistic_needs_title: 'Update Daftar Kebutuhan Logistik Medis',
+    apd_spec_name: 'Nama/Spesifikasi APD',
+    total_needs: 'Jumlah Kebutuhan',
+    realization_date: 'Tanggal Realisasi'
   },
   success: {
     login_success: 'Login Berhasil',
