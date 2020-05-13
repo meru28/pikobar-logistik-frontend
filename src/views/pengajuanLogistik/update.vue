@@ -71,6 +71,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
+import i18n from '@/lang'
 
 export default {
   name: 'UpdateKebutuhanLogistik',
@@ -94,19 +95,19 @@ export default {
       date: null,
       status: [
         {
-          text: 'Sudah Disetujui',
+          text: i18n.t('label.approved'),
           value: 'approved'
         },
         {
-          text: 'Belum Dikirim',
+          text: i18n.t('label.not_delivered'),
           value: 'not_delivered'
         },
         {
-          text: 'Sudah Dikirim',
+          text: i18n.t('label.delivered'),
           value: 'delivered'
         },
         {
-          text: 'Barang Belum Tersedia',
+          text: i18n.t('label.not_available'),
           value: 'not_avalivable'
         }
       ],
@@ -125,7 +126,7 @@ export default {
       this.data.product_id = this.item.product_id
       this.data.agency_id = this.item.agency_id
       await this.$store.dispatch('logistics/postUpdateLogisticNeeds', this.data)
-      window.location.reload()
+      // window.location.reload()
     },
     hideDialog() {
       EventBus.$emit('dialogHide', false)

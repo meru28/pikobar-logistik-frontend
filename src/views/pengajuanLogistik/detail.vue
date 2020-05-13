@@ -252,11 +252,7 @@
                 <td>{{ item.usage }}</td>
                 <td>{{ item.priority }}</td>
                 <td>{{ item.realization_quantity }}</td>
-                <td v-if="item.status === 'approved'">{{ $t('label.approved') }}</td>
-                <td v-else-if="item.status === 'not_delivered'">{{ $t('label.not_delivered') }}</td>
-                <td v-else-if="item.status === 'delivered'">{{ $t('label.delivered') }}</td>
-                <td v-else-if="item.status === 'not_available'">{{ $t('label.not_available') }}</td>
-                <td v-else>{{ $t('label.not_approved') }}</td>
+                <td>{{ item.status }}</td>
                 <td v-if="isVerified">
                   <v-btn text small color="info" @click.stop="showForm = true">
                     {{ $t('label.update') }}
@@ -296,6 +292,7 @@
 import { mapGetters } from 'vuex'
 import updateKebutuhanLogistik from './update'
 import EventBus from '@/utils/eventBus'
+import i18n from '@/lang'
 
 export default {
   name: 'ListDetailPengajuanLogistik',
@@ -328,6 +325,19 @@ export default {
     const temp = this.detailLogisticRequest.letter.letter.split('.')
     this.letterFileType = temp[temp.length - 1]
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
+    this.listLogisticNeeds.forEach(element => {
+      if (element.status === 'approved') {
+        element.status = i18n.t('label.approved')
+      } else if (element.status === 'not_delivered') {
+        element.status = i18n.t('label.not_delivered')
+      } else if (element.status === 'delivered') {
+        element.status = i18n.t('label.delivered')
+      } else if (element.status === 'not_available') {
+        element.status = i18n.t('label.not_available')
+      } else {
+        element.status = i18n.t('label.not_available')
+      }
+    })
     EventBus.$on('dialogHide', (value) => {
       this.showForm = value
     })
