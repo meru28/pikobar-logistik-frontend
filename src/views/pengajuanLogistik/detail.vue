@@ -251,10 +251,13 @@
                 <td>{{ item.unit.unit }}</td>
                 <td>{{ item.usage }}</td>
                 <td>{{ item.priority }}</td>
-                <td>0</td>
-                <td>belum disetujui</td>
+                <td>{{ item.realization_quantity }}</td>
+                <td v-if="item.status === 'approved'">{{ $t('label.approved') }}</td>
+                <td v-else-if="item.status === 'not_delivered'">{{ $t('label.not_delivered') }}</td>
+                <td v-else-if="item.status === 'delivered'">{{ $t('label.delivered') }}</td>
+                <td v-else-if="item.status === 'not_available'">{{ $t('label.not_available') }}</td>
+                <td v-else>{{ $t('label.not_approved') }}</td>
                 <td v-if="isVerified">
-                  <!-- {{ $t('label.update') }} -->
                   <v-btn text small color="info" @click.stop="showForm = true">
                     {{ $t('label.update') }}
                   </v-btn>
@@ -292,6 +295,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import updateKebutuhanLogistik from './update'
+import EventBus from '@/utils/eventBus'
+
 export default {
   name: 'ListDetailPengajuanLogistik',
   components: {
@@ -323,6 +328,9 @@ export default {
     const temp = this.detailLogisticRequest.letter.letter.split('.')
     this.letterFileType = temp[temp.length - 1]
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
+    EventBus.$on('dialogHide', (value) => {
+      this.showForm = value
+    })
   },
   methods: {
     getTableRowNumbering(index) {

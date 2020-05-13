@@ -28,9 +28,10 @@
           <span class="sub-title-update-logistic-needs">{{ $t('label.realization_amount') }}</span>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="requiredUpperName"
+            rules="requiredRealizationAmount|numericRealizationAmount"
           >
             <v-text-field
+              v-model="data.realization_quantity"
               outlined
               :error-messages="errors"
             />
@@ -38,17 +39,25 @@
         </v-col>
         <v-col class="margin-top-min-30-update-logistic-needs">
           <span class="sub-title-update-logistic-needs">{{ $t('label.realization_date') }}</span>
-          <date-picker
+          <date-picker-input
             :value="date"
+            @selected="changeDate"
           />
         </v-col>
         <v-col class="margin-top-min-30-update-logistic-needs">
           <span class="sub-title-update-logistic-needs">{{ $t('label.status') }}</span>
-          <v-select
-            solo
-            :placeholder="$t('label.select_status')"
-            :items="status"
-          />
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="requiredStatus"
+          >
+            <v-select
+              v-model="data.status"
+              solo
+              :placeholder="$t('label.select_status')"
+              :error-messages="errors"
+              :items="status"
+            />
+          </ValidationProvider>
         </v-col>
         <v-col class="margin-top-min-30-update-logistic-needs">
           <v-btn class="margin-btn-update-logistic-needs" outlined @click="hideDialog">{{ $t('label.cancel') }}</v-btn>
@@ -61,6 +70,7 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import EventBus from '@/utils/eventBus'
 
 export default {
   name: 'UpdateKebutuhanLogistik',
@@ -85,32 +95,46 @@ export default {
       status: [
         {
           text: 'Sudah Disetujui',
-          value: 'Sudah Disetujui'
+          value: 'approved'
         },
         {
           text: 'Belum Dikirim',
-          value: 'Belum Dikirim'
+          value: 'not_delivered'
         },
         {
           text: 'Sudah Dikirim',
-          value: 'Sudah Dikirm'
+          value: 'delivered'
         },
         {
           text: 'Barang Belum Tersedia',
-          value: 'Barang Belum Tersedia'
+          value: 'not_avalivable'
         }
-      ]
+      ],
+      data: {},
+      labelDate: 'Pilih Tanggal'
     }
   },
   methods: {
-    submitData() {
-      console.log('masuk')
+    async submitData() {
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        return
+      }
+      this.data.need_id = this.item.id
+      this.data.unit_id = this.item.unit.id
+      this.data.product_id = this.item.product_id
+      this.data.agency_id = this.item.agency_id
+      await this.$store.dispatch('logistics/postUpdateLogisticNeeds', this.data)
+      window.location.reload()
     },
     hideDialog() {
-      console.log('masuk')
+      EventBus.$emit('dialogHide', false)
     },
     handleSelectedDate(value) {
       this.$emit('selected', value)
+    },
+    changeDate(value) {
+      this.data.realization_date = value
     }
   }
 }
