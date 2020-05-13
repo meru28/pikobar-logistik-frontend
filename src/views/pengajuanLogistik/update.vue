@@ -71,7 +71,6 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
-import i18n from '@/lang'
 
 export default {
   name: 'UpdateKebutuhanLogistik',
@@ -95,19 +94,19 @@ export default {
       date: null,
       status: [
         {
-          text: i18n.t('label.approved'),
+          text: this.$t('label.approved'),
           value: 'approved'
         },
         {
-          text: i18n.t('label.not_delivered'),
+          text: this.$t('label.not_delivered'),
           value: 'not_delivered'
         },
         {
-          text: i18n.t('label.delivered'),
+          text: this.$t('label.delivered'),
           value: 'delivered'
         },
         {
-          text: i18n.t('label.not_available'),
+          text: this.$t('label.not_available'),
           value: 'not_avalivable'
         }
       ],

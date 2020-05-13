@@ -60,7 +60,7 @@ export default {
   },
   watch: {
     date(val) {
-      if (this.date == null) {
+      if (this.date === null) {
         this.handleSelectedDate('')
       } else {
         this.dateFormatted = this.formatDate(this.date)

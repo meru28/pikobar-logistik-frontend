@@ -292,7 +292,6 @@
 import { mapGetters } from 'vuex'
 import updateKebutuhanLogistik from './update'
 import EventBus from '@/utils/eventBus'
-import i18n from '@/lang'
 
 export default {
   name: 'ListDetailPengajuanLogistik',
@@ -327,15 +326,15 @@ export default {
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
     this.listLogisticNeeds.forEach(element => {
       if (element.status === 'approved') {
-        element.status = i18n.t('label.approved')
+        element.status = this.$t('label.approved')
       } else if (element.status === 'not_delivered') {
-        element.status = i18n.t('label.not_delivered')
+        element.status = this.$t('label.not_delivered')
       } else if (element.status === 'delivered') {
-        element.status = i18n.t('label.delivered')
+        element.status = this.$t('label.delivered')
       } else if (element.status === 'not_available') {
-        element.status = i18n.t('label.not_available')
+        element.status = this.$t('label.not_available')
       } else {
-        element.status = i18n.t('label.not_available')
+        element.status = this.$t('label.not_available')
       }
     })
     EventBus.$on('dialogHide', (value) => {
