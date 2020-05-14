@@ -357,7 +357,6 @@ export default {
     },
     async getListDetailNeeds() {
       await this.$store.dispatch('logistics/getListDetailLogisticNeeds', this.listQuery)
-      console.log('masuk sini')
     },
     async onNext() {
       await this.getListDetailNeeds()
