@@ -214,7 +214,11 @@
               </v-col>
               <v-col class="margin-20" cols="12" sm="4" md="4">
                 <v-row><span class="text-title-green">{{ $t('label.applicant_ktp') }}</span></v-row>
-                <v-row><img class="image-style" :src="detailLogisticRequest.applicant.file"></v-row>
+                <v-row>
+                  <v-label v-if="detailLogisticRequest.applicant.file === '-'">{{ detailLogisticRequest.applicant.file }}</v-label>
+                  <a v-else-if="detailLogisticRequest.applicant.file.substr(0, 4) === 'https'" class="letter-class" :href="detailLogisticRequest.applicant.file" target="_blank">{{ detailLogisticRequest.applicant.file }}</a>
+                  <img v-else class="image-style" :src="detailLogisticRequest.applicant.file">
+                </v-row>
               </v-col>
             </v-row>
           </v-card>
@@ -252,11 +256,12 @@
                 <td>{{ item.usage }}</td>
                 <td>{{ item.priority }}</td>
                 <td>{{ item.realization_quantity }}</td>
-                <td>{{ item.status }}</td>
+                <td>{{ item.statusLabel }}</td>
                 <td v-if="isVerified">
-                  <v-btn text small color="info" @click.stop="showForm = true">
+                  <v-btn v-if="item.status === 'not_approved' || item.status === 'approved'" text small color="info" @click.stop="showForm = true">
                     {{ $t('label.update') }}
                   </v-btn>
+                  <center v-else>-</center>
                 </td>
                 <updateKebutuhanLogistik
                   :show="showForm"
@@ -327,19 +332,19 @@ export default {
     this.listLogisticNeeds.forEach(element => {
       switch (element.status) {
         case 'approved':
-          element.status = this.$t('label.approved')
+          element.statusLabel = this.$t('label.approved')
           break
         case 'not_delivered':
-          element.status = this.$t('label.not_delivered')
+          element.statusLabel = this.$t('label.not_delivered')
           break
         case 'delivered':
-          element.status = this.$t('label.delivered')
+          element.statusLabel = this.$t('label.delivered')
           break
         case 'not_available':
-          element.status = this.$t('label.not_available')
+          element.statusLabel = this.$t('label.not_available')
           break
         default:
-          element.status = this.$t('label.not_available')
+          element.statusLabel = this.$t('label.not_approved')
       }
     })
     EventBus.$on('dialogHide', (value) => {
