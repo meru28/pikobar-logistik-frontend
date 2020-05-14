@@ -111,7 +111,7 @@ export default {
         }
       ],
       data: {},
-      labelDate: 'Pilih Tanggal'
+      labelDate: this.$t('label.input_date')
     }
   },
   methods: {
@@ -125,7 +125,7 @@ export default {
       this.data.product_id = this.item.product_id
       this.data.agency_id = this.item.agency_id
       await this.$store.dispatch('logistics/postUpdateLogisticNeeds', this.data)
-      // window.location.reload()
+      window.location.reload()
     },
     hideDialog() {
       EventBus.$emit('dialogHide', false)

@@ -325,16 +325,21 @@ export default {
     this.letterFileType = temp[temp.length - 1]
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
     this.listLogisticNeeds.forEach(element => {
-      if (element.status === 'approved') {
-        element.status = this.$t('label.approved')
-      } else if (element.status === 'not_delivered') {
-        element.status = this.$t('label.not_delivered')
-      } else if (element.status === 'delivered') {
-        element.status = this.$t('label.delivered')
-      } else if (element.status === 'not_available') {
-        element.status = this.$t('label.not_available')
-      } else {
-        element.status = this.$t('label.not_available')
+      switch (element.status) {
+        case 'approved':
+          element.status = this.$t('label.approved')
+          break
+        case 'not_delivered':
+          element.status = this.$t('label.not_delivered')
+          break
+        case 'delivered':
+          element.status = this.$t('label.delivered')
+          break
+        case 'not_available':
+          element.status = this.$t('label.not_available')
+          break
+        default:
+          element.status = this.$t('label.not_available')
       }
     })
     EventBus.$on('dialogHide', (value) => {
@@ -352,6 +357,7 @@ export default {
     },
     async getListDetailNeeds() {
       await this.$store.dispatch('logistics/getListDetailLogisticNeeds', this.listQuery)
+      console.log('masuk sini')
     },
     async onNext() {
       await this.getListDetailNeeds()
