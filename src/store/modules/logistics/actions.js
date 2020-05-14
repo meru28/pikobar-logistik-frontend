@@ -87,5 +87,14 @@ export default {
     } catch (e) {
       return e
     }
+  },
+  async postUpdateLogisticNeeds({ commit }, params) {
+    try {
+      params.realization_quantity = parseInt(params.realization_quantity)
+      const response = await doPostUpdate('/api/v1/logistic-request/realization', 'POST', params)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }
