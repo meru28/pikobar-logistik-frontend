@@ -47,7 +47,7 @@ export default {
     target: 'Capaian / Target',
     address: 'Alamat Tempat Tinggal',
     example_address: 'Masukkan alamat lengkap tujuan',
-    select_district: 'Kota/Kab.',
+    select_district: 'Pilih Kota/Kab.',
     select_sub_district: 'Kec.',
     select_sub_district_full_name: 'Kecamatan',
     example_select_sub_district: 'Masukkan kecamatan tujuan',
