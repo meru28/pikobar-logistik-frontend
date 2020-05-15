@@ -73,10 +73,10 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   dashboardRouter,
+  pengajuanLogistik,
   distribusiRdt,
   monitoringRdtRouter,
   faskesRouter,
-  pengajuanLogistik,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/', hidden: true }
 ]

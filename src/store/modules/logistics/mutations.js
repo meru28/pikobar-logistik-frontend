@@ -14,6 +14,9 @@ export default {
   SET_TOTAL_LIST_LOGISTIC_REQUEST: (state, data) => {
     state.totalListLogisticRequest = data
   },
+  SET_TOTAL_DATA_LOGISTIC_REQUEST: (state, data) => {
+    state.totalDataLogisticRequest = data
+  },
   SET_DETAIL_LOGISTIC_REQUEST: (state, data) => {
     state.dataDetailLogisticRequest = data
   },

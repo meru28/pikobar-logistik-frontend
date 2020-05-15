@@ -15,7 +15,7 @@ const pengajuanLogistik = {
       path: 'alat-kesehatan',
       component: () => import('@/views/pengajuanLogistik/list'),
       meta: {
-        title: 'medical_tools_title',
+        title: 'applicant_medical_tools_title',
         icon: 'library_books',
         noCache: true,
         roles: ['superadmin', 'dinkesprov']
@@ -26,7 +26,7 @@ const pengajuanLogistik = {
       component: () => import('@/views/pengajuanLogistik/detail'),
       hidden: true,
       meta: {
-        title: 'medical_tools_title',
+        title: 'applicant_medical_tools_title',
         icon: 'library_books',
         noCache: true,
         roles: ['superadmin', 'dinkesprov']
