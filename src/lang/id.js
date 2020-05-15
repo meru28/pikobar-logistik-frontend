@@ -8,7 +8,7 @@ export default {
     monitoring_rdt_title: 'Monitoring RDT Kit',
     logistic_request_title: 'Pengajuan Logisitk',
     master_data_title: 'Master Data',
-    medical_tools_title: 'Alat Kesehatan',
+    applicant_medical_tools_title: 'Permohonan Alkes',
     medical_facility_title: 'Fasilitas Kesehatan',
     not_registered_title: 'Belum Terdaftar',
     registered_title: 'Terdaftar',
@@ -250,7 +250,8 @@ export default {
     not_delivered: 'Belum Dikirim',
     delivered: 'Sudah Dikirim',
     not_available: 'Barang Belum Tersedia',
-    not_approved: 'Belum Disetujui'
+    not_approved: 'Belum Disetujui',
+    total_data: 'Total Data'
   },
   success: {
     login_success: 'Login Berhasil',
