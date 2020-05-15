@@ -127,7 +127,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        sort: 'asc',
+        sort: '',
         city_code: '',
         verification_status: '',
         agency_name: '',
