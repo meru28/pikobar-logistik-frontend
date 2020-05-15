@@ -104,6 +104,26 @@ extend('requiredUrgencyLevel', {
   message: (_, values) => i18n.t('errors.field_must_be_filled_urgency_level', values)
 })
 
+extend('requiredRealizationAmount', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_realization_amount', values)
+})
+
+extend('numericRealizationAmount', {
+  ...numeric,
+  message: (_, values) => i18n.t('errors.field_unauthorized_characters_realization_amount', values)
+})
+
+extend('requiredRealizationDate', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_realization_date', values)
+})
+
+extend('requiredStatus', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_status', values)
+})
+
 extend('max', {
   ...max,
   message: 'This field must be {length} characters or less'

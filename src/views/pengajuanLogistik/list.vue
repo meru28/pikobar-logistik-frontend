@@ -30,7 +30,7 @@
         />
       </v-col>
       <v-col cols="12" sm="3">
-        <v-label class="title">{{ $t('label.distribution_destination') }}</v-label>
+        <v-label class="title">{{ $t('label.city_district') }}</v-label>
         <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
       </v-col>
       <v-col cols="12" sm="2">
@@ -67,7 +67,7 @@
                   <th class="text-left">{{ $t('label.instance_name').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.city_name').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.contact_person').toUpperCase() }}</th>
-                  <th class="text-left">{{ $t('label.created_date').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.request_date').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.status').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.action').toUpperCase() }}</th>
                 </tr>
@@ -92,12 +92,25 @@
         </v-col>
       </v-row>
     </v-card>
-    <pagination
-      :total="totalListLogisticRequest"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      :on-next="onNext"
-    />
+    <v-row>
+      <v-card
+        outlined
+        height="80%"
+        style="margin: 13px"
+      >
+        <v-list-item>
+          <v-list-item-conten>
+            {{ $t('label.total_data') }} : {{ totalDataLogisticRequest }}
+          </v-list-item-conten>
+        </v-list-item>
+      </v-card>
+      <pagination
+        :total="totalListLogisticRequest"
+        :page.sync="listQuery.page"
+        :limit.sync="listQuery.limit"
+        :on-next="onNext"
+      />
+    </v-row>
   </div>
 </template>
 
@@ -114,7 +127,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        sort: 'asc',
+        sort: '',
         city_code: '',
         verification_status: '',
         agency_name: '',
@@ -136,7 +149,8 @@ export default {
   computed: {
     ...mapGetters('logistics', [
       'listLogisticRequest',
-      'totalListLogisticRequest'
+      'totalListLogisticRequest',
+      'totalDataLogisticRequest'
     ])
   },
   created() {

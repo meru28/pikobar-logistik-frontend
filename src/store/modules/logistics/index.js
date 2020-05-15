@@ -8,6 +8,7 @@ const state = {
   dataInstanceType: [],
   dataListLogisticRequest: [],
   totalListLogisticRequest: 0,
+  totalDataLogisticRequest: 0,
   dataDetailLogisticRequest: {},
   totalDetailLogisticNeeds: 0,
   dataListDetailLogisticNeeds: []

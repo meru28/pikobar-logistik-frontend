@@ -214,7 +214,11 @@
               </v-col>
               <v-col class="margin-20" cols="12" sm="4" md="4">
                 <v-row><span class="text-title-green">{{ $t('label.applicant_ktp') }}</span></v-row>
-                <v-row><img class="image-style" :src="detailLogisticRequest.applicant.file"></v-row>
+                <v-row>
+                  <v-label v-if="detailLogisticRequest.applicant.file === '-'">{{ detailLogisticRequest.applicant.file }}</v-label>
+                  <a v-else-if="detailLogisticRequest.applicant.file.substr(0, 4) === 'https'" class="letter-class" :href="detailLogisticRequest.applicant.file" target="_blank">{{ detailLogisticRequest.applicant.file }}</a>
+                  <img v-else class="image-style" :src="detailLogisticRequest.applicant.file">
+                </v-row>
               </v-col>
             </v-row>
           </v-card>
@@ -228,12 +232,15 @@
             <thead>
               <tr>
                 <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
-                <th class="text-left">{{ $t('label.apd_name_specification') }}</th>
-                <th class="text-left">{{ $t('label.brand') }}</th>
-                <th class="text-left">{{ $t('label.total') }}</th>
-                <th class="text-left">{{ $t('label.unit') }}</th>
-                <th class="text-left">{{ $t('label.purpose') }}</th>
-                <th class="text-left">{{ $t('label.urgency_level') }}</th>
+                <th class="text-left">{{ $t('label.apd_name_specification').toUpperCase() }}</th>
+                <th class="text-left">{{ $t('label.brand').toUpperCase() }}</th>
+                <th class="text-left">{{ $t('label.total').toUpperCase() }}</th>
+                <th class="text-left">{{ $t('label.unit').toUpperCase() }}</th>
+                <th class="text-left">{{ $t('label.purpose').toUpperCase() }}</th>
+                <th class="text-left">{{ $t('label.urgency_level').toUpperCase() }}</th>
+                <th class="text-left">{{ $t('label.realization_amount').toUpperCase() }}</th>
+                <th class="text-left">{{ $t('label.status').toUpperCase() }}</th>
+                <th v-if="isVerified" class="text-left">{{ $t('label.action') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -248,6 +255,18 @@
                 <td>{{ item.unit.unit }}</td>
                 <td>{{ item.usage }}</td>
                 <td>{{ item.priority }}</td>
+                <td>{{ item.realization_quantity }}</td>
+                <td>{{ item.statusLabel }}</td>
+                <td v-if="isVerified">
+                  <v-btn v-if="item.status === 'not_approved' || item.status === 'approved'" text small color="info" @click.stop="showForm = true">
+                    {{ $t('label.update') }}
+                  </v-btn>
+                  <center v-else>-</center>
+                </td>
+                <updateKebutuhanLogistik
+                  :show="showForm"
+                  :item="item"
+                />
               </tr>
             </tbody>
           </template>
@@ -276,8 +295,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import updateKebutuhanLogistik from './update'
+import EventBus from '@/utils/eventBus'
+
 export default {
   name: 'ListDetailPengajuanLogistik',
+  components: {
+    updateKebutuhanLogistik
+  },
   data() {
     return {
       letterFileType: '',
@@ -286,7 +311,8 @@ export default {
         page: 1,
         limit: 3,
         agency_id: ''
-      }
+      },
+      showForm: false
     }
   },
   computed: {
@@ -303,6 +329,27 @@ export default {
     const temp = this.detailLogisticRequest.letter.letter.split('.')
     this.letterFileType = temp[temp.length - 1]
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
+    this.listLogisticNeeds.forEach(element => {
+      switch (element.status) {
+        case 'approved':
+          element.statusLabel = this.$t('label.approved')
+          break
+        case 'not_delivered':
+          element.statusLabel = this.$t('label.not_delivered')
+          break
+        case 'delivered':
+          element.statusLabel = this.$t('label.delivered')
+          break
+        case 'not_available':
+          element.statusLabel = this.$t('label.not_available')
+          break
+        default:
+          element.statusLabel = this.$t('label.not_approved')
+      }
+    })
+    EventBus.$on('dialogHide', (value) => {
+      this.showForm = value
+    })
   },
   methods: {
     getTableRowNumbering(index) {

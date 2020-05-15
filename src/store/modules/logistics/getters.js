@@ -14,6 +14,9 @@ export default {
   totalListLogisticRequest: (state, getters) => {
     return state.totalListLogisticRequest
   },
+  totalDataLogisticRequest: (state, getters) => {
+    return state.totalDataLogisticRequest
+  },
   detailLogisticRequest: (state, getters) => {
     return state.dataDetailLogisticRequest
   },

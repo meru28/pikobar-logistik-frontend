@@ -50,6 +50,7 @@ export default {
       const response = await fetchList('/api/v1/logistic-request', 'GET', params)
       commit('SET_LIST_LOGISTIC_REQUEST', response.data.data)
       commit('SET_TOTAL_LIST_LOGISTIC_REQUEST', response.data.last_page)
+      commit('SET_TOTAL_DATA_LOGISTIC_REQUEST', response.data.total)
     } catch (e) {
       return e
     }
@@ -83,6 +84,15 @@ export default {
   async postAddFaskes({ commit }, params) {
     try {
       const response = await doPostUpdate('/api/v1/master-faskes', 'POST', params)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async postUpdateLogisticNeeds({ commit }, params) {
+    try {
+      params.realization_quantity = parseInt(params.realization_quantity)
+      const response = await doPostUpdate('/api/v1/logistic-request/realization', 'POST', params)
       return response
     } catch (e) {
       return e
