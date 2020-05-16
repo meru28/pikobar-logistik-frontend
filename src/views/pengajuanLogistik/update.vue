@@ -92,25 +92,11 @@ export default {
     return {
       dialog: false,
       date: null,
-      status: [],
-      data: {},
-      labelDate: this.$t('label.input_date')
-    }
-  },
-  created() {
-    if (this.item.status === 'not_approved') {
-      this.status = [
+      status: [
         {
           text: this.$t('label.approved'),
           value: 'approved'
         },
-        {
-          text: this.$t('label.not_available'),
-          value: 'not_avalivable'
-        }
-      ]
-    } else if (this.item.status === 'approved') {
-      this.status = [
         {
           text: this.$t('label.not_delivered'),
           value: 'not_delivered'
@@ -118,8 +104,14 @@ export default {
         {
           text: this.$t('label.delivered'),
           value: 'delivered'
+        },
+        {
+          text: this.$t('label.not_available'),
+          value: 'not_avalivable'
         }
-      ]
+      ],
+      data: {},
+      labelDate: this.$t('label.input_date')
     }
   },
   methods: {
