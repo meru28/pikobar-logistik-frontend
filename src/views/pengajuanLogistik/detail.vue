@@ -258,10 +258,9 @@
                 <td>{{ item.realization_quantity }}</td>
                 <td>{{ item.statusLabel }}</td>
                 <td v-if="isVerified">
-                  <v-btn v-if="item.status === 'not_approved' || item.status === 'approved'" text small color="info" @click.stop="showForm = true">
+                  <v-btn text small color="info" @click.stop="showForm = true">
                     {{ $t('label.update') }}
                   </v-btn>
-                  <center v-else>-</center>
                 </td>
                 <updateKebutuhanLogistik
                   :show="showForm"
