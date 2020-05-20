@@ -51,6 +51,32 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row class="margin-top-min-20-list-pengajuan-logistik">
+      <v-col cols="12" sm="3">
+        <v-label class="title">{{ $t('label.instance_type') }}</v-label>
+        <v-select
+          v-model="listQuery.faskes_type"
+          :items="faskesTypeList"
+          solo
+          item-text="name"
+          item-value="id"
+          :placeholder="$t('label.select_instance_type')"
+          @change="handleSearch()"
+        />
+      </v-col>
+      <v-col cols="12" sm="3">
+        <v-label class="title">{{ $t('label.applicant_origin') }}</v-label>
+        <v-select
+          v-model="listQuery.source_data"
+          :items="applicantOrigin"
+          solo
+          item-text="text"
+          item-value="value"
+          :placeholder="$t('label.select_applicant_origin')"
+          @change="handleSearch()"
+        />
+      </v-col>
+    </v-row>
     <v-card outlined>
       <v-card-text>
         <span class="table-title">{{ $t('label.list_request_logistic_medic') }}</span>
@@ -143,6 +169,16 @@ export default {
           value: 'not_verified'
         }
       ],
+      applicantOrigin: [
+        {
+          text: this.$t('label.dinkes_province'),
+          value: 'dinkes_provinsi'
+        },
+        {
+          text: this.$t('label.pikobar'),
+          value: 'pikobar'
+        }
+      ],
       date: null
     }
   },
@@ -151,9 +187,13 @@ export default {
       'listLogisticRequest',
       'totalListLogisticRequest',
       'totalDataLogisticRequest'
+    ]),
+    ...mapGetters('faskesType', [
+      'faskesTypeList'
     ])
   },
-  created() {
+  async created() {
+    await this.$store.dispatch('faskesType/getListFaskesType')
     this.getLogisticRequestList()
   },
   methods: {
@@ -196,6 +236,9 @@ export default {
 }
 .bottom-add-survey {
   margin-top:25px;
+}
+.margin-top-min-20-list-pengajuan-logistik {
+  margin-top: -20px;
 }
 .table-title {
   font-family: "Product Sans";
