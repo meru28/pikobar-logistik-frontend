@@ -67,12 +67,13 @@
       <v-col cols="12" sm="3">
         <v-label class="title">{{ $t('label.applicant_origin') }}</v-label>
         <v-select
-          v-model="listQuery.applicantOrigin"
+          v-model="listQuery.source_data"
           :items="applicantOrigin"
           solo
           item-text="text"
           item-value="value"
           :placeholder="$t('label.select_applicant_origin')"
+          @change="handleSearch()"
         />
       </v-col>
     </v-row>
@@ -171,7 +172,7 @@ export default {
       applicantOrigin: [
         {
           text: this.$t('label.dinkes_province'),
-          value: 'dinkes'
+          value: 'dinkes_provinsi'
         },
         {
           text: this.$t('label.pikobar'),
