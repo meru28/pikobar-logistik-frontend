@@ -237,6 +237,7 @@ export default {
         })
       })
 
+      // untuk mengirim file dengan request POST harus pakai formData
       const formData = new FormData()
       formData.append('master_faskes_id', this.formApplicant.instance)
       formData.append('logistic_request', JSON.stringify(dataLogistics))
