@@ -12,6 +12,7 @@ import distribusiRdt from './modules/distribusiRdt'
 import monitoringRdtRouter from './modules/monitoringRdt'
 import pengajuanLogistik from './modules/pengajuanLogistik'
 import faskesRouter from './modules/faskes'
+import formPemohonAdmin from './modules/formPemohonAdmin'
 
 /**
  * constantRoutes
@@ -73,6 +74,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   dashboardRouter,
+  formPemohonAdmin,
   pengajuanLogistik,
   distribusiRdt,
   monitoringRdtRouter,
