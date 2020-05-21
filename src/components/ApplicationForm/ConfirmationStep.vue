@@ -512,6 +512,7 @@ export default {
       formData.append('secondary_phone_number', this.formIdentityApplicant.applicantPhoneNumber2)
       formData.append('letter_file', this.applicantLetter)
       formData.append('applicant_file', this.formIdentityApplicant.dataFile)
+      formData.append('source_data', 'pikobar')
       await this.$store.dispatch('logistics/postApplicantForm', formData)
       this.isDone = true
       this.isLoading = false
