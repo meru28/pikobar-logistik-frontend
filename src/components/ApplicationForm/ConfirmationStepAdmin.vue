@@ -224,7 +224,6 @@ export default {
       EventBus.$emit('prevStep', this.step)
     },
     async submitData() {
-      console.log('masuk submit')
       this.isLoading = true
       const dataLogistics = []
       this.logisticNeeds.forEach(element => {
