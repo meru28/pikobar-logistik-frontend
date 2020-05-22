@@ -9,6 +9,7 @@ export default {
     logistic_request_title: 'Pengajuan Logisitk',
     master_data_title: 'Master Data',
     applicant_medical_tools_title: 'Permohonan Alkes',
+    applicant_medical_tools_list_title: 'Daftar Permohonan',
     applicant_form: 'Form Pemohon',
     medical_facility_title: 'Fasilitas Kesehatan',
     not_registered_title: 'Belum Terdaftar',
