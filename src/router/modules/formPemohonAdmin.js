@@ -15,7 +15,7 @@ const pengajuanLogistikAdmin = {
       path: 'form-pemohon',
       component: () => import('@/views/permohonan/formPemohonAdmin'),
       meta: {
-        title: 'applicant_form',
+        title: 'applicant_medical_tools_title',
         icon: 'library_books',
         noCache: true,
         roles: ['superadmin', 'dinkesprov']

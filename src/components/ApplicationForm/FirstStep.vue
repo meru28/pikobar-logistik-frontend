@@ -185,6 +185,10 @@ export default {
     formApplicant: {
       type: Object,
       default: null
+    },
+    isAdmin: {
+      type: Boolean,
+      default: null
     }
   },
   data() {
@@ -214,7 +218,11 @@ export default {
   },
   async created() {
     await this.getListCity()
-    await this.$store.dispatch('faskesType/getListFaskesType')
+    if (this.isAdmin) {
+      await this.$store.dispatch('faskesType/getListFaskesType')
+    } else {
+      await this.$store.dispatch('faskesType/getListFaskesType', { is_imported: 0 })
+    }
     await this.getListFaskes()
     EventBus.$on('dialogHide', (value) => {
       this.showForm = value
@@ -274,7 +282,12 @@ export default {
       await this.getListFaskes()
     },
     async getListFaskes() {
-      await this.$store.dispatch('faskes/getListFaskes', this.listQueryFaskes)
+      if (this.isAdmin){
+        await this.$store.dispatch('faskes/getListFaskes', this.listQueryFaskes)
+      } else {
+        this.listQueryFaskes.is_imported = 0
+        await this.$store.dispatch('faskes/getListFaskes', this.listQueryFaskes)
+      }
     },
     async querySearchFaskes(event) {
       this.listQueryFaskes.nama_faskes = event.target.value

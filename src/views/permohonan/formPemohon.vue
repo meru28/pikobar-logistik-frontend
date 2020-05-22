@@ -69,6 +69,7 @@
             <v-stepper-content step="1">
               <identitas-instansi-pemohon
                 :form-applicant="formApplicant"
+                :isAdmin="isAdmin"
               />
             </v-stepper-content>
             <v-stepper-content step="2">
@@ -112,7 +113,8 @@ export default {
       formIdentityApplicant: {},
       logisticNeeds: [],
       applicantLetter: null,
-      isConfirm: false
+      isConfirm: false,
+      isAdmin: false
     }
   },
   created() {
