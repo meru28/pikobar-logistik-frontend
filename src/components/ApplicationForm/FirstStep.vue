@@ -282,7 +282,7 @@ export default {
       await this.getListFaskes()
     },
     async getListFaskes() {
-      if (this.isAdmin){
+      if (this.isAdmin) {
         await this.$store.dispatch('faskes/getListFaskes', this.listQueryFaskes)
       } else {
         this.listQueryFaskes.is_imported = 0
