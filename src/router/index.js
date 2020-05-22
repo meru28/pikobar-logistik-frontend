@@ -8,12 +8,12 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import dashboardRouter from './modules/dashboard'
-
 // Request Aldy Rialdy. Di production hide dulu menu distribusi & monitoring. Di Staging jangan
 // import distribusiRdt from './modules/distribusiRdt'
 // import monitoringRdtRouter from './modules/monitoringRdt'
 import pengajuanLogistik from './modules/pengajuanLogistik'
 import faskesRouter from './modules/faskes'
+import formPemohonAdmin from './modules/formPemohonAdmin'
 
 /**
  * constantRoutes
@@ -75,6 +75,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   dashboardRouter,
+  formPemohonAdmin,
   pengajuanLogistik,
   // Request Aldy Rialdy. Di production hide dulu menu distribusi & monitoring. Di Staging jangan
   // distribusiRdt,
