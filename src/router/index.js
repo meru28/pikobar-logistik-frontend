@@ -8,8 +8,9 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import dashboardRouter from './modules/dashboard'
-import distribusiRdt from './modules/distribusiRdt'
-import monitoringRdtRouter from './modules/monitoringRdt'
+// Request Aldy Rialdy. Di production hide dulu menu distribusi & monitoring. Di Staging jangan
+// import distribusiRdt from './modules/distribusiRdt'
+// import monitoringRdtRouter from './modules/monitoringRdt'
 import pengajuanLogistik from './modules/pengajuanLogistik'
 import faskesRouter from './modules/faskes'
 import formPemohonAdmin from './modules/formPemohonAdmin'
@@ -76,8 +77,9 @@ export const asyncRoutes = [
   dashboardRouter,
   formPemohonAdmin,
   pengajuanLogistik,
-  distribusiRdt,
-  monitoringRdtRouter,
+  // Request Aldy Rialdy. Di production hide dulu menu distribusi & monitoring. Di Staging jangan
+  // distribusiRdt,
+  // monitoringRdtRouter,
   faskesRouter,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/', hidden: true }
