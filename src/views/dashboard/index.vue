@@ -115,6 +115,7 @@ export default {
   methods: {
     async getLogisticRequestSummary() {
       this.$store.dispatch('logistics/getLogisticRequestSummary')
+      await this.$store.dispatch('logistics/getLogisticRequestSummary')
     }
   }
 }
