@@ -17,7 +17,7 @@
               <v-col cols="12" sm="12" md="12">
                 <v-card-text>
                   <div>
-                    <a class="text-card-source-dashboard" href="https://logistik.pikobar.jabarprov.go.id/" target="_blank">{{ $t('label.dashboard_title_text') }}</a>
+                    <a class="text-card-source-dashboard" :href="baseURL" target="_blank">{{ $t('label.dashboard_title_text') }}</a>
                   </div>
                 </v-card-text>
               </v-col>
@@ -100,8 +100,7 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      labels: ['masker', 'APD'],
-      value: [20, 15]
+      baseURL: process.env.VUE_APP_URL
     }
   },
   computed: {
