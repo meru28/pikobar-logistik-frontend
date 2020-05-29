@@ -267,7 +267,9 @@ export default {
     last_update: 'Update Terakhir',
     total_incoming_request: 'Total Permohonan Masuk',
     with_pikobar: 'Melalu Pikobar',
-    with_dinkes_province: 'Melalui Dinkes Provinsi'
+    with_dinkes_province: 'Melalui Dinkes Provinsi',
+    tools_type_title: 'Jenis Barang pada Permohonan Logistik',
+    applicant_instance: 'Instansi Pemohon'
   },
   success: {
     login_success: 'Login Berhasil',

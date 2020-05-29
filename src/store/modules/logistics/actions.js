@@ -97,5 +97,32 @@ export default {
     } catch (e) {
       return e
     }
+  },
+  async getLogisticRequestSummary({ commit }, params) {
+    try {
+      const response = await fetchList('/api/v1/logistic-request-summary', 'GET')
+      commit('SET_DATA_LOGISTIC_REQUEST_SUMMARY', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async getFaskesTypeTotalRequest({ commit }, params) {
+    try {
+      const response = await fetchList('/api/v1/faskes-type-total-request', 'GET', params)
+      commit('SET_DATA_FASKES_TYPE_TOTAL_REQUEST', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async getProductTotalRequest({ commit }, params) {
+    try {
+      const response = await fetchList('/api/v1/products-total-request', 'GET', params)
+      commit('SET_PRODUCT_TOTAL_REQUEST', response.data.data)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }

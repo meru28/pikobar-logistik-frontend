@@ -25,5 +25,14 @@ export default {
   },
   SET_TOTAL_DETAIL_LOGISTIC_NEEDS: (state, data) => {
     state.totalDetailLogisticNeeds = data
+  },
+  SET_DATA_LOGISTIC_REQUEST_SUMMARY: (state, data) => {
+    state.dataLogisticRequestSummary = data
+  },
+  SET_DATA_FASKES_TYPE_TOTAL_REQUEST: (state, data) => {
+    state.dataFaskesTypeTotalRequest = data
+  },
+  SET_PRODUCT_TOTAL_REQUEST: (state, data) => {
+    state.dataProductTotalRequest = data
   }
 }
