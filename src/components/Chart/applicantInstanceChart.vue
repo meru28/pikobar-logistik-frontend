@@ -17,69 +17,6 @@
           :chart-data="chartData"
           :styles="chartStyles"
         />
-        <v-row>
-          <v-col class="margin-auto">
-            <v-row>
-              <v-icon
-                color="#FF0606"
-                class="mr-3"
-              >
-                mdi-checkbox-blank
-              </v-icon>
-              {{ chartData.labels[0] }}
-            </v-row>
-          </v-col>
-          <v-col class="margin-auto">
-            <v-row>
-              <v-icon
-                color="#1AAFE6"
-                class="mr-3"
-              >
-                mdi-checkbox-blank
-              </v-icon>
-              {{ chartData.labels[1] }}
-            </v-row>
-          </v-col>
-          <v-col class="margin-auto">
-            <v-row>
-              <v-icon
-                color="#27AE60"
-                class="mr-3"
-              >
-                mdi-checkbox-blank
-              </v-icon>
-              {{ chartData.labels[2] }}
-            </v-row>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-row>
-              <div class="margin-auto">
-                <v-icon
-                  color="#27AE60"
-                  class="mr-3"
-                >
-                  mdi-checkbox-blank
-                </v-icon>
-                {{ chartData.labels[3] }}
-              </div>
-            </v-row>
-          </v-col>
-          <v-col>
-            <v-row>
-              <div>
-                <v-icon
-                  color="#F4A60B"
-                  class="mr-3"
-                >
-                  mdi-checkbox-blank
-                </v-icon>
-                {{ chartData.labels[4] }}
-              </div>
-            </v-row>
-          </v-col>
-        </v-row>
       </v-card-text>
     </v-card>
   </v-skeleton-loader>

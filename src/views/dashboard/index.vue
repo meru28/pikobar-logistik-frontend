@@ -1,30 +1,29 @@
 <template>
   <v-container fluid grid-list-xl py-0>
     <div>
-      <v-row>
-        <span class="text-title-dashboard">{{ $t('label.dashboard_title') }}</span>
-      </v-row>
-      <v-row>
-        <span class="text-last-update-dashboard">{{ $t('label.last_update') }}: {{ dataLogisticRequestSummary.last_update === null ? $t('label.stripe') : $moment(dataLogisticRequestSummary.last_update).format('DD MMMM YYYY') }}</span>
-      </v-row>
+      <span class="text-title-dashboard">{{ $t('label.dashboard_title') }}</span>
+      <br>
+      <span class="text-last-update-dashboard">{{ $t('label.last_update') }}: {{ dataLogisticRequestSummary.last_update === null ? $t('label.stripe') : $moment(dataLogisticRequestSummary.last_update).format('lll') }}</span>
     </div>
     <br>
     <div>
       <v-row>
-        <v-card
-          class="mx-auto"
-          color="#219653"
-        >
-          <v-row>
-            <v-col cols="12" sm="12" md="12">
-              <v-card-text>
-                <div>
-                  <a class="text-card-source-dashboard" href="https://logistik.pikobar.jabarprov.go.id/" target="_blank">{{ $t('label.dashboard_title_text') }}</a>
-                </div>
-              </v-card-text>
-            </v-col>
-          </v-row>
-        </v-card>
+        <v-col>
+          <v-card
+            class="mx-auto"
+            color="#219653"
+          >
+            <v-row>
+              <v-col cols="12" sm="12" md="12">
+                <v-card-text>
+                  <div>
+                    <a class="text-card-source-dashboard" href="https://logistik.pikobar.jabarprov.go.id/" target="_blank">{{ $t('label.dashboard_title_text') }}</a>
+                  </div>
+                </v-card-text>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
       </v-row>
       <br>
       <v-row>
