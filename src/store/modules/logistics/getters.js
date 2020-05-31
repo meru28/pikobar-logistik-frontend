@@ -25,5 +25,14 @@ export default {
   },
   totalLogisticNeeds: (state, getters) => {
     return state.totalDetailLogisticNeeds
+  },
+  dataLogisticRequestSummary: (state, getters) => {
+    return state.dataLogisticRequestSummary
+  },
+  dataFaskesTypeTotalRequest: (state, getters) => {
+    return state.dataFaskesTypeTotalRequest
+  },
+  dataProductTotalRequest: (state, getters) => {
+    return state.dataProductTotalRequest
   }
 }

@@ -11,7 +11,10 @@ const state = {
   totalDataLogisticRequest: 0,
   dataDetailLogisticRequest: {},
   totalDetailLogisticNeeds: 0,
-  dataListDetailLogisticNeeds: []
+  dataListDetailLogisticNeeds: [],
+  dataLogisticRequestSummary: {},
+  dataFaskesTypeTotalRequest: [],
+  dataProductTotalRequest: []
 }
 
 export default {
