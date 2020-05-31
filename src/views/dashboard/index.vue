@@ -18,6 +18,7 @@
                 <v-card-text>
                   <div>
                     <a class="text-card-source-dashboard" :href="baseURL" target="_blank">{{ $t('label.dashboard_title_text') }}</a>
+                    <a class="text-card-source-dashboard" :href="baseURL" target="_blank">{{ $t('label.dashboard_title_text') }} ({{ baseURL }})</a>
                   </div>
                 </v-card-text>
               </v-col>
