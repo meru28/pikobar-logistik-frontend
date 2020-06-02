@@ -17,7 +17,6 @@
               <v-col cols="12" sm="12" md="12">
                 <v-card-text>
                   <div>
-                    <a class="text-card-source-dashboard" :href="baseURL" target="_blank">{{ $t('label.dashboard_title_text') }}</a>
                     <a class="text-card-source-dashboard" :href="baseURL" target="_blank">{{ $t('label.dashboard_title_text') }} ({{ baseURL }})</a>
                   </div>
                 </v-card-text>
@@ -39,7 +38,7 @@
                   {{ $t('label.total_incoming_request') }}
                 </v-list-item-title>
                 <v-list-item-title class="value-card-source-dashboard">
-                  {{ dataLogisticRequestSummary.total_request }}
+                  {{ total }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -56,7 +55,7 @@
                   {{ $t('label.with_pikobar') }}
                 </v-list-item-title>
                 <v-list-item-title class="value-card-source-dashboard">
-                  {{ dataLogisticRequestSummary.total_pikobar }}
+                  {{ viaPikobar }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -73,7 +72,7 @@
                   {{ $t('label.with_dinkes_province') }}
                 </v-list-item-title>
                 <v-list-item-title class="value-card-source-dashboard">
-                  {{ dataLogisticRequestSummary.total_dinkesprov }}
+                  {{ viaDinkes }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -90,6 +89,11 @@
           <applicant-instance-chart />
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12" sm="12" md="12">
+          <statistic-appilcant-chart />
+        </v-col>
+      </v-row>
     </div>
   </v-container>
 </template>
@@ -101,7 +105,10 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      baseURL: process.env.VUE_APP_URL
+      baseURL: process.env.VUE_APP_URL,
+      total: 0,
+      viaPikobar: 0,
+      viaDinkes: 0
     }
   },
   computed: {
@@ -114,8 +121,11 @@ export default {
   },
   methods: {
     async getLogisticRequestSummary() {
-      this.$store.dispatch('logistics/getLogisticRequestSummary')
       await this.$store.dispatch('logistics/getLogisticRequestSummary')
+      console.log(this.dataLogisticRequestSummary)
+      this.total = this.dataLogisticRequestSummary.total_request.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      this.viaDinkes = this.dataLogisticRequestSummary.total_dinkesprov.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      this.viaPikobar = this.dataLogisticRequestSummary.total_pikobar.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
   }
 }

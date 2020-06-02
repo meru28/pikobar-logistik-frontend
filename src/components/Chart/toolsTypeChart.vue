@@ -16,6 +16,7 @@
           ref="doughnutChart"
           :chart-data="chartData"
           :styles="chartStyles"
+          :options="chartOptions"
         />
       </v-card-text>
     </v-card>
@@ -61,6 +62,46 @@ export default {
             ]
           }
         ]
+      },
+      chartOptions: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            boxWidth: 10
+          },
+          reverse: true
+        },
+        tooltips: {
+          displayColors: false,
+          mode: 'index',
+          intersect: false,
+          callbacks: {
+            title: (tooltipItem, data) => {
+              return data['labels'][tooltipItem[0]['index']]
+            },
+            label: (tooltipItem, data) => {
+              return this.$t('label.total') + ': ' + data['datasets'][0]['data'][tooltipItem['index']].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            },
+            afterLabel: (tooltipItem, data) => {
+              var dataset = data.datasets[tooltipItem.datasetIndex]
+              var total = dataset.data.reduce((previousValue, currentValue, currentIndex, array) => {
+                return previousValue + currentValue
+              })
+              var currentValue = dataset.data[tooltipItem.index]
+              var percentage = Math.floor(((currentValue / total) * 100) + 0.5)
+              return this.$t('label.percentage') + ': ' + percentage + '%'
+            }
+          }
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        animation: {
+          animateScale: true,
+          animateRotate: true
+        }
       }
     }
   },

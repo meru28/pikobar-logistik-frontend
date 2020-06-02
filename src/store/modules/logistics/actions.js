@@ -124,5 +124,14 @@ export default {
     } catch (e) {
       return e
     }
+  },
+  async getCityTotalRequest({ commit }, params) {
+    try {
+      const response = await fetchList('/api/v1/logistic-request/cities/total-request', 'GET', params)
+      commit('SET_CITY_TOTAL_REQUEST', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }
