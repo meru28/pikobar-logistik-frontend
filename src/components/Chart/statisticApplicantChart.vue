@@ -28,6 +28,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import FormatingNumber from '../../helpers/formattingNumber'
 
 export default {
   name: 'StatisticAppilcantChart',
@@ -65,7 +66,8 @@ export default {
               return data['labels'][tooltipItem[0]['index']]
             },
             label: (tooltipItem, data) => {
-              return `${this.$t('label.total')} : ${data['datasets'][0]['data'][tooltipItem['index']].toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+              const formattingNumber = new FormatingNumber()
+              return `${this.$t('label.total')} : ${formattingNumber.currency(data['datasets'][0]['data'][tooltipItem['index']])}`
             },
             afterLabel: (tooltipItem, data) => {
               var dataset = data.datasets[tooltipItem.datasetIndex]

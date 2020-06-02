@@ -38,7 +38,7 @@
                   {{ $t('label.total_incoming_request') }}
                 </v-list-item-title>
                 <v-list-item-title class="value-card-source-dashboard">
-                  {{ total }}
+                  {{ dataLogisticRequestSummary.total_request | currency }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -55,7 +55,7 @@
                   {{ $t('label.with_pikobar') }}
                 </v-list-item-title>
                 <v-list-item-title class="value-card-source-dashboard">
-                  {{ viaPikobar }}
+                  {{ dataLogisticRequestSummary.total_pikobar | currency }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -72,7 +72,7 @@
                   {{ $t('label.with_dinkes_province') }}
                 </v-list-item-title>
                 <v-list-item-title class="value-card-source-dashboard">
-                  {{ viaDinkes }}
+                  {{ dataLogisticRequestSummary.total_dinkesprov | currency }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -105,10 +105,7 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      baseURL: process.env.VUE_APP_URL,
-      total: 0,
-      viaPikobar: 0,
-      viaDinkes: 0
+      baseURL: process.env.VUE_APP_URL
     }
   },
   computed: {
@@ -122,9 +119,6 @@ export default {
   methods: {
     async getLogisticRequestSummary() {
       await this.$store.dispatch('logistics/getLogisticRequestSummary')
-      this.total = this.dataLogisticRequestSummary.total_request.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-      this.viaDinkes = this.dataLogisticRequestSummary.total_dinkesprov.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-      this.viaPikobar = this.dataLogisticRequestSummary.total_pikobar.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
   }
 }
