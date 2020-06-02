@@ -80,8 +80,8 @@ export default {
                 return previousValue + currentValue
               })
               var currentValue = dataset.data[tooltipItem.index]
-              var percentage = Math.floor(((currentValue / total) * 100) + 0.5)
-              return this.$t('label.percentage') + ': ' + percentage + '%'
+              var percentage = Math.floor((currentValue / total) * 100)
+              return `${this.$t('label.percentage')} : ${percentage} %`
             }
           }
         },
