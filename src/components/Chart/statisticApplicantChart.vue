@@ -65,7 +65,7 @@ export default {
               return data['labels'][tooltipItem[0]['index']]
             },
             label: (tooltipItem, data) => {
-              return `${this.$t('label.total')} : ${data['datasets'][0]['data'][tooltipItem['index']].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+              return `${this.$t('label.total')} : ${data['datasets'][0]['data'][tooltipItem['index']].toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
             },
             afterLabel: (tooltipItem, data) => {
               var dataset = data.datasets[tooltipItem.datasetIndex]
@@ -136,7 +136,7 @@ export default {
       var GG = ((G.toString(16).length === 1) ? '0' + G.toString(16) : G.toString(16))
       var BB = ((B.toString(16).length === 1) ? '0' + B.toString(16) : B.toString(16))
 
-      return '#' + RR + GG + BB
+      return `#${RR}${GG}${BB}`
     }
   }
 }

@@ -122,9 +122,9 @@ export default {
   methods: {
     async getLogisticRequestSummary() {
       await this.$store.dispatch('logistics/getLogisticRequestSummary')
-      this.total = this.dataLogisticRequestSummary.total_request.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      this.viaDinkes = this.dataLogisticRequestSummary.total_dinkesprov.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      this.viaPikobar = this.dataLogisticRequestSummary.total_pikobar.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      this.total = this.dataLogisticRequestSummary.total_request.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      this.viaDinkes = this.dataLogisticRequestSummary.total_dinkesprov.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      this.viaPikobar = this.dataLogisticRequestSummary.total_pikobar.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
   }
 }
