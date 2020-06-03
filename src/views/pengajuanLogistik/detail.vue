@@ -13,7 +13,7 @@
         <v-col class="margin-left-min-30" cols="7" sm="8">
           <span
             class="text-data-green"
-          >:  {{ detailLogisticRequest.created_at === null ? $t('label.stripe') : $moment(detailLogisticRequest.created_at).format('lll') }}</span>
+          >:  {{ detailLogisticRequest.created_at === null ? $t('label.stripe') : $moment(detailLogisticRequest.created_at).format('LLL') }}</span>
         </v-col>
       </v-row>
       <v-row>

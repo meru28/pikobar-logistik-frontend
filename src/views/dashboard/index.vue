@@ -3,7 +3,7 @@
     <div>
       <span class="text-title-dashboard">{{ $t('label.dashboard_title') }}</span>
       <br>
-      <span class="text-last-update-dashboard">{{ $t('label.last_update') }}: {{ dataLogisticRequestSummary.last_update === null ? $t('label.stripe') : $moment(dataLogisticRequestSummary.last_update).format('lll') }}</span>
+      <span class="text-last-update-dashboard">{{ $t('label.last_update') }}: {{ dataLogisticRequestSummary.last_update === null ? $t('label.stripe') : $moment(dataLogisticRequestSummary.last_update).format('LLL') }}</span>
     </div>
     <br>
     <div>
