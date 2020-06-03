@@ -105,7 +105,7 @@
                   <td>{{ data.agency_name }}</td>
                   <td>{{ data.city.kemendagri_kabupaten_nama }}</td>
                   <td>{{ data.applicant.applicant_name }}</td>
-                  <td>{{ data.created_at === null ? $t('label.stripe') : $moment(data.created_at).format('DD MMMM YYYY') }}</td>
+                  <td>{{ data.created_at === null ? $t('label.stripe') : $moment(data.created_at).format('D MMMM YYYY') }}</td>
                   <td>{{ data.applicant.verification_status }}</td>
                   <td><v-btn text small color="info" @click="toDetail(data)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
