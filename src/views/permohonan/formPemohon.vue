@@ -69,7 +69,7 @@
             <v-stepper-content step="1">
               <identitas-instansi-pemohon
                 :form-applicant="formApplicant"
-                :isAdmin="isAdmin"
+                :is-admin="isAdmin"
               />
             </v-stepper-content>
             <v-stepper-content step="2">
