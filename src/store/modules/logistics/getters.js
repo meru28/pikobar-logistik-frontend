@@ -34,5 +34,8 @@ export default {
   },
   dataProductTotalRequest: (state, getters) => {
     return state.dataProductTotalRequest
+  },
+  dataCityTotalRequest: (state, getters) => {
+    return state.dataCityTotalRequest
   }
 }

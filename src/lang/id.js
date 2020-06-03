@@ -263,14 +263,15 @@ export default {
     not_approved: 'Belum Disetujui',
     total_data: 'Total Data',
     dashboard_title: 'Dashboard Permohonan Alkes',
-    dashboard_title_text: 'Data yang ditampilkan pada Dashboard merupakan data yang didapatkan dari form permohonan logistik alat kesehatan pada laman berikut (https://logistik.pikobar.jabarprov.go.id)',
     dashboard_title_text: 'Data yang ditampilkan pada Dashboard merupakan data yang didapatkan dari form permohonan logistik alat kesehatan pada laman berikut',
     last_update: 'Update Terakhir',
     total_incoming_request: 'Total Permohonan Masuk',
     with_pikobar: 'Melalu Pikobar',
     with_dinkes_province: 'Melalui Dinkes Provinsi',
     tools_type_title: 'Jenis Barang pada Permohonan Logistik',
-    applicant_instance: 'Instansi Pemohon'
+    applicant_instance: 'Instansi Pemohon',
+    statistic_alkes_title: 'Statistik Permohonan Alkes pada Kota/Kab',
+    request_number: 'Jumlah Permohonan'
   },
   success: {
     login_success: 'Login Berhasil',

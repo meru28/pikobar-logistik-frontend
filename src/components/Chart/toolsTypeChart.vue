@@ -16,6 +16,7 @@
           ref="doughnutChart"
           :chart-data="chartData"
           :styles="chartStyles"
+          :options="chartOptions"
         />
       </v-card-text>
     </v-card>
@@ -24,6 +25,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import FormatingNumber from '../../helpers/formattingNumber'
 
 export default {
   name: 'ToolsTypeChart',
@@ -61,6 +63,37 @@ export default {
             ]
           }
         ]
+      },
+      chartOptions: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            boxWidth: 10
+          },
+          reverse: true
+        },
+        tooltips: {
+          callbacks: {
+            title: (tooltipItem, data) => {
+              return data['labels'][tooltipItem[0]['index']]
+            },
+            label: (tooltipItem, data) => {
+              const formattingNumber = new FormatingNumber()
+              const dataset = data.datasets[tooltipItem.datasetIndex]
+              const total = dataset.data.reduce((previousValue, currentValue, currentIndex, array) => {
+                return previousValue + currentValue
+              })
+              const currentValue = dataset.data[tooltipItem.index]
+              const percentage = Math.floor((currentValue / total) * 100)
+              return `${this.$t('label.request_number')} : ${formattingNumber.currency(data['datasets'][0]['data'][tooltipItem['index']])} (${percentage}%)`
+            }
+          }
+        },
+        animation: {
+          animateScale: true,
+          animateRotate: true
+        }
       }
     }
   },
