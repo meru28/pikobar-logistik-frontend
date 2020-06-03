@@ -1,17 +1,16 @@
 class FormattingNumber {
   abbreviation(value) {
-    let currency = value
     const suffixes = ['', ' RB', ' JT', ' M', ' T']
     let suffixNum = 0
-    while (currency >= 1000) {
-      currency /= 1000
+    while (value >= 1000) {
+      value /= 1000
       suffixNum++
     }
 
-    currency = currency.toPrecision(3)
+    value = value.toPrecision(3)
 
-    currency += suffixes[suffixNum]
-    return currency
+    value += suffixes[suffixNum]
+    return value
   }
 
   currency(value) {
