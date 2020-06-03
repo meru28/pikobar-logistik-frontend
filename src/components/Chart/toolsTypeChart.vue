@@ -74,9 +74,6 @@ export default {
           reverse: true
         },
         tooltips: {
-          displayColors: false,
-          mode: 'index',
-          intersect: false,
           callbacks: {
             title: (tooltipItem, data) => {
               return data['labels'][tooltipItem[0]['index']]
@@ -86,19 +83,15 @@ export default {
               return `${this.$t('label.total')} : ${formattingNumber.currency(data['datasets'][0]['data'][tooltipItem['index']])}`
             },
             afterLabel: (tooltipItem, data) => {
-              var dataset = data.datasets[tooltipItem.datasetIndex]
-              var total = dataset.data.reduce((previousValue, currentValue, currentIndex, array) => {
+              const dataset = data.datasets[tooltipItem.datasetIndex]
+              const total = dataset.data.reduce((previousValue, currentValue, currentIndex, array) => {
                 return previousValue + currentValue
               })
-              var currentValue = dataset.data[tooltipItem.index]
-              var percentage = Math.floor((currentValue / total) * 100)
+              const currentValue = dataset.data[tooltipItem.index]
+              const percentage = Math.floor((currentValue / total) * 100)
               return `${this.$t('label.percentage')} : ${percentage} %`
             }
           }
-        },
-        hover: {
-          mode: 'nearest',
-          intersect: true
         },
         animation: {
           animateScale: true,
