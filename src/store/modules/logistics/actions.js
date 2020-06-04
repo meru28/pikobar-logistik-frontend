@@ -100,7 +100,7 @@ export default {
   },
   async getLogisticRequestSummary({ commit }, params) {
     try {
-      const response = await fetchList('/api/v1/logistic-request-summary', 'GET')
+      const response = await fetchList('/api/v1/logistic-request-summary', 'GET', params)
       commit('SET_DATA_LOGISTIC_REQUEST_SUMMARY', response.data)
       return response
     } catch (e) {

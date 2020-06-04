@@ -211,6 +211,7 @@ export default {
     select_status: 'Pilih Status',
     request_date: 'Tanggal Pengajuan',
     date_placeholder: 'Tanggal/Bulan/Tahun',
+    date_dashboard_placeholder: 'Tanggal/Bulan/Tahun - Tanggal/Bulan/Tahun',
     list_request_logistic_medic: 'Daftar Pengajuan Logistik Medis',
     created_date: 'Tanggal Dibuat',
     search_data: 'Cari Data',
