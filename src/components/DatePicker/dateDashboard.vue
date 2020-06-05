@@ -35,7 +35,7 @@
         <v-date-picker v-model="endDate" :max="currentDate" :min="startDate" no-title />
         <v-card-actions>
           <v-col cols="12" sm="12" md="2" offset-md="7">
-            <v-btn color="primary" @click="handleSelectedDate()">{{ $t('label.implement') }}</v-btn>
+            <v-btn color="primary" @click="handleSelectedDate()">{{ $t('label.apply') }}</v-btn>
           </v-col>
         </v-card-actions>
       </v-card>

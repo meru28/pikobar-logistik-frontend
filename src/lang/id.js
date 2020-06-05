@@ -273,7 +273,7 @@ export default {
     applicant_instance: 'Instansi Pemohon',
     statistic_alkes_title: 'Statistik Permohonan Alkes pada Kota/Kab',
     request_number: 'Jumlah Permohonan',
-    implement: 'Terapkan'
+    apply: 'Terapkan'
   },
   success: {
     login_success: 'Login Berhasil',
