@@ -211,6 +211,7 @@ export default {
     select_status: 'Pilih Status',
     request_date: 'Tanggal Pengajuan',
     date_placeholder: 'Tanggal/Bulan/Tahun',
+    date_dashboard_placeholder: 'Tanggal/Bulan/Tahun - Tanggal/Bulan/Tahun',
     list_request_logistic_medic: 'Daftar Pengajuan Logistik Medis',
     created_date: 'Tanggal Dibuat',
     search_data: 'Cari Data',
@@ -271,7 +272,8 @@ export default {
     tools_type_title: 'Jenis Barang pada Permohonan Logistik',
     applicant_instance: 'Instansi Pemohon',
     statistic_alkes_title: 'Statistik Permohonan Alkes pada Kota/Kab',
-    request_number: 'Jumlah Permohonan'
+    request_number: 'Jumlah Permohonan',
+    apply: 'Terapkan'
   },
   success: {
     login_success: 'Login Berhasil',
