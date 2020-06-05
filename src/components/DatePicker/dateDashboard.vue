@@ -5,7 +5,7 @@
     :close-on-content-click="false"
     transition="scale-transition"
     offset-y
-    width="100%"
+    width="600"
     min-width="none"
   >
     <template v-slot:activator="{ on }">
@@ -28,18 +28,16 @@
     </template>
     <v-dialog
       v-model="menu"
-      max-width="1000"
+      max-width="590"
     >
       <v-card>
-        <v-row align="end">
-          <v-col cols="12" sm="12" md="8">
-            <v-date-picker v-model="startDate" :max="endDate" no-title />
-            <v-date-picker v-model="endDate" :max="currentDate" :min="startDate" no-title />
-          </v-col>
-          <v-col cols="12" sm="10" md="1">
+        <v-date-picker v-model="startDate" :max="endDate" no-title />
+        <v-date-picker v-model="endDate" :max="currentDate" :min="startDate" no-title />
+        <v-card-actions>
+          <v-col cols="12" sm="12" md="2" offset-md="7">
             <v-btn color="primary" @click="handleSelectedDate()">{{ $t('label.implement') }}</v-btn>
           </v-col>
-        </v-row>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </v-menu>
@@ -69,7 +67,7 @@ export default {
   data() {
     return {
       menu: false,
-      startDate: '2020/01/01',
+      startDate: '2020-01-01',
       endDate: this.$moment(Date.now()).format('YYYY-MM-DD'),
       dateFormatted: null,
       currentDate: this.$moment(Date.now()).format('YYYY-MM-DD')
@@ -86,9 +84,6 @@ export default {
         this.dateFormatted = `${this.$moment(this.startDate).format('DD/MM/YYYY')} - ${this.$moment(this.endDate).format('DD/MM/YYYY')}`
       }
     }
-  },
-  mounted() {
-    this.startDate = this.date
   },
   methods: {
     handleSelectedDate() {
