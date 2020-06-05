@@ -105,7 +105,7 @@ export default {
       'dataCityTotalRequest'
     ])
   },
-  async created() {
+  created() {
     EventBus.$on('getCityTotalRequest', (value) => {
       this.listQuery.start_date = value.start_date
       this.listQuery.end_date = value.end_date

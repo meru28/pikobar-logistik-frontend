@@ -26,8 +26,22 @@
         />
       </ValidationProvider>
     </template>
-    <v-date-picker v-model="startDate" :max="endDate" no-title @change="handleSelectedDate()" />
-    <v-date-picker v-model="endDate" :max="currentDate" :min="startDate" no-title @change="handleSelectedDate()" />
+    <v-dialog
+      v-model="menu"
+      max-width="1000"
+    >
+      <v-card>
+        <v-row align="end">
+          <v-col cols="12" sm="12" md="8">
+            <v-date-picker v-model="startDate" :max="endDate" no-title />
+            <v-date-picker v-model="endDate" :max="currentDate" :min="startDate" no-title />
+          </v-col>
+          <v-col cols="12" sm="10" md="1">
+            <v-btn color="primary" @click="handleSelectedDate()">{{ $t('label.implement') }}</v-btn>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-dialog>
   </v-menu>
 </template>
 
@@ -78,6 +92,7 @@ export default {
   },
   methods: {
     handleSelectedDate() {
+      this.menu = false
       this.$emit('selected', { startDate: this.startDate, endDate: this.endDate })
     }
   }

@@ -6,7 +6,7 @@
           <span class="text-title-dashboard">{{ $t('label.dashboard_title') }}</span>
         </v-col>
       </v-row>
-      <v-row class="margin-top-min-20-dashboard margin-bot-min-40-dashboard" >
+      <v-row class="margin-top-min-20-dashboard margin-bot-min-40-dashboard">
         <v-col cols="12" sm="12" md="5">
           <span class="text-last-update-dashboard">{{ $t('label.last_update') }}: {{ dataLogisticRequestSummary.last_update === null ? $t('label.stripe') : $moment(dataLogisticRequestSummary.last_update).format('LLL') }}</span>
         </v-col>
