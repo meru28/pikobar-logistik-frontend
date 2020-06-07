@@ -26,6 +26,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import FormatingNumber from '../../helpers/formattingNumber'
+import EventBus from '@/utils/eventBus'
 
 export default {
   name: 'ToolsTypeChart',
@@ -42,7 +43,9 @@ export default {
       index: 0,
       listQuery: {
         limit: 10,
-        sort: 'desc'
+        sort: 'desc',
+        start_date: null,
+        end_date: null
       },
       chartData: {
         labels: ['', '', '', '', '', '', '', '', '', ''],
@@ -108,12 +111,20 @@ export default {
       'dataProductTotalRequest'
     ])
   },
+  created() {
+    EventBus.$on('getProductTotalRequest', (value) => {
+      this.listQuery.start_date = value.start_date
+      this.listQuery.end_date = value.end_date
+      this.getProductTotalRequest()
+    })
+  },
   async mounted() {
     await this.getProductTotalRequest()
     this.loaded = true
   },
   methods: {
     async getProductTotalRequest() {
+      this.index = 0
       await this.$store.dispatch('logistics/getProductTotalRequest', this.listQuery)
       this.dataProductTotalRequest.forEach(element => {
         this.chartData.labels[this.index] = element.name
