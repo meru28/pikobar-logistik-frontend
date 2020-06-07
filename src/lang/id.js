@@ -271,7 +271,8 @@ export default {
     tools_type_title: 'Jenis Barang pada Permohonan Logistik',
     applicant_instance: 'Instansi Pemohon',
     statistic_alkes_title: 'Statistik Permohonan Alkes pada Kota/Kab',
-    request_number: 'Jumlah Permohonan'
+    request_number: 'Jumlah Permohonan',
+    export_data: 'Ekspor Data'
   },
   success: {
     login_success: 'Login Berhasil',

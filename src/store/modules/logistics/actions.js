@@ -1,4 +1,5 @@
 import { fetchList, doPostUpdate } from '@/api'
+import request from '@/utils/request'
 
 export default {
   async getListAPD({ commit }, params) {
@@ -132,6 +133,19 @@ export default {
       return response
     } catch (e) {
       return e
+    }
+  },
+  async logisticRequestExportData({ commit }, params) {
+    try {
+      const response = await request({
+        url: `/api/v1/logistic-request/data/export`,
+        method: 'GET',
+        params: params,
+        responseType: 'blob'
+      })
+      return response
+    } catch (error) {
+      return error.response
     }
   }
 }
