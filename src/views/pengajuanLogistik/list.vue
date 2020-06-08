@@ -80,6 +80,7 @@
     <v-card outlined>
       <v-card-text>
         <span class="table-title">{{ $t('label.list_request_logistic_medic') }}</span>
+        <v-btn class="primary" small width="150px" style="float: right" @click="exportData()">{{ $t('label.export_data') }}</v-btn>
       </v-card-text>
       <hr class="thin">
       <v-row>
@@ -142,6 +143,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import FileSaver from 'file-saver'
+
 export default {
   name: 'ListPengajuanLogistik',
   data() {
@@ -219,6 +222,11 @@ export default {
     },
     toDetail(data) {
       this.$router.push(`alat-kesehatan/detail/${data.id}`)
+    },
+    async exportData() {
+      const response = await this.$store.dispatch('logistics/logisticRequestExportData', this.listQuery)
+      const fileName = `${this.$t('label.patient_recap')} ${this.fullName} - ${this.$moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')} WIB.xlsx`
+      await FileSaver.saveAs(response, fileName)
     }
   }
 }
