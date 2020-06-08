@@ -118,7 +118,7 @@ export default {
   methods: {
     async getFaskesTypeTotalRequest() {
       this.index = 0
-      await this.$store.dispatch('logistics/getFaskesTypeTotalRequest')
+      await this.$store.dispatch('logistics/getFaskesTypeTotalRequest', this.listQuery)
       this.dataFaskesTypeTotalRequest.forEach(element => {
         this.chartData.labels[this.index] = element.name
         this.chartData.datasets[0].data[this.index] = element.total_request
