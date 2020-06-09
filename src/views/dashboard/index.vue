@@ -91,7 +91,7 @@
         </v-col>
       </v-row>
     </div>
-    <div>
+    <div v-if="dataLogisticRequestSummary.total_request > 0">
       <v-row>
         <v-col cols="12" sm="12" md="6">
           <tools-type-chart />

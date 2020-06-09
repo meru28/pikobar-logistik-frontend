@@ -274,7 +274,8 @@ export default {
     statistic_alkes_title: 'Statistik Permohonan Alkes pada Kota/Kab',
     request_number: 'Jumlah Permohonan',
     apply: 'Terapkan',
-    export_data: 'Ekspor Data'
+    export_data: 'Ekspor Data',
+    export_file_name: 'export-permohonan-logistik'
   },
   success: {
     login_success: 'Login Berhasil',

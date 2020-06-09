@@ -225,7 +225,7 @@ export default {
     },
     async exportData() {
       const response = await this.$store.dispatch('logistics/logisticRequestExportData', this.listQuery)
-      const fileName = `${this.$t('label.patient_recap')} ${this.fullName} - ${this.$moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')} WIB.xlsx`
+      const fileName = `${this.$t('label.export_file_name')}-${this.$moment(Date.now()).format('YYYY-MM-DD-h:mm:ss')}.xlsx`
       await FileSaver.saveAs(response, fileName)
     }
   }

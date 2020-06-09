@@ -113,17 +113,20 @@ export default {
   },
   async mounted() {
     await this.getFaskesTypeTotalRequest()
-    this.loaded = true
   },
   methods: {
     async getFaskesTypeTotalRequest() {
+      this.loaded = false
       this.index = 0
+      this.chartData.labels = ['', '', '', '', '']
+      this.chartData.datasets[0].data = [0, 0, 0, 0, 0]
       await this.$store.dispatch('logistics/getFaskesTypeTotalRequest', this.listQuery)
       this.dataFaskesTypeTotalRequest.forEach(element => {
         this.chartData.labels[this.index] = element.name
         this.chartData.datasets[0].data[this.index] = element.total_request
         this.index += 1
       })
+      this.loaded = true
     }
   }
 }
