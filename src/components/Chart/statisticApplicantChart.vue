@@ -68,12 +68,15 @@ export default {
             },
             label: (tooltipItem, data) => {
               const formattingNumber = new FormatingNumber()
-              const dataset = data.datasets[tooltipItem.datasetIndex]
-              const total = dataset.data.reduce((previousValue, currentValue, currentIndex, array) => {
-                return previousValue + currentValue
-              })
-              const currentValue = dataset.data[tooltipItem.index]
-              const percentage = Math.floor((currentValue / total) * 100)
+              let percentage = 0
+              if (data['datasets'][0]['data'][tooltipItem['index']] !== 0) {
+                const dataset = data.datasets[tooltipItem.datasetIndex]
+                const total = dataset.data.reduce((previousValue, currentValue, currentIndex, array) => {
+                  return previousValue + currentValue
+                })
+                const currentValue = dataset.data[tooltipItem.index]
+                percentage = Math.floor((currentValue / total) * 100)
+              }
               return `${this.$t('label.request_number')} : ${formattingNumber.currency(data['datasets'][0]['data'][tooltipItem['index']])} (${percentage}%)`
             }
           }

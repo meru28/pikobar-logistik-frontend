@@ -51,7 +51,7 @@ export default {
         labels: ['', '', '', '', '', '', '', '', '', ''],
         datasets: [
           {
-            data: [1, 2, 3, 4, 1, 2, 4, 5, 5, 4],
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             backgroundColor: [
               '#FF0606',
               '#27AE60',
@@ -120,17 +120,20 @@ export default {
   },
   async mounted() {
     await this.getProductTotalRequest()
-    this.loaded = true
   },
   methods: {
     async getProductTotalRequest() {
+      this.loaded = false
       this.index = 0
+      this.chartData.datasets[0].data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      this.chartData.labels = ['', '', '', '', '', '', '', '', '', '']
       await this.$store.dispatch('logistics/getProductTotalRequest', this.listQuery)
       this.dataProductTotalRequest.forEach(element => {
         this.chartData.labels[this.index] = element.name
         this.chartData.datasets[0].data[this.index] = element.total_request
         this.index += 1
       })
+      this.loaded = true
     }
   }
 }
