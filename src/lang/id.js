@@ -275,7 +275,9 @@ export default {
     request_number: 'Jumlah Permohonan',
     apply: 'Terapkan',
     export_data: 'Ekspor Data',
-    export_file_name: 'export-permohonan-logistik'
+    export_file_name: 'export-permohonan-logistik',
+    license_number_facility: 'Nomor Izin Sarana',
+    license_number_facility_placeholder: 'Masukkan Nomor Izin Sarana Faskes'
   },
   success: {
     login_success: 'Login Berhasil',
@@ -308,6 +310,7 @@ export default {
     field_must_be_filled_purpose: 'Tujuan penggunaan tidak boleh kosong',
     field_must_be_filled_urgency_level: 'Tingkat urgensi tidak boleh kosong',
     field_must_be_filled_registraion_number: 'Nomor Registrasi tidak boleh kosong',
+    field_must_be_filled_license_number_facility: 'Nomor Izin Sarana tidak boleh kosong',
     field_must_be_filled_faskes_name: 'Nama Faskes tidak boleh kosong',
     field_must_be_filled_upper_name: 'Nama Atasan tidak boleh kosong',
     field_must_be_filled_faskes_location: 'Lokasi Faskes tidak boleh kosong',
