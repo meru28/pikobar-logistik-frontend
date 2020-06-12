@@ -227,9 +227,7 @@ export default {
       this.handleSearch()
     },
     toDetail(data) {
-      console.log(data.id)
       this.$router.push(`/alat-kesehatan/detail/${data.id}`)
-      // this.$router.push(`/pengajuan-logistik-admin/form-pemohon`)
     },
     async exportData() {
       const response = await this.$store.dispatch('logistics/logisticRequestExportData', this.listQuery)
