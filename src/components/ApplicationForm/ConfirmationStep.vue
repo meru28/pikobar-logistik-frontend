@@ -494,10 +494,14 @@ export default {
       })
 
       const formData = new FormData()
-      formData.append('master_faskes_id', this.formApplicant.instance)
       formData.append('logistic_request', JSON.stringify(dataLogistics))
       formData.append('agency_type', this.formApplicant.instanceType)
-      formData.append('agency_name', this.formApplicant.instanceName)
+      if (this.formApplicant.instanceEtc) {
+        formData.append('agency_name', this.formApplicant.instanceEtc)
+      } else {
+        formData.append('agency_name', this.formApplicant.instanceName)
+        formData.append('master_faskes_id', this.formApplicant.instance)
+      }
       if (this.formApplicant.instancePhoneNumber != null) {
         formData.append('phone_number', this.formApplicant.instancePhoneNumber)
       }

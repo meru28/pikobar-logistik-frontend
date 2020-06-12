@@ -239,10 +239,14 @@ export default {
 
       // untuk mengirim file dengan request POST harus pakai formData
       const formData = new FormData()
-      formData.append('master_faskes_id', this.formApplicant.instance)
       formData.append('logistic_request', JSON.stringify(dataLogistics))
       formData.append('agency_type', this.formApplicant.instanceType)
-      formData.append('agency_name', this.formApplicant.instanceName)
+      if (this.formApplicant.instanceEtc) {
+        formData.append('agency_name', this.formApplicant.instanceEtc)
+      } else {
+        formData.append('agency_name', this.formApplicant.instanceName)
+        formData.append('master_faskes_id', this.formApplicant.instance)
+      }
       if (this.formApplicant.instancePhoneNumber != null) {
         formData.append('phone_number', this.formApplicant.instancePhoneNumber)
       }
@@ -259,7 +263,7 @@ export default {
       formData.append('applicant_file', this.formIdentityApplicant.dataFile)
       formData.append('source_data', 'dinkes_provinsi')
       formData.append('created_by', this.user.id)
-      await this.$store.dispatch('logistics/postApplicantForm', formData)
+      await this.$store.dispatch('logistics/postApplicantFormAdmin', formData)
       this.isDone = true
       this.isLoading = false
     },
