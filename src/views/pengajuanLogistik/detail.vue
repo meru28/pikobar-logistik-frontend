@@ -52,7 +52,7 @@
         </v-col>
         <v-col cols="3" sm="3">
           <v-btn
-            v-if="!isVerified"
+            v-if="!isVerified && !isRejected"
             outlined
             color="#2E7D32"
             class="margin-btn"
@@ -63,7 +63,7 @@
         </v-col>
         <v-col cols="3" sm="3">
           <v-btn
-            v-if="!isVerified"
+            v-if="!isVerified && !isRejected"
             outlined
             color="#e62929"
             class="margin-btn"
@@ -342,6 +342,7 @@ export default {
     return {
       letterFileType: '',
       isVerified: false,
+      isRejected: false,
       listQuery: {
         page: 1,
         limit: 3,
@@ -366,6 +367,7 @@ export default {
     const temp = this.detailLogisticRequest.letter.letter.split('.')
     this.letterFileType = temp[temp.length - 1]
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
+    this.isRejected = this.detailLogisticRequest.applicant.verification_status === 'Pengajuan Ditolak'
     this.listLogisticNeeds.forEach(element => {
       switch (element.status) {
         case 'approved':
@@ -390,6 +392,13 @@ export default {
     EventBus.$on('dialogHideReject', (value) => {
       this.showDialogReject = value
     })
+    EventBus.$on('submitReject', (value) => {
+      const formData = new FormData()
+      formData.append('applicant_id', this.detailLogisticRequest.id)
+      formData.append('verification_status', 'rejected')
+      formData.append('note', value)
+      this.postReject(formData)
+    })
   },
   methods: {
     getTableRowNumbering(index) {
@@ -411,6 +420,10 @@ export default {
       formData.append('applicant_id', this.detailLogisticRequest.id)
       formData.append('verification_status', 'verified')
       await this.$store.dispatch('logistics/postVerificationStatus', formData)
+      window.location.reload()
+    },
+    async postReject(formData) {
+      this.$store.dispatch('logistics/postVerificationStatus', formData)
       window.location.reload()
     },
     setTotal() {

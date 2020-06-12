@@ -27,7 +27,7 @@
           <span class="sub-title-reject-logistic-needs">{{ $t('label.reason_reject') }}</span>
           <br>
           <v-textarea
-            v-model="reason"
+            v-model="note"
             outlined
             :height="100"
             solo-inverted
@@ -47,7 +47,7 @@
           </v-btn>
         </v-col>
         <v-col>
-          <v-btn color="error">{{ $t('label.submit_reject') }}</v-btn>
+          <v-btn color="error" @click="submitReject()">{{ $t('label.submit_reject') }}</v-btn>
         </v-col>
       </v-card-actions>
     </v-card>
@@ -75,12 +75,15 @@ export default {
   },
   data() {
     return {
-      reason: null
+      note: null
     }
   },
   methods: {
     hideDialog() {
       EventBus.$emit('dialogHideReject', false)
+    },
+    submitReject() {
+      EventBus.$emit('submitReject', this.note)
     }
   }
 }
