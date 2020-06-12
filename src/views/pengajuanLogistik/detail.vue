@@ -7,6 +7,22 @@
         </v-col>
       </v-row>
       <v-row>
+        <v-col cols="12" sm="8">
+          <v-card
+            class="mx-auti"
+            color="#219653"
+          >
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <span style="color: white">{{ $t('label.verify_text_alert_1') }}<b>{{ $t('label.verify_text_alert_2') }}</b> {{ $t('label.verify_text_alert_3') }}</span>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col cols="3" sm="2">
           <span class="text-title">{{ $t('label.request_date') }}</span>
         </v-col>
@@ -20,7 +36,7 @@
         <v-col cols="3" sm="2">
           <span class="text-title">{{ $t('label.status') }}</span>
         </v-col>
-        <v-col class="margin-left-min-30" cols="4" sm="4">
+        <v-col class="margin-left-min-30" cols="3" sm="3">
           <span
             v-if="isVerified"
             class="text-data-green"
@@ -34,7 +50,7 @@
             :  {{ detailLogisticRequest.applicant.verification_status }}
           </span>
         </v-col>
-        <v-col cols="6" sm="6">
+        <v-col cols="3" sm="3">
           <v-btn
             v-if="!isVerified"
             outlined
@@ -45,7 +61,24 @@
             {{ $t('label.verif_now') }}
           </v-btn>
         </v-col>
+        <v-col cols="3" sm="3">
+          <v-btn
+            v-if="!isVerified"
+            outlined
+            color="#e62929"
+            class="margin-btn"
+            @click.stop="showDialogReject = true"
+            @click="setTotal()"
+          >
+            {{ $t('label.rejected_label') }}
+          </v-btn>
+        </v-col>
       </v-row>
+      <rejectKebutuhanLogistik
+        :show="showDialogReject"
+        :item="detailLogisticRequest"
+        :total="totalAPD"
+      />
     </div>
     <div>
       <br>
@@ -132,7 +165,8 @@
                   >
                     {{ $t('label.full_address') }}
                   </span>
-                  <br>
+                </v-row>
+                <v-row>
                   <v-label>
                     {{ detailLogisticRequest.location_address }}
                   </v-label>
@@ -296,11 +330,13 @@
 import { mapGetters } from 'vuex'
 import updateKebutuhanLogistik from './update'
 import EventBus from '@/utils/eventBus'
+import rejectKebutuhanLogistik from './reject'
 
 export default {
   name: 'ListDetailPengajuanLogistik',
   components: {
-    updateKebutuhanLogistik
+    updateKebutuhanLogistik,
+    rejectKebutuhanLogistik
   },
   data() {
     return {
@@ -311,7 +347,9 @@ export default {
         limit: 3,
         agency_id: ''
       },
-      showForm: false
+      showForm: false,
+      showDialogReject: false,
+      totalAPD: null
     }
   },
   computed: {
@@ -349,6 +387,9 @@ export default {
     EventBus.$on('dialogHide', (value) => {
       this.showForm = value
     })
+    EventBus.$on('dialogHideReject', (value) => {
+      this.showDialogReject = value
+    })
   },
   methods: {
     getTableRowNumbering(index) {
@@ -371,6 +412,12 @@ export default {
       formData.append('verification_status', 'verified')
       await this.$store.dispatch('logistics/postVerificationStatus', formData)
       window.location.reload()
+    },
+    setTotal() {
+      this.totalAPD = 0
+      this.listLogisticNeeds.forEach(element => {
+        this.totalAPD += parseInt(element.quantity)
+      })
     }
   }
 }
@@ -418,7 +465,7 @@ export default {
   color: #219653;
 }
 .margin-btn {
-  margin: -30%
+  margin: -30%;
 }
 .margin-left-min-30 {
   margin-left: -30px;

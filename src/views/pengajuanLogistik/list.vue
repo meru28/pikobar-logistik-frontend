@@ -1,86 +1,86 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="12" sm="2">
-        <v-label class="title">{{ $t('label.sort') }}</v-label>
-        <v-select
-          v-model="listQuery.sort"
-          :items="sortOption"
-          solo
-          item-text="label"
-          item-value="value"
-          @change="handleSearch"
-        />
-      </v-col>
-      <v-col cols="12" sm="3">
-        <v-label class="title">{{ $t('label.request_date') }}</v-label>
-        <date-picker
-          :value="date"
-          @selected="changeDate"
-        />
-      </v-col>
-      <v-col cols="12" sm="2">
-        <v-label class="title">{{ $t('label.status') }}</v-label>
-        <v-select
-          v-model="listQuery.verification_status"
-          solo
-          :placeholder="$t('label.select_status')"
-          :items="status"
-          @change="handleSearch"
-        />
-      </v-col>
-      <v-col cols="12" sm="3">
-        <v-label class="title">{{ $t('label.city_district') }}</v-label>
-        <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
-      </v-col>
-      <v-col cols="12" sm="2">
-        <br>
-        <v-card
-          outlined
-          class="card-search"
-        >
-          <v-text-field
-            v-model="listQuery.agency_name"
-            solo-inverted
-            flat
-            hide-details
-            :placeholder="$t('label.search_data')"
-            prepend-inner-icon="search"
-            @change="handleSearch"
-          />
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row class="margin-top-min-20-list-pengajuan-logistik">
-      <v-col cols="12" sm="3">
-        <v-label class="title">{{ $t('label.instance_type') }}</v-label>
-        <v-select
-          v-model="listQuery.faskes_type"
-          :items="faskesTypeList"
-          solo
-          item-text="name"
-          item-value="id"
-          :placeholder="$t('label.select_instance_type')"
-          @change="handleSearch()"
-        />
-      </v-col>
-      <v-col cols="12" sm="3">
-        <v-label class="title">{{ $t('label.applicant_origin') }}</v-label>
-        <v-select
-          v-model="listQuery.source_data"
-          :items="applicantOrigin"
-          solo
-          item-text="text"
-          item-value="value"
-          :placeholder="$t('label.select_applicant_origin')"
-          @change="handleSearch()"
-        />
-      </v-col>
-    </v-row>
     <v-card outlined>
       <v-card-text>
         <span class="table-title">{{ $t('label.list_request_logistic_medic') }}</span>
-        <v-btn class="primary" small width="150px" style="float: right" @click="exportData()">{{ $t('label.export_data') }}</v-btn>
+      </v-card-text>
+      <hr class="thin">
+      <v-card-text>
+        <v-row class="margin-top-bot-min-20-list-pengajuan-logistik">
+          <v-col cols="12" sm="4" md="4">
+            <v-card
+              outlined
+              class="card-search"
+            >
+              <v-text-field
+                v-model="listQuery.agency_name"
+                solo-inverted
+                flat
+                hide-details
+                :placeholder="$t('label.search_data')"
+                prepend-inner-icon="search"
+                @change="handleSearch"
+              />
+            </v-card>
+          </v-col>
+          <v-col cols="12" offset-sm="4" offset-md="4" sm="2" md="2">
+            <v-btn color="green" large text outlined @click="exportData()"><v-icon left>mdi-upload</v-icon> {{ $t('label.export_data') }}</v-btn>
+          </v-col>
+          <v-col cols="12" sm="2" md="2">
+            <v-btn class="primary" large max-width="100px" @click="showFilter = !showFilter">{{ $t('label.filter') }} <v-icon v-if="!showFilter" right>mdi-chevron-right</v-icon><v-icon v-else right>mdi-chevron-down</v-icon></v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <hr v-if="showFilter" class="thin">
+      <v-card-text v-if="showFilter">
+        <v-row class="margin-top-bot-min-20-list-pengajuan-logistik">
+          <v-col cols="12" sm="1">
+            <v-label class="title">{{ $t('label.sort') }}</v-label>
+            <v-select
+              v-model="listQuery.sort"
+              :items="sortOption"
+              solo
+              item-text="label"
+              item-value="value"
+              @change="handleSearch"
+            />
+          </v-col>
+          <v-col cols="12" sm="3">
+            <v-label class="title">{{ $t('label.request_date') }}</v-label>
+            <date-picker
+              :value="date"
+              @selected="changeDate"
+            />
+          </v-col>
+          <v-col cols="12" sm="2">
+            <v-label class="title">{{ $t('label.city_district') }}</v-label>
+            <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
+          </v-col>
+          <v-col cols="12" sm="3">
+            <v-label class="title">{{ $t('label.instance_type') }}</v-label>
+            <v-select
+              v-model="listQuery.faskes_type"
+              :items="faskesTypeList"
+              solo
+              item-text="name"
+              item-value="id"
+              :placeholder="$t('label.select_instance_type')"
+              @change="handleSearch()"
+            />
+          </v-col>
+          <v-col cols="12" sm="3">
+            <v-label class="title">{{ $t('label.applicant_origin') }}</v-label>
+            <v-select
+              v-model="listQuery.source_data"
+              :items="applicantOrigin"
+              solo
+              item-text="text"
+              item-value="value"
+              :placeholder="$t('label.select_applicant_origin')"
+              @change="handleSearch()"
+            />
+          </v-col>
+        </v-row>
       </v-card-text>
       <hr class="thin">
       <v-row>
@@ -182,7 +182,8 @@ export default {
           value: 'pikobar'
         }
       ],
-      date: null
+      date: null,
+      showFilter: false
     }
   },
   computed: {
@@ -196,6 +197,11 @@ export default {
     ])
   },
   async created() {
+    if (this.$route.name === 'verified') {
+      this.listQuery.verification_status = 'verified'
+    } else if (this.$route.name === 'notVerified') {
+      this.listQuery.verification_status = 'not_verified'
+    }
     await this.$store.dispatch('faskesType/getListFaskesType')
     this.getLogisticRequestList()
   },
@@ -221,7 +227,9 @@ export default {
       this.handleSearch()
     },
     toDetail(data) {
-      this.$router.push(`alat-kesehatan/detail/${data.id}`)
+      console.log(data.id)
+      this.$router.push(`/alat-kesehatan/detail/${data.id}`)
+      // this.$router.push(`/pengajuan-logistik-admin/form-pemohon`)
     },
     async exportData() {
       const response = await this.$store.dispatch('logistics/logisticRequestExportData', this.listQuery)
@@ -247,6 +255,10 @@ export default {
 }
 .margin-top-min-20-list-pengajuan-logistik {
   margin-top: -20px;
+}
+.margin-top-bot-min-20-list-pengajuan-logistik {
+  margin-top: -20px;
+  margin-bottom: -20px;
 }
 .table-title {
   font-family: "Product Sans";
