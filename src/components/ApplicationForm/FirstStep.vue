@@ -27,6 +27,7 @@
               />
             </ValidationProvider>
             <ValidationProvider
+              v-if="!isEtc"
               v-slot="{ errors }"
               rules="requiredInstanceName"
             >
@@ -46,7 +47,21 @@
                 @change="onSelectFaskes"
               />
             </ValidationProvider>
-            <div>
+            <ValidationProvider
+              v-else
+              v-slot="{ errors }"
+              rules="requiredInstanceName"
+            >
+              <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
+              <v-text-field
+                v-model="formApplicant.instanceEtc"
+                outlined
+                :error-messages="errors"
+                :placeholder="$t('label.autocomplete_instance_placeholder')"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <div v-if="!isEtc">
               <v-label class="title"><b>{{ $t('label.instance_not_found_title') }}</b></v-label>
               <v-btn
                 outlined
@@ -199,7 +214,8 @@ export default {
         nama_faskes: null,
         id_tipe_faskes: null
       },
-      showForm: false
+      showForm: false,
+      isEtc: false
     }
   },
   computed: {
@@ -221,7 +237,7 @@ export default {
     if (this.isAdmin) {
       await this.$store.dispatch('faskesType/getListFaskesType')
     } else {
-      await this.$store.dispatch('faskesType/getListFaskesType', { is_imported: 0 })
+      await this.$store.dispatch('faskesType/getListFaskesType', { non_public: 1 })
     }
     await this.getListFaskes()
     EventBus.$on('dialogHide', (value) => {
@@ -279,6 +295,10 @@ export default {
     },
     async onSelectFaskesType(id) {
       this.listQueryFaskes.id_tipe_faskes = id
+      this.isEtc = false
+      if (this.formApplicant.instanceType === 4 || this.formApplicant.instanceType === 5) {
+        this.isEtc = true
+      }
       await this.getListFaskes()
     },
     async getListFaskes() {
