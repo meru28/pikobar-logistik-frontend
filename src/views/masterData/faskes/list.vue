@@ -106,7 +106,7 @@ export default {
         { value: 'desc', label: 'Z-A' }
       ],
       verificationStatusOption: [
-        { value: i18n.t('label.not_verified_value'), label: i18n.t('label.not_verified_label') },
+        { value: i18n.t('label.not_verified_value'), label: i18n.t('route.not_verified_title') },
         { value: i18n.t('label.rejected_value'), label: i18n.t('label.rejected_label') }
       ],
       listQuery: {
