@@ -247,7 +247,6 @@ export default {
     fail_text_dialog_2: 'sehingga, data yang anda masukkan gagal disimpan.',
     repeat: 'Ulangi!',
     not_verified_value: 'not_verified',
-    not_verified_label: 'Belum Terverifikasi',
     rejected_value: 'rejected',
     rejected_label: 'Ditolak',
     success_text_dialog_verification_faskes: 'Data Fasilitas Kesehatan berhasil diverifikasi.',
