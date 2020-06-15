@@ -201,6 +201,8 @@ export default {
       this.listQuery.verification_status = 'verified'
     } else if (this.$route.name === 'notVerified') {
       this.listQuery.verification_status = 'not_verified'
+    } else if (this.$route.name === 'rejected') {
+      this.listQuery.verification_status = 'rejected'
     }
     await this.$store.dispatch('faskesType/getListFaskesType')
     this.getLogisticRequestList()
