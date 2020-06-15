@@ -249,7 +249,6 @@ export default {
     repeat: 'Ulangi!',
     not_verified_value: 'not_verified',
     rejected_value: 'rejected',
-    rejected_label: 'Ditolak',
     success_text_dialog_verification_faskes: 'Data Fasilitas Kesehatan berhasil diverifikasi.',
     success_text_dialog_reject_faskes: 'Proses tolak verifikasi berhasil dilakukan.',
     realization_amount: 'Jumlah Realisasi',
