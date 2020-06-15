@@ -46,6 +46,7 @@
               <thead>
                 <tr>
                   <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.license_number_facility').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.registration_number').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.faskes_name').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.upper_name').toUpperCase() }}</th>
@@ -56,6 +57,7 @@
               <tbody>
                 <tr v-for="(faskes, index) in faskesList" :key="faskes.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
+                  <td>{{ faskes.nomor_izin_sarana }}</td>
                   <td>{{ faskes.nomor_registrasi }}</td>
                   <td>{{ faskes.nama_faskes }}</td>
                   <td>{{ faskes.nama_atasan }}</td>
