@@ -26,6 +26,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import FormatingNumber from '../../helpers/formattingNumber'
+import EventBus from '@/utils/eventBus'
 
 export default {
   name: 'ApplicantInstanceChart',
@@ -85,6 +86,10 @@ export default {
           animateScale: true,
           animateRotate: true
         }
+      },
+      listQuery: {
+        start_date: null,
+        end_date: null
       }
     }
   },
@@ -99,18 +104,29 @@ export default {
       'dataFaskesTypeTotalRequest'
     ])
   },
+  created() {
+    EventBus.$on('getFaskesTypeTotalRequest', (value) => {
+      this.listQuery.start_date = value.start_date
+      this.listQuery.end_date = value.end_date
+      this.getFaskesTypeTotalRequest()
+    })
+  },
   async mounted() {
     await this.getFaskesTypeTotalRequest()
-    this.loaded = true
   },
   methods: {
     async getFaskesTypeTotalRequest() {
-      await this.$store.dispatch('logistics/getFaskesTypeTotalRequest')
+      this.loaded = false
+      this.index = 0
+      this.chartData.labels = ['', '', '', '', '']
+      this.chartData.datasets[0].data = [0, 0, 0, 0, 0]
+      await this.$store.dispatch('logistics/getFaskesTypeTotalRequest', this.listQuery)
       this.dataFaskesTypeTotalRequest.forEach(element => {
         this.chartData.labels[this.index] = element.name
         this.chartData.datasets[0].data[this.index] = element.total_request
         this.index += 1
       })
+      this.loaded = true
     }
   }
 }

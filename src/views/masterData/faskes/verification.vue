@@ -14,10 +14,10 @@
             <v-container>
               <v-row>
                 <v-col>
-                  <span class="text-title-green-verification-faskes">{{ $t('label.registration_number') }}</span>
+                  <span class="text-title-green-verification-faskes">{{ $t('label.license_number_facility') }}</span>
                   <br>
                   <v-label>
-                    <span class="text-data-grey-verification-faskes">{{ formVerification.nomor_registrasi }}</span>
+                    <span class="text-data-grey-verification-faskes">{{ formVerification.nomor_izin_sarana }}</span>
                   </v-label>
                 </v-col>
               </v-row>
@@ -208,7 +208,7 @@ export default {
     },
     verificationData(value) {
       this.formVerification.id = value.id
-      this.formVerification.nomor_registrasi = value.nomor_registrasi
+      this.formVerification.nomor_izin_sarana = value.nomor_izin_sarana
       this.formVerification.nama_faskes = value.nama_faskes
       this.formVerification.nama_atasan = value.nama_atasan
       this.formVerification.point_latitude_longitude = value.point_latitude_longitude

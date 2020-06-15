@@ -1,11 +1,23 @@
 <template>
   <v-container fluid grid-list-xl py-0>
     <div>
-      <span class="text-title-dashboard">{{ $t('label.dashboard_title') }}</span>
-      <br>
-      <span class="text-last-update-dashboard">{{ $t('label.last_update') }}: {{ dataLogisticRequestSummary.last_update === null ? $t('label.stripe') : $moment(dataLogisticRequestSummary.last_update).format('LLL') }}</span>
+      <v-row>
+        <v-col>
+          <span class="text-title-dashboard">{{ $t('label.dashboard_title') }}</span>
+        </v-col>
+      </v-row>
+      <v-row class="margin-top-min-20-dashboard margin-bot-min-40-dashboard">
+        <v-col cols="12" sm="12" md="5">
+          <span class="text-last-update-dashboard">{{ $t('label.last_update') }}: {{ dataLogisticRequestSummary.last_update === null ? $t('label.stripe') : $moment(dataLogisticRequestSummary.last_update).format('LLL') }}</span>
+        </v-col>
+        <v-col cols="12" sm="12" md="7" class="margin-top-min-20-dashboard">
+          <date-picker-dashboard
+            :date="listQuery.start_date"
+            @selected="updateChart"
+          />
+        </v-col>
+      </v-row>
     </div>
-    <br>
     <div>
       <v-row>
         <v-col>
@@ -25,7 +37,6 @@
           </v-card>
         </v-col>
       </v-row>
-      <br>
       <v-row>
         <v-col cols="12" sm="12" md="4">
           <v-card
@@ -80,7 +91,7 @@
         </v-col>
       </v-row>
     </div>
-    <div>
+    <div v-if="dataLogisticRequestSummary.total_request > 0">
       <v-row>
         <v-col cols="12" sm="12" md="6">
           <tools-type-chart />
@@ -100,12 +111,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import EventBus from '@/utils/eventBus'
 
 export default {
   name: 'Dashboard',
   data() {
     return {
-      baseURL: process.env.VUE_APP_URL
+      baseURL: process.env.VUE_APP_URL,
+      listQuery: {
+        start_date: null,
+        end_date: null
+      }
     }
   },
   computed: {
@@ -118,7 +134,15 @@ export default {
   },
   methods: {
     async getLogisticRequestSummary() {
-      await this.$store.dispatch('logistics/getLogisticRequestSummary')
+      await this.$store.dispatch('logistics/getLogisticRequestSummary', this.listQuery)
+    },
+    async updateChart(value) {
+      this.listQuery.start_date = value.startDate
+      this.listQuery.end_date = value.endDate
+      await this.getLogisticRequestSummary()
+      EventBus.$emit('getCityTotalRequest', this.listQuery)
+      EventBus.$emit('getProductTotalRequest', this.listQuery)
+      EventBus.$emit('getFaskesTypeTotalRequest', this.listQuery)
     }
   }
 }
@@ -157,5 +181,11 @@ export default {
     display: flex;
     align-items: center;
     color: #FFFFFF !important;
+  }
+  .margin-top-min-20-dashboard {
+    margin-top: -20px;
+  }
+  .margin-bot-min-40-dashboard {
+    margin-bottom: -40px;
   }
 </style>

@@ -29,6 +29,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import FormatingNumber from '../../helpers/formattingNumber'
+import EventBus from '@/utils/eventBus'
 
 export default {
   name: 'StatisticAppilcantChart',
@@ -67,12 +68,15 @@ export default {
             },
             label: (tooltipItem, data) => {
               const formattingNumber = new FormatingNumber()
-              const dataset = data.datasets[tooltipItem.datasetIndex]
-              const total = dataset.data.reduce((previousValue, currentValue, currentIndex, array) => {
-                return previousValue + currentValue
-              })
-              const currentValue = dataset.data[tooltipItem.index]
-              const percentage = Math.floor((currentValue / total) * 100)
+              let percentage = 0
+              if (data['datasets'][0]['data'][tooltipItem['index']] !== 0) {
+                const dataset = data.datasets[tooltipItem.datasetIndex]
+                const total = dataset.data.reduce((previousValue, currentValue, currentIndex, array) => {
+                  return previousValue + currentValue
+                })
+                const currentValue = dataset.data[tooltipItem.index]
+                percentage = Math.floor((currentValue / total) * 100)
+              }
               return `${this.$t('label.request_number')} : ${formattingNumber.currency(data['datasets'][0]['data'][tooltipItem['index']])} (${percentage}%)`
             }
           }
@@ -87,7 +91,9 @@ export default {
         }
       },
       listQuery: {
-        sort: 'desc'
+        sort: 'desc',
+        start_date: null,
+        end_date: null
       }
     }
   },
@@ -102,11 +108,20 @@ export default {
       'dataCityTotalRequest'
     ])
   },
+  created() {
+    EventBus.$on('getCityTotalRequest', (value) => {
+      this.listQuery.start_date = value.start_date
+      this.listQuery.end_date = value.end_date
+      this.getCityTotalRequest()
+    })
+  },
   async mounted() {
     await this.getCityTotalRequest()
   },
   methods: {
     async getCityTotalRequest() {
+      this.loaded = false
+      this.color = '#56CCF2'
       await this.$store.dispatch('logistics/getCityTotalRequest', this.listQuery)
       this.index = 0
       this.dataCityTotalRequest.forEach(element => {

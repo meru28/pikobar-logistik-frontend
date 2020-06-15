@@ -26,6 +26,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import FormatingNumber from '../../helpers/formattingNumber'
+import EventBus from '@/utils/eventBus'
 
 export default {
   name: 'ToolsTypeChart',
@@ -42,13 +43,15 @@ export default {
       index: 0,
       listQuery: {
         limit: 10,
-        sort: 'desc'
+        sort: 'desc',
+        start_date: null,
+        end_date: null
       },
       chartData: {
         labels: ['', '', '', '', '', '', '', '', '', ''],
         datasets: [
           {
-            data: [1, 2, 3, 4, 1, 2, 4, 5, 5, 4],
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             backgroundColor: [
               '#FF0606',
               '#27AE60',
@@ -108,18 +111,29 @@ export default {
       'dataProductTotalRequest'
     ])
   },
+  created() {
+    EventBus.$on('getProductTotalRequest', (value) => {
+      this.listQuery.start_date = value.start_date
+      this.listQuery.end_date = value.end_date
+      this.getProductTotalRequest()
+    })
+  },
   async mounted() {
     await this.getProductTotalRequest()
-    this.loaded = true
   },
   methods: {
     async getProductTotalRequest() {
+      this.loaded = false
+      this.index = 0
+      this.chartData.datasets[0].data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      this.chartData.labels = ['', '', '', '', '', '', '', '', '', '']
       await this.$store.dispatch('logistics/getProductTotalRequest', this.listQuery)
       this.dataProductTotalRequest.forEach(element => {
         this.chartData.labels[this.index] = element.name
         this.chartData.datasets[0].data[this.index] = element.total_request
         this.index += 1
       })
+      this.loaded = true
     }
   }
 }

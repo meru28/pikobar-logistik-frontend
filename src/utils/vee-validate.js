@@ -44,6 +44,11 @@ extend('requiredRegistrationNumber', {
   message: (_, values) => i18n.t('errors.field_must_be_filled_registraion_number', values)
 })
 
+extend('requiredLicenseNumberFacility', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_license_number_facility', values)
+})
+
 extend('requiredFaskesName', {
   ...required,
   message: (_, values) => i18n.t('errors.field_must_be_filled_faskes_name', values)

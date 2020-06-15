@@ -12,13 +12,23 @@
           <br>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="requiredRegistrationNumber"
+            rules="requiredLicenseNumberFacility"
           >
-            <v-label class="title"><b>{{ $t('label.regis_number') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
+            <v-label class="title"><b>{{ $t('label.license_number_facility') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
+            <v-text-field
+              v-model="listQuery.nomor_izin_sarana"
+              :placeholder="$t('label.license_number_facility_placeholder')"
+              :error-messages="errors"
+              outlined
+            />
+          </ValidationProvider>
+          <ValidationProvider
+            rules=""
+          >
+            <v-label class="title"><b>{{ $t('label.regis_number') }}</b></v-label>
             <v-text-field
               v-model="listQuery.nomor_registrasi"
               :placeholder="$t('label.regis_number_placeholder')"
-              :error-messages="errors"
               outlined
             />
           </ValidationProvider>

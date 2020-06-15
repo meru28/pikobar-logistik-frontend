@@ -1,4 +1,5 @@
 import { fetchList, doPostUpdate } from '@/api'
+import request from '@/utils/request'
 
 export default {
   async getListAPD({ commit }, params) {
@@ -40,6 +41,14 @@ export default {
   async postApplicantForm({ commit }, params) {
     try {
       const response = await doPostUpdate('/api/v1/logistic-request', 'POST', params)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async postApplicantFormAdmin({ commit }, params) {
+    try {
+      const response = await doPostUpdate('/api/v1/logistic-request-non-public', 'POST', params)
       return response
     } catch (e) {
       return e
@@ -100,7 +109,7 @@ export default {
   },
   async getLogisticRequestSummary({ commit }, params) {
     try {
-      const response = await fetchList('/api/v1/logistic-request-summary', 'GET')
+      const response = await fetchList('/api/v1/logistic-request-summary', 'GET', params)
       commit('SET_DATA_LOGISTIC_REQUEST_SUMMARY', response.data)
       return response
     } catch (e) {
@@ -132,6 +141,19 @@ export default {
       return response
     } catch (e) {
       return e
+    }
+  },
+  async logisticRequestExportData({ commit }, params) {
+    try {
+      const response = await request({
+        url: `/api/v1/logistic-request/data/export`,
+        method: 'GET',
+        params: params,
+        responseType: 'blob'
+      })
+      return response
+    } catch (error) {
+      return error.response
     }
   }
 }
