@@ -109,7 +109,7 @@ export default {
       ],
       verificationStatusOption: [
         { value: i18n.t('label.not_verified_value'), label: i18n.t('route.not_verified_title') },
-        { value: i18n.t('label.rejected_value'), label: i18n.t('label.rejected_label') }
+        { value: i18n.t('label.rejected_value'), label: i18n.t('route.rejected_title') }
       ],
       listQuery: {
         page: 1,

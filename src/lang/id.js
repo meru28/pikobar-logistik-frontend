@@ -15,6 +15,7 @@ export default {
     not_registered_title: 'Belum Terdaftar',
     registered_title: 'Terdaftar',
     verified_title: 'Terverifikasi',
+    rejected_title: 'Ditolak',
     not_verified_title: 'Belum Terverifikasi',
     rdt: 'Test Masif',
     create_rdt: 'Input hasil test',

@@ -6,7 +6,7 @@
           <span class="table-title">{{ $t('label.list_request_logistic_medic') }}</span>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row v-if="!isVerified && !isRejected">
         <v-col cols="12" sm="8">
           <v-card
             class="mx-auti"
@@ -70,7 +70,7 @@
             @click.stop="showDialogReject = true"
             @click="setTotal()"
           >
-            {{ $t('label.rejected_label') }}
+            {{ $t('route.rejected_title') }}
           </v-btn>
         </v-col>
       </v-row>
