@@ -60,6 +60,15 @@
           >
             {{ $t('label.verif_now') }}
           </v-btn>
+          <v-btn
+            v-if="isRejected"
+            outlined
+            color="#2E7D32"
+            @click.stop="showDialogReasonReject = true"
+            @click="setTotal()"
+          >
+            {{ $t('label.reason_reject') }}
+          </v-btn>
         </v-col>
         <v-col cols="3" sm="3">
           <v-btn
@@ -76,6 +85,11 @@
       </v-row>
       <rejectKebutuhanLogistik
         :show="showDialogReject"
+        :item="detailLogisticRequest"
+        :total="totalAPD"
+      />
+      <alasanDitolakKebutuhanLogistik
+        :show="showDialogReasonReject"
         :item="detailLogisticRequest"
         :total="totalAPD"
       />
@@ -331,12 +345,14 @@ import { mapGetters } from 'vuex'
 import updateKebutuhanLogistik from './update'
 import EventBus from '@/utils/eventBus'
 import rejectKebutuhanLogistik from './reject'
+import alasanDitolakKebutuhanLogistik from './reasonReject'
 
 export default {
   name: 'ListDetailPengajuanLogistik',
   components: {
     updateKebutuhanLogistik,
-    rejectKebutuhanLogistik
+    rejectKebutuhanLogistik,
+    alasanDitolakKebutuhanLogistik
   },
   data() {
     return {
@@ -350,6 +366,7 @@ export default {
       },
       showForm: false,
       showDialogReject: false,
+      showDialogReasonReject: false,
       totalAPD: null
     }
   },
@@ -391,6 +408,7 @@ export default {
     })
     EventBus.$on('dialogHideReject', (value) => {
       this.showDialogReject = value
+      this.showDialogReasonReject = value
     })
     EventBus.$on('submitReject', (value) => {
       const formData = new FormData()
