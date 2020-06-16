@@ -88,7 +88,7 @@
         :item="detailLogisticRequest"
         :total="totalAPD"
       />
-      <alasanDitolakKebutuhanLogistik
+      <reasonDeniedLogisticNeeds
         :show="showDialogReasonReject"
         :item="detailLogisticRequest"
         :total="totalAPD"
@@ -345,14 +345,14 @@ import { mapGetters } from 'vuex'
 import updateKebutuhanLogistik from './update'
 import EventBus from '@/utils/eventBus'
 import rejectKebutuhanLogistik from './reject'
-import alasanDitolakKebutuhanLogistik from './reasonReject'
+import reasonDeniedLogisticNeeds from './reasonReject'
 
 export default {
   name: 'ListDetailPengajuanLogistik',
   components: {
     updateKebutuhanLogistik,
     rejectKebutuhanLogistik,
-    alasanDitolakKebutuhanLogistik
+    reasonDeniedLogisticNeeds
   },
   data() {
     return {
