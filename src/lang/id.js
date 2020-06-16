@@ -288,7 +288,8 @@ export default {
     submit_reject: 'Ya, Tolak',
     total_apd_needs: 'Total Kebutuhan APD',
     reason_reject: 'Alasan Ditolak',
-    reason_reject_placeholder: 'Masukkan alasan penolakan permohonan logistik ini'
+    reason_reject_placeholder: 'Masukkan alasan penolakan permohonan logistik ini',
+    reason_reject_title: 'Alasan Permohonan Ditolak'
   },
   success: {
     login_success: 'Login Berhasil',
