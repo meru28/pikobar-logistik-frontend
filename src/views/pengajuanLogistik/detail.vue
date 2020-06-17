@@ -291,7 +291,7 @@
                 <th v-if="isVerified" class="text-left">{{ $t('label.action') }}</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-if="loaded">
               <tr v-if="listLogisticNeeds.length === 0">
                 <td class="text-center" :colspan="7">{{ $t('label.no_data') }}</td>
               </tr>
@@ -306,13 +306,13 @@
                 <td>{{ item.realization_quantity }}</td>
                 <td>{{ item.statusLabel }}</td>
                 <td v-if="isVerified">
-                  <v-btn text small color="info" @click.stop="showForm = true">
+                  <v-btn text small color="info" @click.stop="showForm = true" @click="updateIndex = index">
                     {{ $t('label.update') }}
                   </v-btn>
                 </td>
                 <updateKebutuhanLogistik
                   :show="showForm"
-                  :item="item"
+                  :item="listLogisticNeeds[updateIndex]"
                 />
               </tr>
             </tbody>
@@ -367,7 +367,9 @@ export default {
       showForm: false,
       showDialogReject: false,
       showDialogReasonReject: false,
-      totalAPD: null
+      totalAPD: null,
+      updateIndex: null,
+      loaded: false
     }
   },
   computed: {
@@ -385,24 +387,6 @@ export default {
     this.letterFileType = temp[temp.length - 1]
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
     this.isRejected = this.detailLogisticRequest.applicant.verification_status === 'Pengajuan Ditolak'
-    this.listLogisticNeeds.forEach(element => {
-      switch (element.status) {
-        case 'approved':
-          element.statusLabel = this.$t('label.approved')
-          break
-        case 'not_delivered':
-          element.statusLabel = this.$t('label.not_delivered')
-          break
-        case 'delivered':
-          element.statusLabel = this.$t('label.delivered')
-          break
-        case 'not_available':
-          element.statusLabel = this.$t('label.not_available')
-          break
-        default:
-          element.statusLabel = this.$t('label.not_approved')
-      }
-    })
     EventBus.$on('dialogHide', (value) => {
       this.showForm = value
     })
@@ -428,7 +412,27 @@ export default {
       this.letterFileType = '.' + temp[temp.length - 1]
     },
     async getListDetailNeeds() {
+      this.loaded = false
       await this.$store.dispatch('logistics/getListDetailLogisticNeeds', this.listQuery)
+      this.listLogisticNeeds.forEach(element => {
+        switch (element.status) {
+          case 'approved':
+            element.statusLabel = this.$t('label.approved')
+            break
+          case 'not_delivered':
+            element.statusLabel = this.$t('label.not_delivered')
+            break
+          case 'delivered':
+            element.statusLabel = this.$t('label.delivered')
+            break
+          case 'not_available':
+            element.statusLabel = this.$t('label.not_available')
+            break
+          default:
+            element.statusLabel = this.$t('label.not_approved')
+        }
+      })
+      this.loaded = true
     },
     async onNext() {
       await this.getListDetailNeeds()
