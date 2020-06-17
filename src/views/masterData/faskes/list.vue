@@ -9,17 +9,8 @@
           solo
           item-text="label"
           item-value="value"
-          @change="handleSearch"
-        />
-      </v-col>
-      <v-col v-if="verificationStatusDefault != 'verified'" cols="12" sm="2">
-        <v-label class="title">{{ $t('label.status') }}</v-label>
-        <v-select
-          v-model="listQuery.verification_status"
-          :items="verificationStatusOption"
-          solo
-          item-text="label"
-          item-value="value"
+          clearable="true"
+          :placeholder="$t('label.sort')"
           @change="handleSearch"
         />
       </v-col>
@@ -94,7 +85,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import i18n from '@/lang'
 import dataVerification from './verification'
 export default {
   name: 'ListFasilitasKesehatan',
@@ -107,17 +97,13 @@ export default {
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
       ],
-      verificationStatusOption: [
-        { value: i18n.t('label.not_verified_value'), label: i18n.t('route.not_verified_title') },
-        { value: i18n.t('label.rejected_value'), label: i18n.t('route.rejected_title') }
-      ],
       listQuery: {
         page: 1,
         limit: 10,
-        sort: 'asc',
+        sort: '',
         search: '',
         nama_faskes: '',
-        verification_status: 'not_verified'
+        verification_status: ''
       },
       verificationStatusDefault: '',
       showVerification: false,
@@ -150,6 +136,9 @@ export default {
     } else if (this.$route.name === 'FaskesBelumTerdaftar') {
       this.listQuery.verification_status = 'not_verified'
       this.verificationStatusDefault = 'not_verified'
+    } else if (this.$route.name === 'FaskesDitolak') {
+      this.listQuery.verification_status = 'rejected'
+      this.verificationStatusDefault = 'rejected'
     }
     this.getListFaskes()
   },

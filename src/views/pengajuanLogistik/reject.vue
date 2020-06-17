@@ -7,7 +7,7 @@
     <v-card>
       <v-card-title class="headline">{{ $t('label.dialog_reject_title_1') }}<br>{{ $t('label.dialog_reject_title_2') }}</v-card-title>
 
-      <div>
+      <div class="ml-3">
         <v-col>
           <span class="sub-title-reject-logistic-needs">{{ $t('label.instance_type') }}</span>
           <br>

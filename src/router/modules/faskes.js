@@ -30,6 +30,16 @@ const faskes = {
         noCache: true,
         roles: ['superadmin', 'dinkesprov']
       }
+    },
+    {
+      path: '/faskes/ditolak',
+      component: () => import('@/views/masterData/faskes/list'),
+      name: 'FaskesDitolak',
+      meta: {
+        title: 'rejected_title',
+        noCache: true,
+        roles: ['superadmin', 'dinkesprov']
+      }
     }
   ]
 }
