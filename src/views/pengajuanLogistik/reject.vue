@@ -7,7 +7,7 @@
     <v-card>
       <v-card-title class="headline">{{ $t('label.dialog_reject_title_1') }}<br>{{ $t('label.dialog_reject_title_2') }}</v-card-title>
 
-      <div>
+      <div class="margin-div-reject-logistic-needs">
         <v-col>
           <span class="sub-title-reject-logistic-needs">{{ $t('label.instance_type') }}</span>
           <br>
@@ -97,5 +97,8 @@ export default {
     font-size: 16px;
     line-height: 17px;
     color: #219653;
+  }
+  .margin-div-reject-logistic-needs {
+    margin-left: 12px;
   }
 </style>
