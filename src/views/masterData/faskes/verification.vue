@@ -4,7 +4,7 @@
       <v-card>
         <v-card-title>
           <v-row class="survey-bottom-form">
-            <v-col>
+            <v-col class="ml-3">
               <span class="text-title-green-verification-faskes">{{ $t('label.verification_fakes_title') }}</span>
             </v-col>
           </v-row>
