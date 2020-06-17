@@ -4,7 +4,7 @@
       <v-card>
         <v-card-title>
           <v-row class="survey-bottom-form">
-            <v-col class="margin-title-verification">
+            <v-col class="ml-3">
               <span class="text-title-green-verification-faskes">{{ $t('label.verification_fakes_title') }}</span>
             </v-col>
           </v-row>
@@ -280,8 +280,5 @@ export default {
 }
 .margin-btn-submit-verification-faskes {
   margin: 1% 1% 5% 1%;
-}
-.margin-title-verification {
-  margin-left: 12px;
 }
 </style>
