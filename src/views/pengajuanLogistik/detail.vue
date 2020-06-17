@@ -306,13 +306,13 @@
                 <td>{{ item.realization_quantity }}</td>
                 <td>{{ item.statusLabel }}</td>
                 <td v-if="isVerified">
-                  <v-btn text small color="info" @click.stop="showForm = true">
+                  <v-btn text small color="info" @click.stop="showForm = true" @click="setUpdateIndex(index)">
                     {{ $t('label.update') }}
                   </v-btn>
                 </td>
                 <updateKebutuhanLogistik
                   :show="showForm"
-                  :item="item"
+                  :item="listLogisticNeeds[updateIndex]"
                 />
               </tr>
             </tbody>
@@ -367,7 +367,8 @@ export default {
       showForm: false,
       showDialogReject: false,
       showDialogReasonReject: false,
-      totalAPD: null
+      totalAPD: null,
+      updateIndex: null
     }
   },
   computed: {
@@ -449,6 +450,9 @@ export default {
       this.listLogisticNeeds.forEach(element => {
         this.totalAPD += parseInt(element.quantity)
       })
+    },
+    setUpdateIndex(index) {
+      this.updateIndex = index
     }
   }
 }
