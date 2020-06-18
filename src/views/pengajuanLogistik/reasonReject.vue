@@ -11,22 +11,22 @@
         <v-col>
           <span class="sub-title-reject-reason">{{ $t('label.instance_type') }}</span>
           <br>
-          <span>{{ item.master_faskes_type.name }}</span>
+          <span class="text-gray">{{ item.master_faskes_type.name }}</span>
         </v-col>
         <v-col>
           <span class="sub-title-reject-reason">{{ $t('label.instance_name') }}</span>
           <br>
-          <span>{{ item.agency_name }}</span>
+          <span class="text-gray">{{ item.agency_name }}</span>
         </v-col>
         <v-col>
           <span class="sub-title-reject-reason">{{ $t('label.total_apd_needs') }}</span>
           <br>
-          <span>{{ total }}</span>
+          <span class="text-gray">{{ total }}</span>
         </v-col>
         <v-col>
           <span class="sub-title-reject-reason">{{ $t('label.reason_reject') }}</span>
           <br>
-          <span>{{ item.applicant.note }}</span>
+          <span class="text-gray">{{ item.applicant.note }}</span>
         </v-col>
       </div>
 
@@ -82,5 +82,8 @@ export default {
     font-size: 16px;
     line-height: 17px;
     color: #219653;
+  }
+  .text-gray {
+    color: gray !important;
   }
 </style>
