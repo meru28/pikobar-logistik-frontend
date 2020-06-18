@@ -94,7 +94,8 @@
                     <v-row class="main-color-data-confirmation">{{ $t('label.instance_type') }}</v-row>
                     <v-row>{{ formApplicant.instanceTypeName }}</v-row>
                     <v-row class="main-color-data-confirmation">{{ $t('label.instance_name') }}</v-row>
-                    <v-row>{{ formApplicant.instanceName }}</v-row>
+                    <v-row v-if="formApplicant.instanceEtc">{{ formApplicant.instanceEtc }}</v-row>
+                    <v-row v-else>{{ formApplicant.instanceName }}</v-row>
                     <v-row class="main-color-data-confirmation">{{ $t('label.number_phone') }}</v-row>
                     <v-row>{{ formApplicant.instancePhoneNumber }}</v-row>
                   </v-col>
@@ -282,7 +283,8 @@
           <v-col class="" cols="6" sm="6">
             <v-label class="title" color="#2E7D32"><b>{{ $t('label.instance_name') }}</b></v-label>
             <br>
-            <v-label>{{ formApplicant.instanceName }}</v-label>
+            <v-label v-if="formApplicant.instanceEtc">{{ formApplicant.instanceEtc }}</v-label>
+            <v-label v-else>{{ formApplicant.instanceName }}</v-label>
           </v-col>
           <v-col class="" cols="6" sm="6">
             <v-label class="title" color="#2E7D32"><b>{{ $t('label.select_sub_district_full_name') }}</b></v-label>
