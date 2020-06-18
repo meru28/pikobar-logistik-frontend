@@ -10,19 +10,19 @@
 
         <div class="ml-3">
           <v-col>
-            <span class="sub-title-reject-logistic-needs">{{ $t('label.instance_type') }}</span>
+            <span>{{ $t('label.instance_type') }}</span>
             <br>
-            <span class="text-gray">{{ item.master_faskes_type.name }}</span>
+            <span class="grey--text">{{ item.master_faskes_type.name }}</span>
           </v-col>
           <v-col>
             <span class="sub-title-reject-logistic-needs">{{ $t('label.instance_name') }}</span>
             <br>
-            <span class="text-gray">{{ item.agency_name }}</span>
+            <span class="grey--text">{{ item.agency_name }}</span>
           </v-col>
           <v-col>
             <span class="sub-title-reject-logistic-needs">{{ $t('label.total_apd_needs') }}</span>
             <br>
-            <span class="text-gray">{{ total }}</span>
+            <span class="grey--text">{{ total }}</span>
           </v-col>
           <v-col>
             <ValidationProvider
@@ -96,9 +96,7 @@ export default {
     },
     async submitReject() {
       const valid = await this.$refs.observer.validate()
-      if (!valid) {
-        return
-      }
+      if (!valid) return
       EventBus.$emit('submitReject', this.note)
     }
   }

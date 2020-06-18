@@ -442,7 +442,7 @@ export default {
       window.location.reload()
     },
     async postReject(formData) {
-      this.$store.dispatch('logistics/postVerificationStatus', formData)
+      await this.$store.dispatch('logistics/postVerificationStatus', formData)
       window.location.reload()
     }
   }
