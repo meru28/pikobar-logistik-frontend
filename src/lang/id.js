@@ -329,6 +329,7 @@ export default {
     field_must_be_filled_realization_amount: 'Jumlah realisasi tidak boleh kosong',
     field_must_be_filled_realization_date: 'Tanggal Realisasi tidak boleh kosong',
     field_must_be_filled_status: 'Status tidak boleh kosong',
+    field_must_be_filled_reason_reject: 'Alasan Ditolak tidak boleh kosong',
     field_unauthorized_characters: 'Bidang mengandung karakter yang tidak diizinkan.',
     field_unauthorized_characters_realization_amount: 'Jumlah realisasi mengandung karakter yang tidak diizinkan.',
     not_minus: 'Nilai tidak boleh 0 atau kurang',

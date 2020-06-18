@@ -65,7 +65,6 @@
             outlined
             color="#2E7D32"
             @click.stop="showDialogReasonReject = true"
-            @click="setTotal()"
           >
             {{ $t('label.reason_reject') }}
           </v-btn>
@@ -77,7 +76,6 @@
             color="#e62929"
             class="margin-btn"
             @click.stop="showDialogReject = true"
-            @click="setTotal()"
           >
             {{ $t('route.rejected_title') }}
           </v-btn>
@@ -86,12 +84,12 @@
       <rejectKebutuhanLogistik
         :show="showDialogReject"
         :item="detailLogisticRequest"
-        :total="totalAPD"
+        :total="listLogisticNeeds[0].logistic_item_summary"
       />
       <reasonDeniedLogisticNeeds
         :show="showDialogReasonReject"
         :item="detailLogisticRequest"
-        :total="totalAPD"
+        :total="listLogisticNeeds[0].logistic_item_summary"
       />
     </div>
     <div>
@@ -367,7 +365,6 @@ export default {
       showForm: false,
       showDialogReject: false,
       showDialogReasonReject: false,
-      totalAPD: null,
       updateIndex: null,
       loaded: false
     }
@@ -445,14 +442,8 @@ export default {
       window.location.reload()
     },
     async postReject(formData) {
-      this.$store.dispatch('logistics/postVerificationStatus', formData)
+      await this.$store.dispatch('logistics/postVerificationStatus', formData)
       window.location.reload()
-    },
-    setTotal() {
-      this.totalAPD = 0
-      this.listLogisticNeeds.forEach(element => {
-        this.totalAPD += parseInt(element.quantity)
-      })
     }
   }
 }
