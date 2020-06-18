@@ -112,7 +112,4 @@ export default {
     line-height: 17px;
     color: #219653;
   }
-  .text-gray {
-    color: gray !important;
-  }
 </style>
