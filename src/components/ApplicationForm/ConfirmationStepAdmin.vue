@@ -46,7 +46,8 @@
               <v-row class="main-color-data-confirmation-admin">{{ $t('label.instance_type') }}</v-row>
               <v-row>{{ formApplicant.instanceTypeName }}</v-row>
               <v-row class="main-color-data-confirmation-admin">{{ $t('label.instance_name') }}</v-row>
-              <v-row>{{ formApplicant.instanceName }}</v-row>
+              <v-row v-if="formApplicant.instanceEtc">{{ formApplicant.instanceEtc }}</v-row>
+              <v-row v-else>{{ formApplicant.instanceName }}</v-row>
               <v-row class="main-color-data-confirmation-admin">{{ $t('label.number_phone') }}</v-row>
               <v-row>{{ formApplicant.instancePhoneNumber }}</v-row>
             </v-col>
