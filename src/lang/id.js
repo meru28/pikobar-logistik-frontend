@@ -16,6 +16,7 @@ export default {
     registered_title: 'Terdaftar',
     verified_title: 'Terverifikasi',
     rejected_title: 'Ditolak',
+    approved_title: 'Disetujui',
     not_verified_title: 'Belum Terverifikasi',
     rdt: 'Test Masif',
     create_rdt: 'Input hasil test',
@@ -289,7 +290,12 @@ export default {
     total_apd_needs: 'Total Kebutuhan APD',
     reason_reject: 'Alasan Ditolak',
     reason_reject_placeholder: 'Masukkan alasan penolakan permohonan logistik ini',
-    reason_reject_title: 'Alasan Permohonan Ditolak'
+    reason_reject_title: 'Alasan Permohonan Ditolak',
+    alert_verified_title_card_logistic_needs_1: 'Sebelum melakukan Persetujuan, pastikan untuk mengecek',
+    alert_verified_title_card_logistic_needs_2: 'Stock Barang di gudang',
+    alert_verified_title_card_logistic_needs_3: 'dengan mengklik',
+    alert_verified_title_card_logistic_needs_4: 'tautan berikut.',
+    approve: 'Setujui'
   },
   success: {
     login_success: 'Login Berhasil',

@@ -6,9 +6,10 @@
           <span class="table-title">{{ $t('label.list_request_logistic_medic') }}</span>
         </v-col>
       </v-row>
-      <v-row v-if="!isVerified && !isRejected">
-        <v-col cols="12" sm="8">
+      <v-row>
+        <v-col cols="12" sm="9">
           <v-card
+            v-if="!isVerified && !isRejected"
             class="mx-auti"
             color="#219653"
           >
@@ -16,6 +17,20 @@
               <v-list-item-content>
                 <v-list-item-title>
                   <span style="color: white">{{ $t('label.verify_text_alert_1') }}<b>{{ $t('label.verify_text_alert_2') }}</b> {{ $t('label.verify_text_alert_3') }}</span>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card>
+          <v-card
+            v-if="isVerified"
+            class="mx-auti"
+            color="#219653"
+          >
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <span class="sub-title-verified-card-detail-logistic-needs">{{ $t('label.alert_verified_title_card_logistic_needs_1') }} <b>{{ $t('label.alert_verified_title_card_logistic_needs_2') }}</b> {{ $t('label.alert_verified_title_card_logistic_needs_3') }} </span>
+                  <a href="" target="blank" class="sub-title-verified-card-detail-logistic-needs" @click="updateCheckStock()"><u>{{ $t('label.alert_verified_title_card_logistic_needs_4') }}</u></a>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -68,6 +83,14 @@
           >
             {{ $t('label.reason_reject') }}
           </v-btn>
+          <v-btn
+            v-if="isVerified && isStock"
+            outlined
+            color="#2E7D32"
+            class="margin-btn"
+          >
+            {{ $t('label.approve') }}
+          </v-btn>
         </v-col>
         <v-col cols="3" sm="3">
           <v-btn
@@ -78,6 +101,16 @@
             @click.stop="showDialogReject = true"
           >
             {{ $t('route.rejected_title') }}
+          </v-btn>
+          <v-btn
+            v-if="isVerified && isStock"
+            outlined
+            color="#e62929"
+            class="margin-btn"
+            @click.stop="showDialogReject = true"
+            @click="setTotal()"
+          >
+            {{ $t('label.reason_reject') }}
           </v-btn>
         </v-col>
       </v-row>
@@ -366,7 +399,8 @@ export default {
       showDialogReject: false,
       showDialogReasonReject: false,
       updateIndex: null,
-      loaded: false
+      loaded: false,
+      isStock: true
     }
   },
   computed: {
@@ -444,6 +478,16 @@ export default {
     async postReject(formData) {
       await this.$store.dispatch('logistics/postVerificationStatus', formData)
       window.location.reload()
+    },
+    setTotal() {
+      this.totalAPD = 0
+      this.listLogisticNeeds.forEach(element => {
+        this.totalAPD += parseInt(element.quantity)
+      })
+    },
+    updateCheckStock() {
+      console.log('masuk sni')
+      window.location.reload(true)
     }
   }
 }
@@ -517,5 +561,9 @@ export default {
   font-size: 16px;
   line-height: 19px;
   text-decoration: underline;
+}
+.sub-title-verified-card-detail-logistic-needs {
+  color: white !important;
+  font-size: 13px;
 }
 </style>
