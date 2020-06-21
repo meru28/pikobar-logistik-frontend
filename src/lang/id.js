@@ -295,7 +295,10 @@ export default {
     alert_verified_title_card_logistic_needs_2: 'Stock Barang di gudang',
     alert_verified_title_card_logistic_needs_3: 'dengan mengklik',
     alert_verified_title_card_logistic_needs_4: 'tautan berikut.',
-    approve: 'Setujui'
+    approve: 'Setujui',
+    applicant_letter_number: 'Nomor Surat Permohonan',
+    applicant_letter_number_placeholder: 'Masukkan Nomor Surat Permohonan',
+    applicant_letter_number_upload: 'Upload Surat Permohonan'
   },
   success: {
     login_success: 'Login Berhasil',
@@ -326,6 +329,7 @@ export default {
     field_must_be_filled_total: 'Jumlah tidak boleh kosong',
     field_must_be_filled_unit: 'Satuan tidak boleh kosong',
     field_must_be_filled_purpose: 'Tujuan penggunaan tidak boleh kosong',
+    field_must_be_filled_applicant_letter_number: 'Nomor Surat Permohonan tidak boleh kosong',
     field_must_be_filled_urgency_level: 'Tingkat urgensi tidak boleh kosong',
     field_must_be_filled_registraion_number: 'Nomor Registrasi tidak boleh kosong',
     field_must_be_filled_license_number_facility: 'Nomor Izin Sarana tidak boleh kosong',

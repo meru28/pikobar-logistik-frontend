@@ -77,7 +77,8 @@ export default {
       this.step = value - 1
     })
     EventBus.$on('confirmStep', (value) => {
-      this.applicantLetter = value
+      this.applicantLetter = value.file
+      this.formApplicant.letterNumber = value.letter
       this.isConfirm = true
       this.step = 5
     })
