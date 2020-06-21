@@ -42,6 +42,16 @@ const pengajuanLogistik = {
       }
     },
     {
+      path: '/alat-kesehatan/disetujui',
+      component: () => import('@/views/pengajuanLogistik/list'),
+      name: 'approved',
+      meta: {
+        title: 'approved_title',
+        noCache: true,
+        roles: ['superadmin', 'dinkesprov']
+      }
+    },
+    {
       path: '/alat-kesehatan/detail/:id',
       component: () => import('@/views/pengajuanLogistik/detail'),
       hidden: true,
