@@ -29,8 +29,8 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>
-                  <span class="sub-title-verified-card-detail-logistic-needs">{{ $t('label.alert_verified_title_card_logistic_needs_1') }} <b>{{ $t('label.alert_verified_title_card_logistic_needs_2') }}</b> {{ $t('label.alert_verified_title_card_logistic_needs_3') }} </span>
-                  <a href="" target="blank" class="sub-title-verified-card-detail-logistic-needs" @click="updateCheckStock()"><u>{{ $t('label.alert_verified_title_card_logistic_needs_4') }}</u></a>
+                  <span class="white--text">{{ $t('label.alert_verified_title_card_logistic_needs_1') }} <b>{{ $t('label.alert_verified_title_card_logistic_needs_2') }}</b> {{ $t('label.alert_verified_title_card_logistic_needs_3') }} </span>
+                  <a href="" target="blank" class="white--text" @click="updateCheckStock()"><u>{{ $t('label.alert_verified_title_card_logistic_needs_4') }}</u></a>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -427,11 +427,7 @@ export default {
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
     this.isRejected = this.detailLogisticRequest.applicant.verification_status === 'Pengajuan Ditolak'
     this.isApproved = this.detailLogisticRequest.applicant.approval_status === 'Telah Disetujui'
-    if (this.detailLogisticRequest.applicant.stock_checking_status === 'checked') {
-      this.isStock = true
-    } else {
-      this.isStock = false
-    }
+    this.isStock = this.detailLogisticRequest.applicant.stock_checking_status === 'checked'
     EventBus.$on('dialogHide', (value) => {
       this.showForm = value
     })
@@ -582,9 +578,5 @@ export default {
   font-size: 16px;
   line-height: 19px;
   text-decoration: underline;
-}
-.sub-title-verified-card-detail-logistic-needs {
-  color: white !important;
-  font-size: 13px;
 }
 </style>
