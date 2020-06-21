@@ -53,10 +53,16 @@
         </v-col>
         <v-col class="margin-left-min-30" cols="3" sm="3">
           <span
-            v-if="isVerified"
+            v-if="isVerified && !isApproved"
             class="text-data-green"
           >
             :  {{ detailLogisticRequest.applicant.verification_status }}
+          </span>
+          <span
+            v-else-if="isApproved"
+            class="text-data-green"
+          >
+            :  {{ detailLogisticRequest.applicant.approval_status }}
           </span>
           <span
             v-else
@@ -84,10 +90,11 @@
             {{ $t('label.reason_reject') }}
           </v-btn>
           <v-btn
-            v-if="isVerified && isStock"
+            v-if="isVerified && isStock && !isApproved"
             outlined
             color="#2E7D32"
             class="margin-btn"
+            @click="submitApprove()"
           >
             {{ $t('label.approve') }}
           </v-btn>
@@ -103,14 +110,14 @@
             {{ $t('route.rejected_title') }}
           </v-btn>
           <v-btn
-            v-if="isVerified && isStock"
+            v-if="isVerified && isStock && !isApproved"
             outlined
             color="#e62929"
             class="margin-btn"
             @click.stop="showDialogReject = true"
             @click="setTotal()"
           >
-            {{ $t('label.reason_reject') }}
+            {{ $t('route.rejected_title') }}
           </v-btn>
         </v-col>
       </v-row>
@@ -390,6 +397,7 @@ export default {
       letterFileType: '',
       isVerified: false,
       isRejected: false,
+      isApproved: false,
       listQuery: {
         page: 1,
         limit: 3,
@@ -418,6 +426,12 @@ export default {
     this.letterFileType = temp[temp.length - 1]
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
     this.isRejected = this.detailLogisticRequest.applicant.verification_status === 'Pengajuan Ditolak'
+    this.isApproved = this.detailLogisticRequest.applicant.approval_status === 'Telah Disetujui'
+    if (this.detailLogisticRequest.applicant.stock_checking_status === 'checked') {
+      this.isStock = true
+    } else {
+      this.isStock = false
+    }
     EventBus.$on('dialogHide', (value) => {
       this.showForm = value
     })
@@ -485,8 +499,15 @@ export default {
         this.totalAPD += parseInt(element.quantity)
       })
     },
-    updateCheckStock() {
-      console.log('masuk sni')
+    async updateCheckStock() {
+      await this.$store.dispatch('logistics/postCheckStockStatus', { stock_checking_status: 'checked', applicant_id: this.detailLogisticRequest.id })
+      window.location.reload(true)
+    },
+    async submitApprove() {
+      const formData = new FormData()
+      formData.append('applicant_id', this.detailLogisticRequest.id)
+      formData.append('approval_status', 'approved')
+      await this.$store.dispatch('logistics/postApprovalStatus', formData)
       window.location.reload(true)
     }
   }

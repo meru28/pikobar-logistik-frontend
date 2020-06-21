@@ -155,5 +155,21 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async postCheckStockStatus({ commit }, params) {
+    try {
+      const response = await doPostUpdate('/api/v1/logistic-request/stock-checking', 'POST', params)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async postApprovalStatus({ commit }, params) {
+    try {
+      const response = await doPostUpdate('/api/v1/logistic-request/approval', 'POST', params)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }
