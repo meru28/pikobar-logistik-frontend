@@ -29,8 +29,8 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>
-                  <span class="white--text">{{ $t('label.alert_verified_title_card_logistic_needs_1') }} <b>{{ $t('label.alert_verified_title_card_logistic_needs_2') }}</b> {{ $t('label.alert_verified_title_card_logistic_needs_3') }} </span>
-                  <a href="" target="blank" class="white--text" @click="updateCheckStock()"><u>{{ $t('label.alert_verified_title_card_logistic_needs_4') }}</u></a>
+                  <span class="sub-title-verified-card-detail-logistic-needs white--text">{{ $t('label.alert_verified_title_card_logistic_needs_1') }} <b>{{ $t('label.alert_verified_title_card_logistic_needs_2') }}</b> {{ $t('label.alert_verified_title_card_logistic_needs_3') }} </span>
+                  <a href="" target="blank" class="sub-title-verified-card-detail-logistic-needs white--text" @click="updateCheckStock()"><u>{{ $t('label.alert_verified_title_card_logistic_needs_4') }}</u></a>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -578,5 +578,8 @@ export default {
   font-size: 16px;
   line-height: 19px;
   text-decoration: underline;
+}
+.sub-title-verified-card-detail-logistic-needs {
+  font-size: 13px;
 }
 </style>
