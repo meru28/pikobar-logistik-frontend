@@ -19,7 +19,7 @@
                 v-model="letterNumber"
                 outlined
                 :error-messages="errors"
-                :placeholder="$t('label.autocomplete_instance_placeholder')"
+                :placeholder="$t('label.applicant_letter_number_placeholder')"
                 solo-inverted
               />
             </ValidationProvider>

@@ -22,7 +22,7 @@
             </v-list-item>
           </v-card>
           <v-card
-            v-if="isVerified"
+            v-if="isVerified && !isApproved"
             class="mx-auti"
             color="#219653"
           >
@@ -364,17 +364,32 @@
         @input="onNext"
       />
     </div>
-    <div>
-      <v-row>
-        <v-col cols="12" sm="12" md="12">
-          <span class="text-data-green">
-            {{ $t('label.applicant_letter') }}
-          </span>
-          <br>
-          <a class="letter-class" :href="detailLogisticRequest.letter.letter" target="_blank">{{ $t('label.applicant_letter') }} {{ detailLogisticRequest.agency_name }}{{ letterFileType }}</a>
+    <div class="text-title-green">{{ $t('label.step_title_4') }}</div>
+    <v-card outlined>
+      <v-row class="ml-2">
+        <v-col cols="1" md="1">
+          <span class="text-title-green">#</span>
+        </v-col>
+        <v-col cols="3" md="3">
+          <span class="text-title-green">{{ $t('label.letter_number') }}</span>
         </v-col>
       </v-row>
-    </div>
+      <v-row class="ml-2">
+        <v-col cols="1" md="1">
+          <span>1</span>
+        </v-col>
+        <v-col cols="3" md="3">
+          <span class="grey--text">{{ detailLogisticRequest.applicant.application_letter_number }}</span>
+        </v-col>
+        <v-col cols="4" md="4">
+          <a :href="detailLogisticRequest.letter.letter" target="_blank" class="blue--text"><u>{{ $t('label.applicant_letter') }}</u></a>
+        </v-col>
+        <v-col>
+          <a :href="detailLogisticRequest.letter.letter" target="_blank" class="green--text">{{ $t('label.download') }}</a>
+        </v-col>
+      </v-row>
+    </v-card>
+    <br>
   </div>
 </template>
 
@@ -437,6 +452,7 @@ export default {
     })
     EventBus.$on('submitReject', (value) => {
       const formData = new FormData()
+      this.showDialogReject = false
       formData.append('applicant_id', this.detailLogisticRequest.id)
       formData.append('verification_status', 'rejected')
       formData.append('note', value)
