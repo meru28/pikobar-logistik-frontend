@@ -22,7 +22,7 @@
             </v-list-item>
           </v-card>
           <v-card
-            v-if="isVerified"
+            v-if="isVerified && !isApproved"
             class="mx-auti"
             color="#219653"
           >
