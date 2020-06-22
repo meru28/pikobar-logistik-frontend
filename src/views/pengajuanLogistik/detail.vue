@@ -379,7 +379,7 @@
           <span>1</span>
         </v-col>
         <v-col cols="3" md="3">
-          <span class="gray--text">{{ detailLogisticRequest.applicant.application_letter_number }}</span>
+          <span class="grey--text">{{ detailLogisticRequest.applicant.application_letter_number }}</span>
         </v-col>
         <v-col cols="4" md="4">
           <a :href="detailLogisticRequest.letter.letter" target="_blank" class="blue--text"><u>{{ $t('label.applicant_letter') }}</u></a>
