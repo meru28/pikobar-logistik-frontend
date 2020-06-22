@@ -296,9 +296,11 @@ export default {
     alert_verified_title_card_logistic_needs_3: 'dengan mengklik',
     alert_verified_title_card_logistic_needs_4: 'tautan berikut.',
     approve: 'Setujui',
+    letter_number: 'Nomor Surat',
     applicant_letter_number: 'Nomor Surat Permohonan',
     applicant_letter_number_placeholder: 'Masukkan Nomor Surat Permohonan',
-    applicant_letter_number_upload: 'Upload Surat Permohonan'
+    applicant_letter_number_upload: 'Upload Surat Permohonan',
+    download: 'Unduh'
   },
   success: {
     login_success: 'Login Berhasil',
