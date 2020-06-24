@@ -129,6 +129,16 @@ extend('requiredStatus', {
   message: (_, values) => i18n.t('errors.field_must_be_filled_status', values)
 })
 
+extend('requiredApplicantLetterNumber', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_letter_number', values)
+})
+
+extend('requiredReasonReject', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_reason_reject', values)
+})
+
 extend('max', {
   ...max,
   message: 'This field must be {length} characters or less'

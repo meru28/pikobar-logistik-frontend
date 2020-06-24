@@ -6,9 +6,10 @@
           <span class="table-title">{{ $t('label.list_request_logistic_medic') }}</span>
         </v-col>
       </v-row>
-      <v-row v-if="!isVerified && !isRejected">
-        <v-col cols="12" sm="8">
+      <v-row>
+        <v-col cols="12" sm="9">
           <v-card
+            v-if="!isVerified && !isRejected"
             class="mx-auti"
             color="#219653"
           >
@@ -16,6 +17,20 @@
               <v-list-item-content>
                 <v-list-item-title>
                   <span style="color: white">{{ $t('label.verify_text_alert_1') }}<b>{{ $t('label.verify_text_alert_2') }}</b> {{ $t('label.verify_text_alert_3') }}</span>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card>
+          <v-card
+            v-if="isVerified && !isApproved"
+            class="mx-auti"
+            color="#219653"
+          >
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <span class="sub-title-verified-card-detail-logistic-needs white--text">{{ $t('label.alert_verified_title_card_logistic_needs_1') }} <b>{{ $t('label.alert_verified_title_card_logistic_needs_2') }}</b> {{ $t('label.alert_verified_title_card_logistic_needs_3') }} </span>
+                  <a href="" target="blank" class="sub-title-verified-card-detail-logistic-needs white--text" @click="updateCheckStock()"><u>{{ $t('label.alert_verified_title_card_logistic_needs_4') }}</u></a>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -38,10 +53,16 @@
         </v-col>
         <v-col class="margin-left-min-30" cols="3" sm="3">
           <span
-            v-if="isVerified"
+            v-if="isVerified && !isApproved"
             class="text-data-green"
           >
             :  {{ detailLogisticRequest.applicant.verification_status }}
+          </span>
+          <span
+            v-else-if="isApproved"
+            class="text-data-green"
+          >
+            :  {{ detailLogisticRequest.applicant.approval_status }}
           </span>
           <span
             v-else
@@ -60,10 +81,36 @@
           >
             {{ $t('label.verif_now') }}
           </v-btn>
+          <v-btn
+            v-if="isRejected"
+            outlined
+            color="#2E7D32"
+            @click.stop="showDialogReasonReject = true"
+          >
+            {{ $t('label.reason_reject') }}
+          </v-btn>
+          <v-btn
+            v-if="isVerified && isStock && !isApproved"
+            outlined
+            color="#2E7D32"
+            class="margin-btn"
+            @click="submitApprove()"
+          >
+            {{ $t('label.approve') }}
+          </v-btn>
         </v-col>
         <v-col cols="3" sm="3">
           <v-btn
             v-if="!isVerified && !isRejected"
+            outlined
+            color="#e62929"
+            class="margin-btn"
+            @click.stop="showDialogReject = true"
+          >
+            {{ $t('route.rejected_title') }}
+          </v-btn>
+          <v-btn
+            v-if="isVerified && isStock && !isApproved"
             outlined
             color="#e62929"
             class="margin-btn"
@@ -77,7 +124,12 @@
       <rejectKebutuhanLogistik
         :show="showDialogReject"
         :item="detailLogisticRequest"
-        :total="totalAPD"
+        :total="listLogisticNeeds[0].logistic_item_summary"
+      />
+      <reasonDeniedLogisticNeeds
+        :show="showDialogReasonReject"
+        :item="detailLogisticRequest"
+        :total="listLogisticNeeds[0].logistic_item_summary"
       />
     </div>
     <div>
@@ -277,7 +329,7 @@
                 <th v-if="isVerified" class="text-left">{{ $t('label.action') }}</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-if="loaded">
               <tr v-if="listLogisticNeeds.length === 0">
                 <td class="text-center" :colspan="7">{{ $t('label.no_data') }}</td>
               </tr>
@@ -292,13 +344,13 @@
                 <td>{{ item.realization_quantity }}</td>
                 <td>{{ item.statusLabel }}</td>
                 <td v-if="isVerified">
-                  <v-btn text small color="info" @click.stop="showForm = true">
+                  <v-btn text small color="info" @click.stop="showForm = true" @click="updateIndex = index">
                     {{ $t('label.update') }}
                   </v-btn>
                 </td>
                 <updateKebutuhanLogistik
                   :show="showForm"
-                  :item="item"
+                  :item="listLogisticNeeds[updateIndex]"
                 />
               </tr>
             </tbody>
@@ -312,17 +364,32 @@
         @input="onNext"
       />
     </div>
-    <div>
-      <v-row>
-        <v-col cols="12" sm="12" md="12">
-          <span class="text-data-green">
-            {{ $t('label.applicant_letter') }}
-          </span>
-          <br>
-          <a class="letter-class" :href="detailLogisticRequest.letter.letter" target="_blank">{{ $t('label.applicant_letter') }} {{ detailLogisticRequest.agency_name }}{{ letterFileType }}</a>
+    <div class="text-title-green">{{ $t('label.step_title_4') }}</div>
+    <v-card outlined>
+      <v-row class="ml-2">
+        <v-col cols="1" md="1">
+          <span class="text-title-green">#</span>
+        </v-col>
+        <v-col cols="3" md="3">
+          <span class="text-title-green">{{ $t('label.letter_number') }}</span>
         </v-col>
       </v-row>
-    </div>
+      <v-row class="ml-2">
+        <v-col cols="1" md="1">
+          <span>1</span>
+        </v-col>
+        <v-col cols="3" md="3">
+          <span class="grey--text">{{ detailLogisticRequest.applicant.application_letter_number }}</span>
+        </v-col>
+        <v-col cols="4" md="4">
+          <a :href="detailLogisticRequest.letter.letter" target="_blank" class="blue--text"><u>{{ $t('label.applicant_letter') }}</u></a>
+        </v-col>
+        <v-col>
+          <a :href="detailLogisticRequest.letter.letter" target="_blank" class="green--text">{{ $t('label.download') }}</a>
+        </v-col>
+      </v-row>
+    </v-card>
+    <br>
   </div>
 </template>
 
@@ -331,18 +398,21 @@ import { mapGetters } from 'vuex'
 import updateKebutuhanLogistik from './update'
 import EventBus from '@/utils/eventBus'
 import rejectKebutuhanLogistik from './reject'
+import reasonDeniedLogisticNeeds from './reasonReject'
 
 export default {
   name: 'ListDetailPengajuanLogistik',
   components: {
     updateKebutuhanLogistik,
-    rejectKebutuhanLogistik
+    rejectKebutuhanLogistik,
+    reasonDeniedLogisticNeeds
   },
   data() {
     return {
       letterFileType: '',
       isVerified: false,
       isRejected: false,
+      isApproved: false,
       listQuery: {
         page: 1,
         limit: 3,
@@ -350,7 +420,10 @@ export default {
       },
       showForm: false,
       showDialogReject: false,
-      totalAPD: null
+      showDialogReasonReject: false,
+      updateIndex: null,
+      loaded: false,
+      isStock: true
     }
   },
   computed: {
@@ -368,32 +441,18 @@ export default {
     this.letterFileType = temp[temp.length - 1]
     this.isVerified = this.detailLogisticRequest.applicant.verification_status === 'Terverifikasi'
     this.isRejected = this.detailLogisticRequest.applicant.verification_status === 'Pengajuan Ditolak'
-    this.listLogisticNeeds.forEach(element => {
-      switch (element.status) {
-        case 'approved':
-          element.statusLabel = this.$t('label.approved')
-          break
-        case 'not_delivered':
-          element.statusLabel = this.$t('label.not_delivered')
-          break
-        case 'delivered':
-          element.statusLabel = this.$t('label.delivered')
-          break
-        case 'not_available':
-          element.statusLabel = this.$t('label.not_available')
-          break
-        default:
-          element.statusLabel = this.$t('label.not_approved')
-      }
-    })
+    this.isApproved = this.detailLogisticRequest.applicant.approval_status === 'Telah Disetujui'
+    this.isStock = this.detailLogisticRequest.applicant.stock_checking_status === 'checked'
     EventBus.$on('dialogHide', (value) => {
       this.showForm = value
     })
     EventBus.$on('dialogHideReject', (value) => {
       this.showDialogReject = value
+      this.showDialogReasonReject = value
     })
     EventBus.$on('submitReject', (value) => {
       const formData = new FormData()
+      this.showDialogReject = false
       formData.append('applicant_id', this.detailLogisticRequest.id)
       formData.append('verification_status', 'rejected')
       formData.append('note', value)
@@ -410,7 +469,27 @@ export default {
       this.letterFileType = '.' + temp[temp.length - 1]
     },
     async getListDetailNeeds() {
+      this.loaded = false
       await this.$store.dispatch('logistics/getListDetailLogisticNeeds', this.listQuery)
+      this.listLogisticNeeds.forEach(element => {
+        switch (element.status) {
+          case 'approved':
+            element.statusLabel = this.$t('label.approved')
+            break
+          case 'not_delivered':
+            element.statusLabel = this.$t('label.not_delivered')
+            break
+          case 'delivered':
+            element.statusLabel = this.$t('label.delivered')
+            break
+          case 'not_available':
+            element.statusLabel = this.$t('label.not_available')
+            break
+          default:
+            element.statusLabel = this.$t('label.not_approved')
+        }
+      })
+      this.loaded = true
     },
     async onNext() {
       await this.getListDetailNeeds()
@@ -423,7 +502,7 @@ export default {
       window.location.reload()
     },
     async postReject(formData) {
-      this.$store.dispatch('logistics/postVerificationStatus', formData)
+      await this.$store.dispatch('logistics/postVerificationStatus', formData)
       window.location.reload()
     },
     setTotal() {
@@ -431,6 +510,17 @@ export default {
       this.listLogisticNeeds.forEach(element => {
         this.totalAPD += parseInt(element.quantity)
       })
+    },
+    async updateCheckStock() {
+      await this.$store.dispatch('logistics/postCheckStockStatus', { stock_checking_status: 'checked', applicant_id: this.detailLogisticRequest.id })
+      window.location.reload(true)
+    },
+    async submitApprove() {
+      const formData = new FormData()
+      formData.append('applicant_id', this.detailLogisticRequest.id)
+      formData.append('approval_status', 'approved')
+      await this.$store.dispatch('logistics/postApprovalStatus', formData)
+      window.location.reload(true)
     }
   }
 }
@@ -504,5 +594,8 @@ export default {
   font-size: 16px;
   line-height: 19px;
   text-decoration: underline;
+}
+.sub-title-verified-card-detail-logistic-needs {
+  font-size: 13px;
 }
 </style>

@@ -46,7 +46,8 @@
               <v-row class="main-color-data-confirmation-admin">{{ $t('label.instance_type') }}</v-row>
               <v-row>{{ formApplicant.instanceTypeName }}</v-row>
               <v-row class="main-color-data-confirmation-admin">{{ $t('label.instance_name') }}</v-row>
-              <v-row>{{ formApplicant.instanceName }}</v-row>
+              <v-row v-if="formApplicant.instanceEtc">{{ formApplicant.instanceEtc }}</v-row>
+              <v-row v-else>{{ formApplicant.instanceName }}</v-row>
               <v-row class="main-color-data-confirmation-admin">{{ $t('label.number_phone') }}</v-row>
               <v-row>{{ formApplicant.instancePhoneNumber }}</v-row>
             </v-col>
@@ -137,7 +138,30 @@
     />
     <hr>
     <div class="main-color-data-confirmation-admin">{{ $t('label.step_title_4') }}</div>
-    <a :href="urlLetter" target="_blank">{{ letterName }}</a>
+    <v-card outlined>
+      <v-row class="ml-2">
+        <v-col cols="1" md="1">
+          <span class="main-color-data-confirmation-admin">#</span>
+        </v-col>
+        <v-col cols="3" md="3">
+          <span class="main-color-data-confirmation-admin">{{ $t('label.letter_number') }}</span>
+        </v-col>
+      </v-row>
+      <v-row class="ml-2">
+        <v-col cols="1" md="1">
+          <span>1</span>
+        </v-col>
+        <v-col cols="3" md="3">
+          <span class="grey--text">{{ formApplicant.letterNumber }}</span>
+        </v-col>
+        <v-col cols="4" md="4">
+          <a :href="urlLetter" target="_blank" class="blue--text"><u>{{ letterName }}</u></a>
+        </v-col>
+        <v-col>
+          <span class="main-color-data-confirmation-admin">{{ $t('label.download') }}</span>
+        </v-col>
+      </v-row>
+    </v-card>
     <hr>
     <v-row justify="end">
       <v-btn class="ml-5 white--text" min-width="140px" color="success" outlined @click="onPrev()">{{ $t('label.back') }}</v-btn>
@@ -260,6 +284,7 @@ export default {
       formData.append('primary_phone_number', this.formIdentityApplicant.applicantPhoneNumber)
       formData.append('secondary_phone_number', this.formIdentityApplicant.applicantPhoneNumber2)
       formData.append('letter_file', this.applicantLetter)
+      formData.append('application_letter_number', this.formApplicant.letterNumber)
       formData.append('applicant_file', this.formIdentityApplicant.dataFile)
       formData.append('source_data', 'dinkes_provinsi')
       formData.append('created_by', this.user.id)

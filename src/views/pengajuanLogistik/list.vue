@@ -42,6 +42,8 @@
               solo
               item-text="label"
               item-value="value"
+              clearable="true"
+              :placeholder="$t('label.sort')"
               @change="handleSearch"
             />
           </v-col>
@@ -64,6 +66,7 @@
               solo
               item-text="name"
               item-value="id"
+              clearable="true"
               :placeholder="$t('label.select_instance_type')"
               @change="handleSearch()"
             />
@@ -76,6 +79,7 @@
               solo
               item-text="text"
               item-value="value"
+              clearable="true"
               :placeholder="$t('label.select_applicant_origin')"
               @change="handleSearch()"
             />
@@ -107,7 +111,8 @@
                   <td>{{ data.city.kemendagri_kabupaten_nama }}</td>
                   <td>{{ data.applicant.applicant_name }}</td>
                   <td>{{ data.created_at === null ? $t('label.stripe') : $moment(data.created_at).format('D MMMM YYYY') }}</td>
-                  <td>{{ data.applicant.verification_status }}</td>
+                  <td v-if="isApproved">{{ data.applicant.approval_status }}</td>
+                  <td v-else>{{ data.applicant.verification_status }}</td>
                   <td><v-btn text small color="info" @click="toDetail(data)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
                 <tr v-if="listLogisticRequest.length === 0">
@@ -183,7 +188,8 @@ export default {
         }
       ],
       date: null,
-      showFilter: false
+      showFilter: false,
+      isApproved: false
     }
   },
   computed: {
@@ -199,10 +205,15 @@ export default {
   async created() {
     if (this.$route.name === 'verified') {
       this.listQuery.verification_status = 'verified'
+      this.listQuery.approval_status = 'not_approved'
     } else if (this.$route.name === 'notVerified') {
       this.listQuery.verification_status = 'not_verified'
     } else if (this.$route.name === 'rejected') {
       this.listQuery.verification_status = 'rejected'
+    } else if (this.$route.name === 'approved') {
+      this.listQuery.verification_status = 'verified'
+      this.listQuery.approval_status = 'approved'
+      this.isApproved = true
     }
     await this.$store.dispatch('faskesType/getListFaskesType')
     this.getLogisticRequestList()
