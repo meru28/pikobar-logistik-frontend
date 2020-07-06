@@ -82,10 +82,10 @@
               v-slot="{ errors }"
               rules="requiredBrand"
             >
-              <v-label class="title"><b>{{ $t('label.brand') }}</b></v-label>
+              <v-label class="title"><b>{{ $t('label.description') }}</b></v-label>
               <v-text-field
                 v-model="data.brand"
-                :placeholder="$t('label.input_brand')"
+                :placeholder="$t('label.input_description')"
                 :error-messages="errors"
                 outlined
                 solo-inverted
