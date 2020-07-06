@@ -29,8 +29,7 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>
-                  <span class="sub-title-verified-card-detail-logistic-needs white--text">{{ $t('label.alert_verified_title_card_logistic_needs_1') }} <b>{{ $t('label.alert_verified_title_card_logistic_needs_2') }}</b> {{ $t('label.alert_verified_title_card_logistic_needs_3') }} </span>
-                  <a href="" target="blank" class="sub-title-verified-card-detail-logistic-needs white--text" @click="updateCheckStock()"><u>{{ $t('label.alert_verified_title_card_logistic_needs_4') }}</u></a>
+                  <span class="sub-title-verified-card-detail-logistic-needs white--text">{{ $t('label.alert_verified_title_card_logistic_needs_1') }} <b>{{ $t('label.alert_verified_title_card_logistic_needs_2') }}</b></span>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -51,7 +50,7 @@
         <v-col cols="3" sm="2">
           <span class="text-title">{{ $t('label.status') }}</span>
         </v-col>
-        <v-col class="margin-left-min-30" cols="3" sm="3">
+        <v-col class="margin-left-min-30" cols="2" sm="2">
           <span
             v-if="isVerified && !isApproved"
             class="text-data-green"
@@ -71,54 +70,56 @@
             :  {{ detailLogisticRequest.applicant.verification_status }}
           </span>
         </v-col>
-        <v-col cols="3" sm="3">
-          <v-btn
-            v-if="!isVerified && !isRejected"
-            outlined
-            color="#2E7D32"
-            class="margin-btn"
-            @click="postVerification"
-          >
-            {{ $t('label.verif_now') }}
-          </v-btn>
-          <v-btn
-            v-if="isRejected"
-            outlined
-            color="#2E7D32"
-            @click.stop="showDialogReasonReject = true"
-          >
-            {{ $t('label.reason_reject') }}
-          </v-btn>
-          <v-btn
-            v-if="isVerified && isStock && !isApproved"
-            outlined
-            color="#2E7D32"
-            class="margin-btn"
-            @click="submitApprove()"
-          >
-            {{ $t('label.approve') }}
-          </v-btn>
-        </v-col>
-        <v-col cols="3" sm="3">
-          <v-btn
-            v-if="!isVerified && !isRejected"
-            outlined
-            color="#e62929"
-            class="margin-btn"
-            @click.stop="showDialogReject = true"
-          >
-            {{ $t('route.rejected_title') }}
-          </v-btn>
-          <v-btn
-            v-if="isVerified && isStock && !isApproved"
-            outlined
-            color="#e62929"
-            class="margin-btn"
-            @click.stop="showDialogReject = true"
-            @click="setTotal()"
-          >
-            {{ $t('route.rejected_title') }}
-          </v-btn>
+        <v-col cols="5" sm="5">
+          <span>
+            <v-btn
+              v-if="!isVerified && !isRejected"
+              outlined
+              color="#2E7D32"
+              class="margin-btn"
+              @click="postVerification"
+            >
+              {{ $t('label.verif_now') }}
+            </v-btn>
+            <v-btn
+              v-if="isRejected"
+              outlined
+              color="#2E7D32"
+              @click.stop="showDialogReasonReject = true"
+            >
+              {{ $t('label.reason_reject') }}
+            </v-btn>
+            <v-btn
+              v-if="isVerified && !isApproved"
+              outlined
+              color="#2E7D32"
+              class="margin-btn"
+              @click="submitApprove()"
+            >
+              {{ $t('label.approve') }}
+            </v-btn>
+          </span>
+          <span style="margin-left: 20px">
+            <v-btn
+              v-if="!isVerified && !isRejected"
+              outlined
+              color="#e62929"
+              class="margin-btn"
+              @click.stop="showDialogReject = true"
+            >
+              {{ $t('route.rejected_title') }}
+            </v-btn>
+            <v-btn
+              v-if="isVerified && isStock && !isApproved"
+              outlined
+              color="#e62929"
+              class="margin-btn"
+              @click.stop="showDialogReject = true"
+              @click="setTotal()"
+            >
+              {{ $t('route.rejected_title') }}
+            </v-btn>
+          </span>
         </v-col>
       </v-row>
       <rejectKebutuhanLogistik
@@ -324,7 +325,9 @@
                 <th class="text-left">{{ $t('label.unit').toUpperCase() }}</th>
                 <th class="text-left">{{ $t('label.purpose').toUpperCase() }}</th>
                 <th class="text-left">{{ $t('label.urgency_level').toUpperCase() }}</th>
+                <th class="text-left">{{ $t('label.remaining_stock_item').toUpperCase() }}</th>
                 <th class="text-left">{{ $t('label.realization_amount').toUpperCase() }}</th>
+                <th class="text-left">{{ $t('label.realization_date').toUpperCase() }}</th>
                 <th class="text-left">{{ $t('label.status').toUpperCase() }}</th>
                 <th v-if="isVerified" class="text-left">{{ $t('label.action') }}</th>
               </tr>
@@ -341,7 +344,9 @@
                 <td>{{ item.unit.unit }}</td>
                 <td>{{ item.usage }}</td>
                 <td>{{ item.priority }}</td>
+                <td>{{ '-' }}</td>
                 <td>{{ item.realization_quantity }}</td>
+                <td>{{ item.realization_date || '-' }}</td>
                 <td>{{ item.statusLabel }}</td>
                 <td v-if="isVerified">
                   <v-btn text small color="info" @click.stop="showForm = true" @click="updateIndex = index">
@@ -511,10 +516,6 @@ export default {
         this.totalAPD += parseInt(element.quantity)
       })
     },
-    async updateCheckStock() {
-      await this.$store.dispatch('logistics/postCheckStockStatus', { stock_checking_status: 'checked', applicant_id: this.detailLogisticRequest.id })
-      window.location.reload(true)
-    },
     async submitApprove() {
       const formData = new FormData()
       formData.append('applicant_id', this.detailLogisticRequest.id)
@@ -568,7 +569,7 @@ export default {
   color: #219653;
 }
 .margin-btn {
-  margin: -30%;
+  /* margin: -30%; */
 }
 .margin-left-min-30 {
   margin-left: -30px;
