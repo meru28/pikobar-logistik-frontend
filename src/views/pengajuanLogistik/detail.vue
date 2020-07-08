@@ -345,7 +345,7 @@
                 <td>{{ item.usage }}</td>
                 <td>{{ item.priority }}</td>
                 <td>{{ '-' }}</td>
-                <td>{{ item.realization_quantity }}</td>
+                <td>{{ item.realization_quantity || '-' }}</td>
                 <td>{{ item.realization_date || '-' }}</td>
                 <td>{{ item.statusLabel }}</td>
                 <td v-if="isVerified">

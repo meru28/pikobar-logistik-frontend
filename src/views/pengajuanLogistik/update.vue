@@ -9,17 +9,34 @@
         <v-col>
           <span class="title-update-logistic-needs">{{ $t('label.update_logistic_needs_title') }}</span>
         </v-col>
-        <v-col>
+        <v-col v-if="updateName === false">
           <span class="sub-title-update-logistic-needs">{{ $t('label.apd_spec_name') }}</span>
+          <v-btn class="ma-2" small outlined color="success" height="35px" absolute right @click="updateName = true">
+            <v-icon left>mdi-pencil</v-icon>{{ $t('label.edit') }}
+          </v-btn>
           <br>
           <span class="value-sub-title-update-logistic-needs">{{ item.product.name }}</span>
         </v-col>
-        <v-col class="margin-top-min-10-update-logistic-needs">
-          <span class="sub-title-update-logistic-needs">{{ $t('label.brand') }}</span>
-          <br>
-          <span class="value-sub-title-update-logistic-needs">{{ item.brand }}</span>
+        <v-col v-else class="margin-top-min-10-update-logistic-needs">
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="requiredAPDName"
+          >
+            <span class="sub-title-update-logistic-needs">{{ $t('label.apd_name_spec') }}</span>
+            <v-autocomplete
+              v-model="data.apd"
+              :placeholder="$t('label.choose_apd')"
+              :items="listAPD"
+              item-text="name"
+              item-value="id"
+              :error-messages="errors"
+              outlined
+              solo-inverted
+              @change="setUnit(data)"
+            />
+          </ValidationProvider>
         </v-col>
-        <v-col class="margin-top-min-10-update-logistic-needs">
+        <v-col v-if="updateName === false" class="margin-top-min-10-update-logistic-needs">
           <span class="sub-title-update-logistic-needs">{{ $t('label.total_needs') }}</span>
           <br>
           <span class="value-sub-title-update-logistic-needs">{{ item.quantity }}</span>
@@ -71,6 +88,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'UpdateKebutuhanLogistik',
@@ -90,6 +108,7 @@ export default {
   },
   data() {
     return {
+      updateName: false,
       dialog: false,
       date: null,
       status: [
@@ -114,7 +133,24 @@ export default {
       labelDate: this.$t('label.input_date')
     }
   },
+  computed: {
+    ...mapGetters('logistics', [
+      'listAPD', 'listApdUnit'
+    ])
+  },
+  async created() {
+    await this.getListAPD()
+  },
   methods: {
+    async getListAPD() {
+      await this.$store.dispatch('logistics/getListAPD', this.listQueryAPD)
+      this.listAPD.forEach(element => {
+        element.value = {
+          id: element.id,
+          name: element.name
+        }
+      })
+    },
     async submitData() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
